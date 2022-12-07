@@ -49,6 +49,7 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [TailwindCSS](https://tailwindcss.com/) - For styles
+- [C# with ASP.NET](https://dotnet.microsoft.com/en-us/apps/aspnet) - For Backend
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 
@@ -86,6 +87,6 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ## Author
 
-- Website - [TCL](https://tingchiehlin.com/)
+- Website - [Ting Chieh Lin](https://tingchiehlin.com/)
 - Mentor Cruise - [Jay Lin](https://mentorcruise.com/mentor/tingchiehlin/)
-- Linkedin - [TCL](https://www.linkedin.com/in/cooloojayoo/)
+- Linkedin - [Ting Chieh Lin](https://www.linkedin.com/in/cooloojayoo/)

@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        bgColor: "#F2F2F2",
         pfPurple: "#AD1FEA",
         pfBlue_normal: "#4661E6",
         pfBLue_light: "#62BCFA",
