@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Tag } from "../components/Tag";
 import { Process } from "../components/Process";
+import { Header } from "../components/Header";
 
 const jost = Jost({
   weight: "400",
