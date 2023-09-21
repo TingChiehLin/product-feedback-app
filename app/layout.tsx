@@ -15,7 +15,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <main className="w-full max-w-7xl mx-auto">{children}</main>
         <footer className="absolute bottom-0 w-full h-20 flex justify-center items-center bg-pfBlue_dark text-white">
           <div className="text-center text-sm text-gray-200 font-light leading-6 tracking-wide">
-            <span>Developed by Ting Chieh Lin</span>
+            <span>Developed by <a rel="noopener" target="_blank" className="font-bold">Ting Chieh Lin</a></span>
             <br />
             <span>© 2023 JayLinXR All rights reserved.</span>
           </div>
