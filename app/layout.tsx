@@ -11,11 +11,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" className={`${jost.className}`}>
       <head />
-      <body className="min-h-screen relative bg-pfGray_light pt-16 pb-40">
-        <main className="w-full max-w-7xl mx-auto">{children}</main>
-        <footer className="absolute bottom-0 w-full h-20 flex justify-center items-center bg-pfBlue_dark text-white">
-          <div className="text-center text-sm text-gray-200 font-light leading-6 tracking-wide">
-            <span>Developed by <a rel="noopener" target="_blank" className="font-bold">Ting Chieh Lin</a></span>
+      <body className="min-h-screen grid grid-rows-[auto,1fr,auto] bg-pfGrayLight leading-loose tracking-wide">
+        <main className="w-full max-w-7xl py-24 mx-auto">{children}</main>
+        <footer className="w-full py-5 flex justify-center items-center bg-pfBlueDark text-white">
+          <div className="text-center text-sm text-gray-200 font-light">
+            <span>Developed by <a rel="noopener" target="_blank" className="cursor-pointer font-bold">Ting Chieh Lin</a></span>
             <br />
             <span>© 2023 JayLinXR All rights reserved.</span>
           </div>

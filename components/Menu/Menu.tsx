@@ -20,7 +20,7 @@ const Menu = () => {
     setIsOpen(!isOpen);
   };
 
-  // 1.How to Detect Click outside of Component
+  // Detect Click outside of Component
   const handleClickOutside = () => {};
 
   const currentStateHandler = (m: MenuItemState) => {
@@ -44,7 +44,7 @@ const Menu = () => {
         Sort by: <span className="">Most U pvotes</span>
       </div>
       <Image
-        className={`w-2 h-1 transition ease-out delay-400 ${
+        className={`w-2 h-2 transition ease-out delay-400 ${
           isOpen && "rotate-180"
         }`}
         src={ARROW_UPIMG}
@@ -55,8 +55,8 @@ const Menu = () => {
       {isOpen && (
         <div
           className="absolute top-16
-                     rounded-md shadow bg-white
-                     w-64
+                     rounded-md bg-white
+                     w-64 shadow-lg
                     "
         >
           {menuItems.map((m) => (

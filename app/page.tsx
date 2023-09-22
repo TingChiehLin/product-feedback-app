@@ -70,10 +70,10 @@ const Home = () => {
       </aside>
       <div className="w-full">
         <header
-          className="w-full h-[72px] rounded-[10px] bg-pfBlue_primary
+          className="w-full h-[72px] rounded-[10px] bg-pfBluePrimary
                        pl-6 pr-4 py-6 
                        flex justify-between items-center
-                      "
+                    "
         >
           <nav className="flex items-center gap-[38px]">
             <div className="flex gap-4">
@@ -97,7 +97,7 @@ const Home = () => {
           />
         </header>
         {comments.length === 0 ? (
-          <div className="w-full h-full flex justify-center items-center bg-white mt-6 shadow rounded-[10px]">
+          <div className="w-full h-full flex justify-center items-center bg-wgite mt-6 shadow rounded-[10px]">
             <div className="w-full xl:max-w-[480px] flex items-center flex-col">
               <Image
                 className="h-auto mb-14"
@@ -121,14 +121,14 @@ const Home = () => {
           </div>
         ) : (
           <div className="mt-6">
-            {comments.map((c) => (
+            {comments.map((comment) => (
               <CommentItem
                 key={id}
-                title={c.title}
-                description={c.description}
-                voteNum={c.voteNum}
-                tagName={c.tagName}
-                commentNum={c.commentNum}
+                title={comment.title}
+                description={comment.description}
+                voteNum={comment.voteNum}
+                tagName={comment.tagName}
+                commentNum={comment.commentNum}
               />
             ))}
           </div>

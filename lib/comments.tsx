@@ -46,4 +46,13 @@ export const comments: commentType[] = [
     commentNum: 3,
     status: "Live",
   },
+  {
+    id: 4,
+    title: "Q&A within the challenge hubs",
+    description: "Challenge-specific Q&A would make for easy reference.",
+    voteNum: 96,
+    tagName: "Feature",
+    commentNum: 3,
+    status: "Live",
+  },
 ];

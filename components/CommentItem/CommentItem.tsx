@@ -18,7 +18,7 @@ const CommentItem: React.FC<CommentItemProp> = ({
   commentNum,
 }) => {
   return (
-    <div className="w-full h-[151px] mt-5 shadow bg-white rounded-[10px] cursor-pointer">
+    <div className="w-full mt-5 shadow bg-white rounded-[10px] cursor-pointer">
       <div className="px-8 py-7 flex items-center justify-between">
         <div className="flex justify-start gap-10">
           <VoteSection voteNum={voteNum} fieldDirection={"vertical"} />
