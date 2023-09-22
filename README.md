@@ -2,7 +2,7 @@
 
 This is [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6).
 
-I am planning to develop different techniques with areas which included MERN Stack with REST API and GraphQL. Finally, I will transfer to C# with ASP.NET.
+I am planning to develop different techniques with areas which included MERN Stack with REST API and GraphQL.
 
 ![Preview](./public/preview.jpg)
 
@@ -11,9 +11,9 @@ I am planning to develop different techniques with areas which included MERN Sta
 - [Product Feedback App](#product-feedback-app)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
+    - [Links](#links)
     - [The challenge](#the-challenge)
     - [Milestone](#milestone)
-    - [Links](#links)
   - [My process](#my-process)
     - [Built with](#built-with)
     - [What I learned](#what-i-learned)
@@ -21,6 +21,10 @@ I am planning to develop different techniques with areas which included MERN Sta
   - [Author](#author)
 
 ## Overview
+
+### Links
+
+- Live Demo Site URL: [Product Feedback App]()
 
 ### The challenge
 
@@ -37,14 +41,10 @@ Users should be able to:
 
 ### Milestone
 
-- Desktop Version + Node.js + Express.js + MongoDB
-- Add GraphQL + Testing - version 2.0
-- C# + ASP.NET - version 3.0
-- Responsive Design - version 4.0
-
-### Links
-
-- Live Site URL: [Product Feedback App]()
+- Desktop Version
+- Node.js + Express.js + MongoDB
+- Add GraphQL + Testing 
+- Responsive Design
 
 ## My process
 
@@ -52,7 +52,7 @@ Users should be able to:
 
 - Semantic HTML5 match from Figma File
 - CSS in JS
-- Flexbox
+- Flexbox/ Grid
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [TailwindCSS](https://tailwindcss.com/) - Styling CSS-In-JS
@@ -60,7 +60,6 @@ Users should be able to:
 - [Node](https://nodejs.org/en/) - JavaScript runtime environment outside of browser
 - [MongoDB](https://www.mongodb.com/) - Database with NoSQL
 - [GraphQL](https://graphql.org/) - Query language for APIs
-- [C# with ASP.NET](https://dotnet.microsoft.com/en-us/apps/aspnet) - Backend Development for Web
 - React Icon
 
 ### What I learned
@@ -85,4 +84,3 @@ const proudOfThisFunc = () => {
 - Website - [Ting Chieh Lin](https://tingchiehlin.com/)
 - Mentor Cruise - [Jay Lin](https://mentorcruise.com/mentor/tingchiehlin/)
 - Linkedin - [Ting Chieh Lin](https://www.linkedin.com/in/cooloojayoo/)
-- Youtube - [Ting Chieh Lin](https://www.youtube.com/channel/UC1rMgKD4Rn-7aVcymjlvhfQ)
