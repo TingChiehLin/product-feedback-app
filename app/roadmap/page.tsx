@@ -14,7 +14,7 @@ const RoadMap: FC = () => {
     <>
       <div
         className="w-full h-[113px] px-8 py-7
-                 bg-pfBlue_primary
+                 bg-pfBluePrimary
                   flex justify-between
                   rounded-[10px]
                   shadow

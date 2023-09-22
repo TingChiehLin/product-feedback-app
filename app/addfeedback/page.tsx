@@ -19,7 +19,7 @@ const AddFeedBack: FC<FeedbackDetailPropType> = () => {
               <FaAngleLeft size={"1.2rem"} className="text-pfBlue_normal" />
             </Link>
             <Link href="/">
-              <h4 className="font-bold text-sm hover:underline cursor-pointer text-pfGray_dark">
+              <h4 className="font-bold text-sm hover:underline cursor-pointer text-pfGrayDark">
                 Go Back
               </h4>
             </Link>

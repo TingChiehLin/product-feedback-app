@@ -23,10 +23,10 @@ const CommentItem: React.FC<CommentItemProp> = ({
         <div className="flex justify-start gap-10">
           <VoteSection voteNum={voteNum} fieldDirection={"vertical"} />
           <div className="">
-            <h4 className="text-[18px] text-pfBlue_dark font-bold mb-1">
+            <h4 className="text-[18px] text-pfBlueDark font-bold mb-1">
               {title}
             </h4>
-            <p className="text-pfGray_dark mb-3">{description}</p>
+            <p className="text-pfGrayDark mb-3">{description}</p>
             <div className="flex gap-2">
               <Tag text={tagName} />
             </div>

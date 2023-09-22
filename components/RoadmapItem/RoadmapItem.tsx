@@ -3,6 +3,8 @@ import CommentSection from "../CommentSection";
 import Tag from "../Tag";
 import VoteSection from "../VoteSection";
 
+export type RoadmapItemStatus = "Planned" | "In Progress" | "Live";
+
 interface RoadmapItemProp {
   status: string;
   title: string;
@@ -20,19 +22,20 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
   voteNum,
   commentNum,
 }) => {
+
   const borderColor =
     status === "Planned"
-      ? "border-pfOrange_warm"
+      ? "border-pfOrangeWarm"
       : status === "In Progress"
       ? "border-pfPink"
-      : "border-pfBLue_light";
+      : "border-pfBLueLight";
 
   const bgColor =
     status === "Planned"
-      ? "bg-pfOrange_warm"
+      ? "bg-pfOrangeWarm"
       : status === "In Progress"
       ? "bg-pfPink"
-      : "bg-pfBLue_light";
+      : "bg-pfBLueLight";
 
   return (
     <div
@@ -44,11 +47,11 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
     >
       <div className="flex items-center gap-4 mb-2">
         <div className={`w-2 h-2 ${bgColor} rounded-full`}></div>
-        <span className="text-base text-pfGray_dark">{status}</span>
+        <span className="text-base text-pfGrayDark">{status}</span>
       </div>
       <div className="mb-4">
-        <h4 className="text-lg text-pfBlue_dark font-bold mb-1">{title}</h4>
-        <p className="text-base text-pfGray_dark">{description}</p>
+        <h4 className="text-lg text-pfBlueDark font-bold mb-1">{title}</h4>
+        <p className="text-base text-pfGrayDark">{description}</p>
       </div>
       <Tag text={tagName} />
       <div className="mb-4"></div>

@@ -45,13 +45,13 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
   return (
     <div className="w-full">
       <div>
-        <h4 className="text-[18px] font-bold text-pfBlue_dark">
+        <h4 className="text-[18px] font-bold text-pfBlueDark">
           {title}&nbsp;(
           {status === "Planned" && plannedTotalCount}
           {status === "In Progress" && InProgressTotalCount}
           {status === "Live" && LiveTotalCount})
         </h4>
-        <h5 className="text-pfGray_dark mt-1">{subTitle}</h5>
+        <h5 className="text-pfGrayDark mt-1">{subTitle}</h5>
       </div>
       <div className="mt-8 flex gap-6 flex-wrap">
         {status === "Planned" &&

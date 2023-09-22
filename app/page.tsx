@@ -109,7 +109,7 @@ const Home = () => {
               <h3 className="font-bold text-2xl mb-4">
                 There is no feedback yet.
               </h3>
-              <p className="w-full mb-12 text-center text-pfGray_dark tracking-wide">
+              <p className="w-full mb-12 text-center text-pfGrayDark tracking-wide">
                 Got a suggestion? Found a bug that needs to be squashed? We love
                 hearing about new ideas to improve our app.
               </p>

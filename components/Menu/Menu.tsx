@@ -63,7 +63,7 @@ const Menu = () => {
             <>
               <div
                 key={m.name}
-                className="text-pfGray_dark hover:text-pfPurple 
+                className="text-pfGrayDark hover:text-pfPurple 
                            px-6 py-3 text-left
                            flex justify-between items-center
                         "

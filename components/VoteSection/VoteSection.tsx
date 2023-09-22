@@ -20,18 +20,18 @@ const VoteNumber: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
                     }
                       flex items-center justify-center 
                       rounded-[10px] 
-                    bg-pfWhiteLight hover:bg-pfBlue_darkLight
-                    active:bg-pfBlue_normal
+                    bg-pfWhiteLight hover:bg-pfBlueDarkLight
+                    active:bg-pfBlueNormal
                       cursor-pointer
                       select-none 
                       group
                   `}
       >
         <FaAngleUp
-          className="text-pfBlue_normal group-active:text-white"
+          className="text-pfBlueNormal group-active:text-white"
           size={"1rem"}
         />
-        <span className="font-bold text-sm text-pfBlue_dark group-active:text-white">
+        <span className="font-bold text-sm text-pfBlueDark group-active:text-white">
           {voteNum}
         </span>
       </div>

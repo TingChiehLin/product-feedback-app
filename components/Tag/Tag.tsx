@@ -17,10 +17,10 @@ const Tag: FC<TagPropType> = ({ text, customClass }) => {
         justify-center 
         items-center 
         font-semibold
-        bg-pfGray_normal hover:bg-[#CFD7FF] 
+        bg-pfGrayNormal hover:bg-[#CFD7FF] 
         cursor-pointer rounded-[10px]
-        text-pfBlue_normal active:text-white
-        active:bg-pfBlue_normal
+        text-pfBlueNormal active:text-white
+        active:bg-pfBlueNormal
         select-none 
       `}
     >
