@@ -6,12 +6,24 @@ import VoteSection from "../VoteSection";
 export type RoadmapItemStatus = "Planned" | "In Progress" | "Live";
 
 interface RoadmapItemProp {
-  status: string;
+  status: RoadmapItemStatus;
   title: string;
   description: string;
   tagName: string;
   voteNum: number;
-  commentNum: number;
+  commentNum: number; 
+}
+
+const bgColorMapper: {[key in RoadmapItemStatus]: string} = {
+  "Planned": "bg-pfOrangeWarm",
+  "In Progress": "bg-pfPink",
+  "Live": "bg-pfBlueLight",
+}
+
+const LineColorMapper: {[key in RoadmapItemStatus]: string} = {
+  "Planned": "border-pfOrangeWarm",
+  "In Progress": "border-pfPink",
+  "Live": "border-pfBlueLight",
 }
 
 const RoadmapItem: FC<RoadmapItemProp> = ({
@@ -23,19 +35,8 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
   commentNum,
 }) => {
 
-  const borderColor =
-    status === "Planned"
-      ? "border-pfOrangeWarm"
-      : status === "In Progress"
-      ? "border-pfPink"
-      : "border-pfBLueLight";
-
-  const bgColor =
-    status === "Planned"
-      ? "bg-pfOrangeWarm"
-      : status === "In Progress"
-      ? "bg-pfPink"
-      : "bg-pfBLueLight";
+  const bgColor = bgColorMapper[status];
+  const borderColor = LineColorMapper[status];
 
   return (
     <div

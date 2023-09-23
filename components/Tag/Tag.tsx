@@ -24,7 +24,7 @@ const Tag: FC<TagPropType> = ({ text, customClass }) => {
         select-none 
       `}
     >
-      <div>{text}</div>
+      <span>{text}</span>
     </div>
   );
 };
