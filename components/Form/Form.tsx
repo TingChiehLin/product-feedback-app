@@ -1,15 +1,42 @@
+import { type } from "os";
 import * as React from "react";
+import { FaPlus } from "react-icons/fa";
 
-interface FromPropType {
+type FormType = "Add" | "Edit";
+
+interface FormPropType {
     title: string;
+    type: FormType;  
+    children: React.ReactNode;
     onSumit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const Form: React.FC<FromPropType> = ({onSumit}) => {
+const Form: React.FC<FormPropType> = ({title, children, onSumit}) => {
+
+    const addButtonStyle = {
+        background:
+          "radial-gradient(128.88% 128.88% at 103.9% -10.39%, #E84D70 0%, #A337F6 53.09%, #28A7ED 100%)",
+      };
+
     return (
-        <form onSubmit={onSumit}>
-            <h1></h1>
-        
+        <form onSubmit={onSumit} 
+              className="w-full max-w-[540px] 
+                         rounded-[10px] shadow
+                         px-[42px] pt-[52px] pb-10
+                         relative bg-white
+                        "
+        >
+            <div
+                className="w-14 h-14 rounded-full absolute -top-7 left-[42px] cursor-pointer 
+                            flex justify-center items-center"
+                style={addButtonStyle}
+                >
+                <FaPlus size={"1rem"} color={"white"} className="" />
+            </div>
+            <h1 className="text-pfBlueDark text-2xl font-bold">{title}</h1>
+            <div className="flex flex-col gap-y-6">
+                {children}
+            </div>
         </form>
     );
 }
