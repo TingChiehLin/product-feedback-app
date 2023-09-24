@@ -12,7 +12,7 @@ import Tag from "../components/Tag";
 import Process from "../components/ProcessStatus";
 import Button from "../components/Button";
 
-import Menu from "../components/Menu";
+import SortMenu from "../components/SortMenu";
 import CommentItem from "../components/CommentItem";
 
 const gradientBG = {
@@ -88,12 +88,13 @@ const Home = () => {
                 <span>{comments.length}</span> Suggestions
               </h1>
             </div>
-            <Menu />
+            <SortMenu />
           </nav>
           <Button
             text={"Add Feedback"}
             icon={<FaPlus color="white" size="0.8rem" />}
             href={"addfeedback"}
+            variant={"Add"}
           />
         </header>
         {comments.length === 0 ? (
@@ -116,6 +117,7 @@ const Home = () => {
               <Button
                 text={"Add Feedback"}
                 icon={<FaPlus color="white" size="0.8rem" />}
+                variant={"Add"}
               />
             </div>
           </div>

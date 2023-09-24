@@ -37,6 +37,7 @@ const RoadMap: FC = () => {
           text={"Add Feedback"}
           icon={<FaPlus color="white" size="0.8rem" />}
           href={"addfeedback"}
+          variant={"Add"}
         />
       </div>
       <div className="w-full mt-12 flex gap-7.5">

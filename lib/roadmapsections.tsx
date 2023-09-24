@@ -1,4 +1,12 @@
-export const roadmapsections = [
+import { RoadmapItemStatus } from "../components/RoadmapItem";
+
+interface RoadmapSectionDataType {
+  title: string;
+  subTitle: string;
+  status: RoadmapItemStatus;
+}
+
+export const roadmapsections: RoadmapSectionDataType[] = [
   {
     title: "Planned",
     subTitle: "Ideas prioritized for research",

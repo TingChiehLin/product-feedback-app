@@ -1,12 +1,12 @@
 import { FC } from "react";
 
-import RoadmapItem from "../RoadmapItem";
+import RoadmapItem, { RoadmapItemStatus } from "../RoadmapItem";
 import { commentType } from "../../lib";
 
 interface RoadMapSectionProp {
   title: string;
   subTitle: string;
-  status: string;
+  status: RoadmapItemStatus;
   data: commentType[];
 }
 
@@ -16,6 +16,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
   status,
   data,
 }) => {
+
   const plannedTotalCount = data.reduce(
     (acc: number, cur: commentType) => (cur.status === "Planned" ? ++acc : acc),
     0

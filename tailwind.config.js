@@ -17,7 +17,6 @@ module.exports = {
         pfGrayNormal: "#F2F4FF",
         pfGrayLight: "#F7F8FD",
         pfGrayDark: "#647196",
-        pfPink: "#AD1FEA",
         pfPinkLight: "#C75AF6",
       },
       fontFamily: {

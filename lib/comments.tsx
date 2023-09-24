@@ -1,3 +1,5 @@
+import { RoadmapItemStatus } from "../components/RoadmapItem";
+
 export interface commentType {
   id: number;
   title: string;
@@ -5,7 +7,7 @@ export interface commentType {
   voteNum: number;
   tagName: string;
   commentNum: number;
-  status: string;
+  status: RoadmapItemStatus;
 }
 
 export const comments: commentType[] = [
