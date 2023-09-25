@@ -3,29 +3,33 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import { MENU_ITEMS } from "../../lib/menuItems";
 import ARROW_UPIMG from "../../assets/arrow_up.svg";
 import TICK from "../../assets/tick.svg";
 
-interface SortMenuItemState {
+interface MenuState {
   name: string;
   isActive: boolean;
 }
 
-const SortMenu = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [menuItems, setMenuItems] = useState<SortMenuItemState[]>(MENU_ITEMS);
+interface MenuTypeProp {
+  data: any[];
+  onClick: () => void;
+}
 
-  const handleOpenMenu = () => {
+const Menu:React.FC<MenuTypeProp> = ({data, onClick}) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [menuItems, setMenuItems] = useState<MenuState[]>(data);
+
+  const handleOpen = () => {
     setIsOpen(!isOpen);
   };
 
   // Detect Click outside of Component
   const handleClickOutside = () => {};
 
-  const currentStateHandler = (m: SortMenuItemState) => {
+  const handleState = (menuItem: MenuState) => {
     setMenuItems((prevState) => {
-      return prevState.map((menuItem) => ({
+      return prevState.map((m) => ({
         ...menuItem,
         isActive: menuItem.name === m.name,
       }));
@@ -38,9 +42,9 @@ const SortMenu = () => {
                  cursor-pointer text-white hover:text-pfWhiteLight 
                  tracking-wide rounded-[10px]
                  flex items-center"
-      onClick={() => handleOpenMenu()}
+      onClick={() => handleOpen()}
     >
-      <div className="text-sm mr-[5px]">
+      <div className="text-sm mr-4">
         Sort by: <span className="">Most U pvotes</span>
       </div>
       <Image
@@ -54,23 +58,23 @@ const SortMenu = () => {
       />
       {isOpen && (
         <div
-          className="absolute top-16
+          className="absolute top-8
                      rounded-md bg-white
                      w-64 shadow-lg
                     "
         >
-          {menuItems.map((m) => (
+          {menuItems.map((menuItem) => (
             <>
               <div
-                key={m.name}
+                key={menuItem.name}
                 className="text-pfGrayDark hover:text-pfPurple 
                            px-6 py-3 text-left
                            flex justify-between items-center
                         "
-                onClick={() => currentStateHandler(m)}
+                onClick={() => handleState(menuItem)}
               >
-                <span>{m.name}</span>
-                {m.isActive && (
+                <span>{menuItem.name}</span>
+                {menuItem.isActive && (
                   <Image src={TICK} alt="tick" width={11} height={7.5} />
                 )}
               </div>
@@ -83,4 +87,4 @@ const SortMenu = () => {
   );
 };
 
-export default SortMenu;
+export default Menu;

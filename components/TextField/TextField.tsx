@@ -16,8 +16,8 @@ interface TextFieldTypeProp {
 const TextField:React.FC<TextFieldTypeProp> = ({...props}) => {
     return (
         <div>
-            <label className="text-sm font-bold" htmlFor={props.id}>{props.label}</label>
-            <span className="text-pfBlueDark text-sm block mt-1">{props.description}</span>
+            <label className="text-pfBlueDark text-sm font-bold" htmlFor={props.id}>{props.label}</label>
+            <span className="text-pfGrayDark text-sm block mt-1">{props.description}</span>
             <textarea className={`${props.iserror && "border-error"} 
                                     border-1 
                                     w-full

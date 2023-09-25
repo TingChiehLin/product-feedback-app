@@ -4,11 +4,13 @@ import * as React from "react";
 import Link from "next/link";
 
 import { FaPlus, FaAngleLeft } from "react-icons/fa";
+import { CATEGORIES } from "../../lib";
+
 import Input from "../../components/Input";
 import Form from "../../components/Form";
 import BackButton from "../../components/BackButton";
 import TextField from "../../components/TextField";
-import DropDownMenu from "../../components/DropDownMenu";
+import Menu from "../../components/Menu";
 
 interface FeedbackDetailPropType {}
 
@@ -31,6 +33,10 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
     })
   }
 
+  const handleMenu = () => {
+
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -50,9 +56,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
             value={values["feedback-title"]} 
             onChange={handleValue}
           />
-          <DropDownMenu
-
-          />
+          <Menu data={CATEGORIES} onClick={handleMenu}/>
           <TextField id={"feedback-detail"} 
                      label={"Feedback Detail"} 
                      description={"Include any specific comments on what should be improved, added, etc."} 

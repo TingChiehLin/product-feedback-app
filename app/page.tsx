@@ -1,8 +1,11 @@
+"use client"
+
 import React from "react";
 
 import Link from "next/link";
 import Image from "next/image";
 
+import { MENU_ITEMS } from "../lib/menuItems";
 import BULBIMG from "../assets/bulb.svg";
 import NO_FEEDBACK from "../assets/nofeedback.svg";
 
@@ -12,7 +15,7 @@ import Tag from "../components/Tag";
 import Process from "../components/ProcessStatus";
 import Button from "../components/Button";
 
-import SortMenu from "../components/SortMenu";
+import Menu from "../components/Menu";
 import CommentItem from "../components/CommentItem";
 
 const gradientBG = {
@@ -25,6 +28,11 @@ const gradientBG = {
 
 const Home = () => {
   const id = React.useId();
+
+  const handleMenu = () => {
+
+  }
+
   return (
     <div className="flex">
       <aside className="mr-[30px]">
@@ -88,7 +96,7 @@ const Home = () => {
                 <span>{comments.length}</span> Suggestions
               </h1>
             </div>
-            <SortMenu />
+            <Menu data={MENU_ITEMS} onClick={handleMenu}/>
           </nav>
           <Button
             text={"Add Feedback"}
