@@ -5,36 +5,23 @@ import Image from "next/image";
 
 import ARROW_UPIMG from "../../assets/arrow_up.svg";
 import TICK from "../../assets/tick.svg";
-
-interface MenuState {
-  name: string;
-  isActive: boolean;
-}
+import { MenuState } from "../../lib";
 
 interface MenuTypeProp {
   data: any[];
-  onClick: () => void;
+  handleClick: (menuItem:MenuState) => void;
 }
 
-const Menu:React.FC<MenuTypeProp> = ({data, onClick}) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [menuItems, setMenuItems] = useState<MenuState[]>(data);
+const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
 
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
-  };
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // Detect Click outside of Component
   const handleClickOutside = () => {};
 
-  const handleState = (menuItem: MenuState) => {
-    setMenuItems((prevState) => {
-      return prevState.map((m) => ({
-        ...menuItem,
-        isActive: menuItem.name === m.name,
-      }));
-    });
-  };
+  const handleOpen = () => {
+    setIsOpen(!isOpen)
+  }
 
   return (
     <button
@@ -42,15 +29,21 @@ const Menu:React.FC<MenuTypeProp> = ({data, onClick}) => {
                  cursor-pointer text-white hover:text-pfWhiteLight 
                  tracking-wide rounded-[10px]
                  flex items-center"
-      onClick={() => handleOpen()}
+      onClick={handleOpen}
     >
-      <div className="text-sm mr-4">
-        Sort by: <span className="">Most U pvotes</span>
+      <div className="text-sm text-pfWhiteLight flex gap-3 cursor-pointer">
+        <span>Sort by: 
+          <span className="font-bold mx-2">
+            {
+              data.find((menuItem) => menuItem.isActive)?.name
+            }
+          </span>
+        </span>
       </div>
       <Image
         className={`w-2 h-2 transition ease-out delay-400 ${
-          isOpen && "rotate-180"
-        }`}
+                    isOpen && "rotate-180"}
+                  `}
         src={ARROW_UPIMG}
         alt="arrow_up"
         width={0}
@@ -63,7 +56,7 @@ const Menu:React.FC<MenuTypeProp> = ({data, onClick}) => {
                      w-64 shadow-lg
                     "
         >
-          {menuItems.map((menuItem) => (
+          {data.map((menuItem) => (
             <>
               <div
                 key={menuItem.name}
@@ -71,7 +64,7 @@ const Menu:React.FC<MenuTypeProp> = ({data, onClick}) => {
                            px-6 py-3 text-left
                            flex justify-between items-center
                         "
-                onClick={() => handleState(menuItem)}
+                onClick={() => handleClick(menuItem)}
               >
                 <span>{menuItem.name}</span>
                 {menuItem.isActive && (

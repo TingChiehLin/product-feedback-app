@@ -5,7 +5,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { MENU_ITEMS } from "../lib/menuItems";
+import { MENU_ITEMS, MenuState } from "../lib/menuItems";
 import BULBIMG from "../assets/bulb.svg";
 import NO_FEEDBACK from "../assets/nofeedback.svg";
 
@@ -29,9 +29,16 @@ const gradientBG = {
 const Home = () => {
   const id = React.useId();
 
-  const handleMenu = () => {
+  const [values, setValues] = React.useState<MenuState[]>(MENU_ITEMS);
 
-  }
+  const handleValues = (m: MenuState) => {
+    setValues((prevState) => {
+      return prevState.map((menuItem) => ({
+        ...menuItem,
+        isActive: menuItem.name === m.name,
+      }));
+    });
+  };
 
   return (
     <div className="flex">
@@ -79,7 +86,7 @@ const Home = () => {
       <div className="w-full">
         <header
           className="w-full h-[72px] rounded-[10px] bg-pfBluePrimary
-                       pl-6 pr-4 py-6 
+                       pl-6 pr-4 py-[14px]
                        flex justify-between items-center
                     "
         >
@@ -96,7 +103,7 @@ const Home = () => {
                 <span>{comments.length}</span> Suggestions
               </h1>
             </div>
-            <Menu data={MENU_ITEMS} onClick={handleMenu}/>
+          <Menu data={values} handleClick={handleValues}/>
           </nav>
           <Button
             text={"Add Feedback"}
