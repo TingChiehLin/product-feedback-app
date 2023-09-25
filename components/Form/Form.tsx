@@ -33,7 +33,7 @@ const Form: React.FC<FormPropType> = ({title, children, onSumit}) => {
                 >
                 <FaPlus size={"1rem"} color={"white"} className="" />
             </div>
-            <h1 className="text-pfBlueDark text-2xl font-bold">{title}</h1>
+            <h1 className="text-pfBlueDark text-2xl font-bold mb-10">{title}</h1>
             <div className="flex flex-col gap-y-6">
                 {children}
             </div>

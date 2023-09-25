@@ -18,6 +18,7 @@ module.exports = {
         pfGrayLight: "#F7F8FD",
         pfGrayDark: "#647196",
         pfPinkLight: "#C75AF6",
+        error: "#D73737"
       },
       fontFamily: {
         jost: ["var(--font-jost)"],

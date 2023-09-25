@@ -7,25 +7,32 @@ import { FaPlus, FaAngleLeft } from "react-icons/fa";
 import Input from "../../components/Input";
 import Form from "../../components/Form";
 import BackButton from "../../components/BackButton";
+import TextField from "../../components/TextField";
+import DropDownMenu from "../../components/DropDownMenu";
 
 interface FeedbackDetailPropType {}
 
 const initialData = {
-  title: "",
-  category: [],
-  status: [],
-  details: "",
+  "feedback-title": "",
+  "feedback-category": [],
+  "feedback-detail":"",
 }
 
 const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
 
-  const [value, setValues] = React.useState(initialData);
+  const [values, setValues] = React.useState(initialData);
 
-  const handleValue = () => {
-
+  const handleValue = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setValues((preValue) => {
+      return {
+        ...preValue,
+        [e.target.name]: e.target.value
+      }
+    })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
   }
 
@@ -40,9 +47,26 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
             type={"text"} 
             name={"feedback-title"} 
             placeholder={"Please add a dark theme option"} 
-            value={""} 
+            value={values["feedback-title"]} 
             onChange={handleValue}
           />
+          <DropDownMenu
+
+          />
+          <TextField id={"feedback-detail"} 
+                     label={"Feedback Detail"} 
+                     description={"Include any specific comments on what should be improved, added, etc."} 
+                     name={"feedback-detail"} 
+                     value={values["feedback-detail"]}
+                     rows={4} cols={50} 
+                     placeholder={"Please input your feedback here"}
+                     iserror={false}
+                     onChange={handleValue}
+          />
+          <div className="">
+            {/* <Button/> */}
+            {/* <Button/> */}
+          </div>
         </Form>
     </div>
   );
