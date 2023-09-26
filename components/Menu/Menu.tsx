@@ -51,7 +51,7 @@ const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
       />
       {isOpen && (
         <div
-          className="absolute top-8
+          className="absolute top-10
                      rounded-md bg-white
                      w-64 shadow-lg
                     "
