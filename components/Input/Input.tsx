@@ -19,6 +19,7 @@ const Input: React.FC<InputTypeProp> = ({...props}) => {
             <span className='text-pfGrayDark text-sm block mt-1'>{props.description}</span>
             <input className='w-full pl-6 py-3 
                               border-1 outline-0 rounded-[5px] 
+                              text-pfBlueDark text-sm
                               mt-4 bg-pfGrayLight'
                               {...props}
             />

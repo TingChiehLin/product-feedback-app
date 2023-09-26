@@ -27,7 +27,7 @@ const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
     <button
       className="relative
                  cursor-pointer text-white hover:text-pfWhiteLight 
-                 tracking-wide rounded-[10px]
+                 rounded-[10px]
                  flex items-center"
       onClick={handleOpen}
     >
@@ -50,7 +50,7 @@ const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
         height={0}
       />
       {isOpen && (
-        <div
+        <ul
           className="absolute top-10
                      rounded-md bg-white
                      w-64 shadow-lg
@@ -58,7 +58,7 @@ const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
         >
           {data.map((menuItem) => (
             <>
-              <div
+              <li
                 key={menuItem.name}
                 className="text-pfGrayDark hover:text-pfPurple 
                            px-6 py-3 text-left
@@ -70,11 +70,11 @@ const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
                 {menuItem.isActive && (
                   <Image src={TICK} alt="tick" width={11} height={7.5} />
                 )}
-              </div>
+              </li>
               <hr />
             </>
           ))}
-        </div>
+        </ul>
       )}
     </button>
   );

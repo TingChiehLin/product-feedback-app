@@ -10,7 +10,7 @@ import Input from "../../components/Input";
 import Form from "../../components/Form";
 import BackButton from "../../components/BackButton";
 import TextField from "../../components/TextField";
-import Menu from "../../components/Menu";
+import DropDownMenu from "../../components/DropDownMenu";
 
 interface FeedbackDetailPropType {}
 
@@ -33,7 +33,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
     })
   }
 
-  const handleMenu = () => {
+  const handleCategory = () => {
 
   }
 
@@ -56,7 +56,14 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
             value={values["feedback-title"]} 
             onChange={handleValue}
           />
-          <Menu data={CATEGORIES} onClick={handleMenu}/>
+          <DropDownMenu 
+                        id={"feedback-category"}
+                        label={"Category"}
+                        description={"Choose a category for your feedback"}
+                        name={"feedback-category"}
+                        data={CATEGORIES}
+                        onClick={handleValue}
+          />
           <TextField id={"feedback-detail"} 
                      label={"Feedback Detail"} 
                      description={"Include any specific comments on what should be improved, added, etc."} 
