@@ -13,12 +13,11 @@ I am planning to develop different techniques with areas which included MERN Sta
   - [Overview](#overview)
     - [Links](#links)
     - [The challenge](#the-challenge)
-    - [Milestone](#milestone)
-  - [My process](#my-process)
     - [Built with](#built-with)
+    - [Future Plan](#future-plan)
     - [What I learned](#what-i-learned)
     - [Useful resources](#useful-resources)
-  - [Author](#author)
+  - [Developer](#developer)
 
 ## Overview
 
@@ -39,15 +38,6 @@ Users should be able to:
 - Add comments and replies to a product feedback request
 - Upvote product feedback requests
 
-### Milestone
-
-- Desktop Version
-- Node.js + Express.js + MongoDB
-- Add GraphQL + Testing 
-- Responsive Design
-
-## My process
-
 ### Built with
 
 - Semantic HTML5 match from Figma File
@@ -56,12 +46,17 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [TailwindCSS](https://tailwindcss.com/) - Styling CSS-In-JS
-- [Express](https://expressjs.com/) - Building RESTful APIs
+- [Zustand](https://zustand-demo.pmnd.rs/) - State management library
 - [Node](https://nodejs.org/en/) - JavaScript runtime environment outside of browser
+
+### Future Plan
+
+- [NextAuth](https://next-auth.js.org/) - Authentication for Next.js
 - [MongoDB](https://www.mongodb.com/) - Database with NoSQL
 - [GraphQL](https://graphql.org/) - Query language for APIs
-- React Icon
-
+- [React Query](https://tanstack.com/query/v3/) - A new way to fetch data and implementation
+- [Framer Motion](https://www.framer.com/motion/) - Better User Experience for animation
+  
 ### What I learned
 
 Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
@@ -79,7 +74,7 @@ const proudOfThisFunc = () => {
 - [Counting occurrences of particular property value in array of objects](https://stackoverflow.com/questions/45547504/counting-occurrences-of-particular-property-value-in-array-of-objects) - Using reduce to count the sum of value in the array
 - [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
 
-## Author
+## Developer
 
 - Website - [Ting Chieh Lin](https://tingchiehlin.com/)
 - Mentor Cruise - [Jay Lin](https://mentorcruise.com/mentor/tingchiehlin/)

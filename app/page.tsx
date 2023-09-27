@@ -30,7 +30,7 @@ const Home = () => {
   const id = React.useId();
 
   const [values, setValues] = React.useState<MenuState[]>(MENU_ITEMS);
-  console.log(values)
+
   const handleValues = (m: MenuState) => {
     setValues((prevState) => {
       return prevState.map((menuItem) => ({

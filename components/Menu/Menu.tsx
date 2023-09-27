@@ -41,7 +41,7 @@ const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
         </span>
       </div>
       <Image
-        className={`w-2 h-2 transition ease-out delay-400 ${
+        className={`w-2 h-2 transition ease-out duration-200 ${
                     isOpen && "rotate-180"}
                   `}
         src={ARROW_UPIMG}
