@@ -25,9 +25,9 @@ const TextField:React.FC<TextFieldTypeProp> = ({...props}) => {
                                     outline-none 
                                     resize-none
                                     text-pfBlueDark
-                                    text-sm
                                     px-6 py-3 
                                     mt-4
+                                    text-[15px]
                                     rounded-[5px] 
                                   bg-pfGrayLight`} 
                                 {...props}

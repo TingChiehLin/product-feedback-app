@@ -8,11 +8,11 @@ import TICK from "../../assets/tick.svg";
 import { MenuState } from "../../lib";
 
 interface MenuTypeProp {
-  data: any[];
+  data: MenuState[];
   handleClick: (menuItem:MenuState) => void;
 }
 
-const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
+const Menu:React.FC<MenuTypeProp> = ({...props}) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -35,7 +35,7 @@ const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
         <span>Sort by: 
           <span className="font-bold mx-2">
             {
-              data.find((menuItem) => menuItem.isActive)?.name
+              props.data.find((menuItem) => menuItem.isActive)?.name
             }
           </span>
         </span>
@@ -56,22 +56,23 @@ const Menu:React.FC<MenuTypeProp> = ({data, handleClick}) => {
                      w-64 shadow-lg
                     "
         >
-          {data.map((menuItem) => (
+          {props.data.map((menuItem, index) => (
             <>
               <li
                 key={menuItem.name}
                 className="text-pfGrayDark hover:text-pfPurple 
                            px-6 py-3 text-left
+                           text-[15px]
                            flex justify-between items-center
                         "
-                onClick={() => handleClick(menuItem)}
+                onClick={() => props.handleClick(menuItem)}
               >
                 <span>{menuItem.name}</span>
                 {menuItem.isActive && (
-                  <Image src={TICK} alt="tick" width={11} height={7.5} />
+                  <Image src={TICK} alt="tick" className="w-3" width={0} height={0} sizes="100vw"/>
                 )}
               </li>
-              <hr />
+              {(index !== props.data.length - 1) && <hr />}
             </>
           ))}
         </ul>

@@ -24,7 +24,8 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
 
   const [values, setValues] = React.useState(initialData);
 
-  const handleValue = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleValues = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    console.log(e.target.value)
     setValues((preValue) => {
       return {
         ...preValue,
@@ -54,7 +55,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
             name={"feedback-title"} 
             placeholder={"Please add a dark theme option"} 
             value={values["feedback-title"]} 
-            onChange={handleValue}
+            onChange={handleValues}
           />
           <DropDownMenu 
                         id={"feedback-category"}
@@ -62,7 +63,8 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
                         description={"Choose a category for your feedback"}
                         name={"feedback-category"}
                         data={CATEGORIES}
-                        onClick={handleValue}
+                        value={values["feedback-category"]}
+                        onChange={handleValues}
           />
           <TextField id={"feedback-detail"} 
                      label={"Feedback Detail"} 
@@ -72,7 +74,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
                      rows={4} cols={50} 
                      placeholder={"Please input your feedback here"}
                      iserror={false}
-                     onChange={handleValue}
+                     onChange={handleValues}
           />
           <div className="">
             {/* <Button/> */}
