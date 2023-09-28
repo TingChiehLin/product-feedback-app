@@ -1,9 +1,8 @@
 'use client'
 
 import * as React from "react";
-import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
-import { FaPlus, FaAngleLeft } from "react-icons/fa";
 import { CATEGORIES } from "../../lib";
 
 import Input from "../../components/Input";
@@ -11,6 +10,7 @@ import Form from "../../components/Form";
 import BackButton from "../../components/BackButton";
 import TextField from "../../components/TextField";
 import DropDownMenu from "../../components/DropDownMenu";
+import Button from "../../components/Button";
 
 interface FeedbackDetailPropType {}
 
@@ -21,6 +21,8 @@ const initialData = {
 }
 
 const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
+
+  const { push } = useRouter();
 
   const [values, setValues] = React.useState(initialData);
 
@@ -38,8 +40,17 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
 
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleCancel = () => {
+    setValues(initialData)
+    push("/");
+  }
+
+  const handleAdd = () => {
+
+  }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
   }
 
@@ -76,9 +87,9 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
                      iserror={false}
                      onChange={handleValues}
           />
-          <div className="">
-            {/* <Button/> */}
-            {/* <Button/> */}
+          <div className="flex justify-end gap-x-4">
+            <Button text={"Cancel"} variant={"Cancel"} onClick={handleCancel}/>
+            <Button text={"Add Feedback"} variant={"Add"} onClick={handleAdd}/>
           </div>
         </Form>
     </div>

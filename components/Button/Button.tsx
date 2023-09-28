@@ -7,20 +7,21 @@ interface ButtonTypeProp {
   variant: Buttons;
   icon?: React.ReactNode;
   href?: string;
+  onClick?: () => void;
 }
 
 const buttonTypeMapper: {[k in Buttons]: string} = {
   "Add": "bg-pfPurple",
   "Edit": "bg-pfBlue",
-  "Cancel": "bg-pfRed",
+  "Cancel": "bg-pfBlueDark",
   "Delete": "bg-pfRed",
 }
 
 const hoverColorMapper: {[k in Buttons]: string} = {
   "Add": "hover:bg-pfPinkLight",
   "Edit": "hover:bg-pfBlueDark",
-  "Cancel": "hover:bg-pfRedDark",
-  "Delete": "hover:bg-pfRedDark",
+  "Cancel": "hover:bg-pfBlueDarkLight",
+  "Delete": "hover:bg-pfLightRed",
 }
 
 const Button: React.FC<ButtonTypeProp> = ({
@@ -28,6 +29,7 @@ const Button: React.FC<ButtonTypeProp> = ({
   variant,
   icon,
   href,
+  onClick
 }) => {
 
   return (
@@ -35,7 +37,9 @@ const Button: React.FC<ButtonTypeProp> = ({
       <button className={`flex items-center gap-2 text-white
                           rounded-[10px] ${buttonTypeMapper[variant]} py-2 px-6
                           ${hoverColorMapper[variant]} cursor-pointer`
-      }>
+                        }
+              onClick={onClick}
+      >
         {icon}
         <span>{text}</span>
       </button>
