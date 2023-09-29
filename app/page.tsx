@@ -109,6 +109,7 @@ const Home = () => {
             text={"Add Feedback"}
             icon={<FaPlus color="white" size="0.8rem" />}
             href={"addfeedback"}
+            type="button"
             variant={"Add"}
           />
         </header>
@@ -133,6 +134,7 @@ const Home = () => {
                 text={"Add Feedback"}
                 icon={<FaPlus color="white" size="0.8rem" />}
                 variant={"Add"}
+                type="button"
               />
             </div>
           </div>

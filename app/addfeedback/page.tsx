@@ -57,7 +57,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
   return (
     <div className="flex flex-col items-center gap-[68px] max-w-[540px] mx-auto">
         <BackButton href="/"/> 
-        <Form type="Add" title="Create New Feedback" onSumit={handleSubmit}>
+        <Form type="Add" title="Create New Feedback" onSubmit={handleSubmit}>
           <Input 
             id={"feedback-title"} 
             label={"Feedback Title"} 
@@ -88,8 +88,8 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
                      onChange={handleValues}
           />
           <div className="flex justify-end gap-x-4">
-            <Button text={"Cancel"} variant={"Cancel"} onClick={handleCancel}/>
-            <Button text={"Add Feedback"} variant={"Add"} onClick={handleAdd}/>
+            <Button text={"Cancel"} variant={"Cancel"} type="button" onClick={handleCancel}/>
+            <Button text={"Add Feedback"} variant={"Add"} type="submit" onClick={handleAdd}/>
           </div>
         </Form>
     </div>

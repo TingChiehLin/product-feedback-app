@@ -8,10 +8,10 @@ interface FormPropType {
     title: string;
     type: FormType;  
     children: React.ReactNode;
-    onSumit: (e: React.FormEvent<HTMLFormElement>) => void;
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const Form: React.FC<FormPropType> = ({title, children, onSumit}) => {
+const Form: React.FC<FormPropType> = ({title, children, onSubmit}) => {
 
     const addButtonStyle = {
         background:
@@ -19,7 +19,7 @@ const Form: React.FC<FormPropType> = ({title, children, onSumit}) => {
       };
 
     return (
-        <form onSubmit={onSumit} 
+        <form onSubmit={onSubmit} 
               className="w-full max-w-[540px] 
                          rounded-[10px] shadow
                          px-[42px] pt-[52px] pb-10
