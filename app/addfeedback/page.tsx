@@ -27,13 +27,24 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
   const [values, setValues] = React.useState(initialData);
 
   const handleValues = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    console.log(e.target.value)
-    setValues((preValue) => {
-      return {
-        ...preValue,
-        [e.target.name]: e.target.value
-      }
-    })
+    const { name, value } = e.target;
+    console.log(name)
+    if(e.target instanceof HTMLSelectElement) {
+      const values = [value];
+      setValues((preValue) => {
+        return {
+          ...preValue,
+          [name]: values
+        }
+      })
+    } else {
+      setValues((preValue) => {
+        return {
+          ...preValue,
+          [name]: value
+        }
+      })
+    }
   }
 
   const handleCategory = () => {
@@ -45,13 +56,9 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
     push("/");
   }
 
-  const handleAdd = () => {
-
-  }
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    console.log("submit")
   }
 
   return (
@@ -89,7 +96,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
           />
           <div className="flex justify-end gap-x-4">
             <Button text={"Cancel"} variant={"Cancel"} type="button" onClick={handleCancel}/>
-            <Button text={"Add Feedback"} variant={"Add"} type="submit" onClick={handleAdd}/>
+            <Button text={"Add Feedback"} variant={"Add"} type="submit" onClick={() => handleSubmit}/>
           </div>
         </Form>
     </div>
