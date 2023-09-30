@@ -9,7 +9,7 @@ import { MenuState } from "../../lib";
 
 interface MenuTypeProp {
   data: MenuState[];
-  handleClick: (menuItem:MenuState) => void;
+  onClick: (menuItem:MenuState) => void;
 }
 
 const Menu:React.FC<MenuTypeProp> = ({...props}) => {
@@ -65,7 +65,7 @@ const Menu:React.FC<MenuTypeProp> = ({...props}) => {
                            text-[15px]
                            flex justify-between items-center
                         "
-                onClick={() => props.handleClick(menuItem)}
+                onClick={() => props.onClick(menuItem)}
               >
                 <span>{menuItem.name}</span>
                 {menuItem.isActive && (

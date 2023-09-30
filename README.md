@@ -41,8 +41,6 @@ Users should be able to:
 ### Built with
 
 - Semantic HTML5 match from Figma File
-- CSS in JS
-- Flexbox/ Grid
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [TailwindCSS](https://tailwindcss.com/) - Styling CSS-In-JS
@@ -51,6 +49,8 @@ Users should be able to:
 
 ### Future Plan
 
+- [Prisma](https://www.prisma.io/) - Working with databases thanks to data model, type-safety & auto-completion
+- [PostgreSQL](https://www.postgresql.org/) - Relational Database
 - [NextAuth](https://next-auth.js.org/) - Authentication for Next.js
 - [MongoDB](https://www.mongodb.com/) - Database with NoSQL
 - [GraphQL](https://graphql.org/) - Query language for APIs

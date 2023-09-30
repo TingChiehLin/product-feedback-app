@@ -103,7 +103,7 @@ const Home = () => {
                 <span>{comments.length}</span> Suggestions
               </h1>
             </div>
-          <Menu data={values} handleClick={handleValues}/>
+          <Menu data={values} onClick={handleValues}/>
           </nav>
           <Button
             text={"Add Feedback"}

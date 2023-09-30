@@ -28,7 +28,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
 
   const handleValues = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    console.log(name)
+    console.log(name, value)
     if(e.target instanceof HTMLSelectElement) {
       const values = [value];
       setValues((preValue) => {
