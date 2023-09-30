@@ -52,7 +52,6 @@ Users should be able to:
 - [Prisma](https://www.prisma.io/) - Working with databases thanks to data model, type-safety & auto-completion
 - [PostgreSQL](https://www.postgresql.org/) - Relational Database
 - [NextAuth](https://next-auth.js.org/) - Authentication for Next.js
-- [MongoDB](https://www.mongodb.com/) - Database with NoSQL
 - [GraphQL](https://graphql.org/) - Query language for APIs
 - [React Query](https://tanstack.com/query/v3/) - A new way to fetch data and implementation
 - [Framer Motion](https://www.framer.com/motion/) - Better User Experience for animation
@@ -73,6 +72,7 @@ const proudOfThisFunc = () => {
 
 - [Counting occurrences of particular property value in array of objects](https://stackoverflow.com/questions/45547504/counting-occurrences-of-particular-property-value-in-array-of-objects) - Using reduce to count the sum of value in the array
 - [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [The Full Stack React Course 2023](https://developedbyed.com/p/the-full-stack-react-course) - Learning Full Stack  
 
 ## Developer
 

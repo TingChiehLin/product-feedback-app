@@ -11,10 +11,9 @@ interface DropDownMenuProps {
     id: string,
     label: string,
     name: string,
-    value: string[],
     description: string,
     data: CategoryType[],
-    onChange: (e:React.ChangeEvent<HTMLInputElement>) => void,
+    onClick: (item: CategoryType) => void,
 }
 
 const DropDownMenu:React.FC<DropDownMenuProps> = ({...props}) => {
@@ -70,6 +69,9 @@ const DropDownMenu:React.FC<DropDownMenuProps> = ({...props}) => {
                                                 hover:text-pfPurple
                                                 flex justify-between items-center
                                                "
+                                    id={item.name}
+                                    value={item.name}
+                                    onClick={()=> props.onClick(item)}
                                 >
                                     {item.name}
                                     {item.isActive && 

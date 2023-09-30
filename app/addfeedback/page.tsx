@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRouter } from 'next/navigation';
 
-import { CATEGORIES } from "../../lib";
+import { CATEGORIES, CategoryType } from "../../lib";
 
 import Input from "../../components/Input";
 import Form from "../../components/Form";
@@ -16,7 +16,7 @@ interface FeedbackDetailPropType {}
 
 const initialData = {
   "feedback-title": "",
-  "feedback-category": [],
+  "feedback-category": CATEGORIES,
   "feedback-detail":"",
 }
 
@@ -25,30 +25,35 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
   const { push } = useRouter();
 
   const [values, setValues] = React.useState(initialData);
+  const [categories, setCategories] = React.useState<CategoryType[]>(CATEGORIES);
 
-  const handleValues = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    console.log(name, value)
-    if(e.target instanceof HTMLSelectElement) {
-      const values = [value];
-      setValues((preValue) => {
+  const handleValues = (event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = event.target;
+      setValues((preState) => { 
         return {
-          ...preValue,
-          [name]: values
-        }
-      })
-    } else {
-      setValues((preValue) => {
-        return {
-          ...preValue,
+          ...preState,
           [name]: value
         }
       })
-    }
   }
+  console.log(values)
+  const handleCategory = (i: CategoryType) => { 
 
-  const handleCategory = () => {
+    setValues((preState: any) => {
+      return preState["feedback-category"].map((item:CategoryType)=> {
+        return {
+          ...item,
+          isActive: item.name === i.name,
+        }
+      })
+    })
 
+    setCategories((preState) => {
+      return preState.map((item) => ({
+        ...item,
+        isActive: item.name === i.name,
+      }))
+    })
   }
 
   const handleCancel = () => {
@@ -58,7 +63,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("submit")
+
   }
 
   return (
@@ -80,9 +85,8 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
                         label={"Category"}
                         description={"Choose a category for your feedback"}
                         name={"feedback-category"}
-                        data={CATEGORIES}
-                        value={values["feedback-category"]}
-                        onChange={handleValues}
+                        data={categories}
+                        onClick={handleCategory}
           />
           <TextField id={"feedback-detail"} 
                      label={"Feedback Detail"} 
