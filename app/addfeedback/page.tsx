@@ -40,12 +40,15 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
   const handleCategory = (i: CategoryType) => { 
 
     setValues((preState: any) => {
-      return preState["feedback-category"].map((item:CategoryType)=> {
-        return {
-          ...item,
-          isActive: item.name === i.name,
-        }
-      })
+      return {
+        ...preState,
+        "feedback-category": preState["feedback-category"].map((item:CategoryType)=> {
+          return {
+            ...item,
+            isActive: item.name === i.name,
+          }
+        })
+      }
     })
 
     setCategories((preState) => {
