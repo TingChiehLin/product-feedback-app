@@ -10,7 +10,8 @@ interface InputTypeProp {
     placeholder: string;
     value: string;
     isInValid: boolean;
-    onChange:(e: React.ChangeEvent<HTMLInputElement>) => void; 
+    error: any;
+    onChange:(event: React.ChangeEvent<HTMLInputElement>) => void; 
 }
 
 const Input: React.FC<InputTypeProp> = ({...props}) => {
@@ -24,8 +25,9 @@ const Input: React.FC<InputTypeProp> = ({...props}) => {
                               text-pfBlueDark 
                               mt-4 bg-pfGrayLight ${props.isInValid && "border-error border-2"}
                               {...props}`}
+                    {...props}
             />
-            {props.isInValid && <span className="text-sm text-error block mt-2">Can’t be empty</span>}
+            {props.isInValid && <span className="text-sm text-error block mt-2">{props.error}</span>}
         </div>
     )
 }

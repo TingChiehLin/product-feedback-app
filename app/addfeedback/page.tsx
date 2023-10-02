@@ -12,27 +12,57 @@ import TextField from "../../components/TextField";
 import DropDownMenu from "../../components/DropDownMenu";
 import Button from "../../components/Button";
 
-const initialData = {
-  "feedback-title": "",
+type FieldConfig = {
+  value: string,
+  error: string,
+  validator: () => string,
+}
+
+interface requestFormType {
+  "feedback-title": FieldConfig,
+  "feedback-category": CategoryType[],
+  "feedback-detail": FieldConfig,
+}
+
+const validateTitle = () => {
+  // return "Can’t be empty"
+
+  return ""
+}
+
+const validateDetail = () => {
+
+  // return "Can’t be empty"
+  return ""
+}
+
+const initialData: requestFormType = {
+  "feedback-title": {value: "", error: "", validator: validateTitle},
   "feedback-category": CATEGORIES,
-  "feedback-detail":"",
+  "feedback-detail": {value: "", error: "", validator: validateDetail}
 }
 
 const AddFeedBack: React.FC = () => {
 
-  const { push } = useRouter();
-
   const [values, setValues] = React.useState(initialData);
   const [categories, setCategories] = React.useState<CategoryType[]>(CATEGORIES);
 
+  const { push } = useRouter();
+  console.log(values["feedback-detail"].validator())  
+
   const handleValues = (event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = event.target;
-      setValues((preState) => { 
-        return {
-          ...preState,
-          [name]: value
-        }
-      })
+      console.log("Name:",name)
+      console.log("Value:",value)
+      // setValues((preState) => {
+      //   return {
+      //     ...preState,
+      //     [name]: {
+      //       ...preState,
+      //       value: value
+      //     }
+      //   }
+      // })
   }
 
   const handleCategory = (i: CategoryType) => { 
@@ -56,6 +86,8 @@ const AddFeedBack: React.FC = () => {
     })
   }
 
+  console.log(values)
+
   const handleCancel = () => {
     setValues(initialData)
     push("/");
@@ -63,7 +95,7 @@ const AddFeedBack: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
   }
 
   return (
@@ -77,8 +109,9 @@ const AddFeedBack: React.FC = () => {
             type={"text"} 
             name={"feedback-title"} 
             placeholder={"Please add a dark theme option"} 
-            value={values["feedback-title"]} 
-            isInValid={true}
+            value={values["feedback-title"].value} 
+            isInValid={values["feedback-title"].validator() !== ""}
+            error={values["feedback-title"].error}
             onChange={handleValues}
           />
           <DropDownMenu 
@@ -93,10 +126,11 @@ const AddFeedBack: React.FC = () => {
                      label={"Feedback Detail"} 
                      description={"Include any specific comments on what should be improved, added, etc."} 
                      name={"feedback-detail"} 
-                     value={values["feedback-detail"]}
+                     value={values["feedback-detail"].value}
                      rows={4} cols={50} 
                      placeholder={"Please input your feedback here"}
-                     isInValid={true}
+                     isInValid={values["feedback-detail"].validator() !== ""}
+                     error={values["feedback-detail"].error}
                      onChange={handleValues}
           />
           <div className="flex justify-end gap-x-4">

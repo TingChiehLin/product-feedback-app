@@ -10,10 +10,12 @@ interface TextFieldTypeProp {
     placeholder?: string;
     description?: string;
     isInValid: boolean;
-    onChange:(e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    error: string;
+    onChange:(event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextField:React.FC<TextFieldTypeProp> = ({...props}) => {
+
     return (
         <div>
             <label className="text-pfBlueDark text-sm font-bold" htmlFor={props.id}>{props.label}</label>
@@ -32,7 +34,7 @@ const TextField:React.FC<TextFieldTypeProp> = ({...props}) => {
                                 {...props}
             >
             </textarea>
-            {props.isInValid && <span className="text-sm text-error block">Can’t be empty</span>}
+            {props.isInValid && <span className="text-sm text-error block">{props.error}</span>}
         </div>
     )
 }
