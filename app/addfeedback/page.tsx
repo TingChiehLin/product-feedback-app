@@ -52,17 +52,16 @@ const AddFeedBack: React.FC = () => {
 
   const handleValues = (event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = event.target;
-      console.log("Name:",name)
-      console.log("Value:",value)
-      // setValues((preState) => {
-      //   return {
-      //     ...preState,
-      //     [name]: {
-      //       ...preState,
-      //       value: value
-      //     }
-      //   }
-      // })
+
+      setValues((preState) => {
+        return {
+          ...preState,
+          [name]: {
+            ...preState[name as keyof requestFormType],
+            value: value
+          }
+        }
+      })
   }
 
   const handleCategory = (i: CategoryType) => { 
@@ -85,8 +84,6 @@ const AddFeedBack: React.FC = () => {
       }))
     })
   }
-
-  console.log(values)
 
   const handleCancel = () => {
     setValues(initialData)
