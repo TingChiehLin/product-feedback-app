@@ -84,7 +84,7 @@ const Home = () => {
         </div>
       </aside>
       <div className="w-full">
-        <header
+        <div
           className="w-full h-[72px] rounded-[10px] bg-pfBluePrimary
                        pl-6 pr-4 py-[14px]
                        flex justify-between items-center
@@ -112,7 +112,7 @@ const Home = () => {
             type="button"
             variant={"Add"}
           />
-        </header>
+        </div>
         {comments.length === 0 ? (
           <div className="w-full h-full flex justify-center items-center bg-wgite mt-6 shadow rounded-[10px]">
             <div className="w-full xl:max-w-[480px] flex items-center flex-col">

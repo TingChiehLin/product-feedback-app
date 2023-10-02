@@ -2,7 +2,7 @@
 
 This is [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6).
 
-I am planning to develop different techniques with areas which included MERN Stack with REST API and GraphQL.
+I am planning to develop different techniques with areas which included backend with REST API and GraphQL.
 
 ![Preview](./public/preview.jpg)
 

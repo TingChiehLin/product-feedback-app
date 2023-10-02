@@ -1,9 +1,10 @@
-
+import * as React from 'react';
 
 const EditFeedback: React.FC = () => {
   return (
     <div>
-      <header></header>
+      
+
     </div>
   );
 }

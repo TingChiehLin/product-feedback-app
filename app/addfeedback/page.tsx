@@ -12,15 +12,13 @@ import TextField from "../../components/TextField";
 import DropDownMenu from "../../components/DropDownMenu";
 import Button from "../../components/Button";
 
-interface FeedbackDetailPropType {}
-
 const initialData = {
   "feedback-title": "",
   "feedback-category": CATEGORIES,
   "feedback-detail":"",
 }
 
-const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
+const AddFeedBack: React.FC = () => {
 
   const { push } = useRouter();
 
@@ -36,9 +34,8 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
         }
       })
   }
-  console.log(values)
-  const handleCategory = (i: CategoryType) => { 
 
+  const handleCategory = (i: CategoryType) => { 
     setValues((preState: any) => {
       return {
         ...preState,
@@ -66,7 +63,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    
   }
 
   return (
@@ -81,6 +78,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
             name={"feedback-title"} 
             placeholder={"Please add a dark theme option"} 
             value={values["feedback-title"]} 
+            isInValid={true}
             onChange={handleValues}
           />
           <DropDownMenu 
@@ -98,7 +96,7 @@ const AddFeedBack: React.FC<FeedbackDetailPropType> = () => {
                      value={values["feedback-detail"]}
                      rows={4} cols={50} 
                      placeholder={"Please input your feedback here"}
-                     iserror={false}
+                     isInValid={true}
                      onChange={handleValues}
           />
           <div className="flex justify-end gap-x-4">
