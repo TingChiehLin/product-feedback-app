@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Jost } from "@next/font/google";
+import { Jost } from "next/font/google";
 
 const jost = Jost({
   weight: ["100", "200", "300", "400", "700"],
