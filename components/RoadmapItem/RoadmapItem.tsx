@@ -1,7 +1,7 @@
 import { FC } from "react";
 import CommentSection from "../CommentSection";
 import Tag from "../Tag";
-import VoteSection from "../VoteSection";
+import VoteSection from "../VoteTag";
 
 export type RoadmapItemStatus = "Planned" | "In Progress" | "Live";
 

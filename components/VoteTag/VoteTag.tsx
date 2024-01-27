@@ -8,7 +8,7 @@ interface VoteNumberPropType {
   fieldDirection: FeildDirections;
 }
 
-const VoteNumber: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
+const VoteTag: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
   return (
     <>
       <div
@@ -20,7 +20,7 @@ const VoteNumber: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
                     }
                       flex items-center justify-center 
                       rounded-[10px] 
-                    bg-pfWhiteLight hover:bg-pfBlueDarkLight
+                    bg-pfWhiteLight hover:bg-lightPurple
                     active:bg-pfBlueNormal
                       cursor-pointer
                       select-none 
@@ -39,4 +39,4 @@ const VoteNumber: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
   );
 };
 
-export default VoteNumber;
+export default VoteTag;

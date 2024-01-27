@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         bgColor: "#F2F2F2",
         pfPurple: "#AD1FEA",
+        lightPurple: "#CFD7FF",
         pfBlueNormal: "#4661E6",
         pfBlueLight: "#62BCFA",
         pfBlueDark: "#3A4374",

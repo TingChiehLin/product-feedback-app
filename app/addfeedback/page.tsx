@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRouter } from 'next/navigation';
 
-import { CATEGORIES, CategoryType } from "../../lib";
+import { CATEGORIES, CategoryType } from "@/data/categories";
 
 import Input from "../../components/Input";
 import Form from "../../components/Form";

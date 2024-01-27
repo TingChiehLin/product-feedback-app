@@ -1,6 +1,6 @@
 import Tag from "../Tag";
 import CommentSection from "../CommentSection";
-import VoteSection from "../VoteSection";
+import VoteSection from "../VoteTag";
 
 interface CommentItemProp {
   title: string;
