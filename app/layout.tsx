@@ -22,7 +22,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                  target="_blank" className="cursor-pointer font-bold text-slate-200">&nbsp;Ting Chieh Lin
               </a>
             </span>
-            <span>© 2023 JayLinXR All rights reserved.</span>
+            <span>© 2024 JayLinXR All rights reserved.</span>
           </div>
         </footer>
       </body>

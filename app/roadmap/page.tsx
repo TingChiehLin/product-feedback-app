@@ -36,7 +36,7 @@ const RoadMap: FC = () => {
         <Button
           text={"Add Feedback"}
           icon={<FaPlus color="white" size="0.8rem" />}
-          href={"addfeedback"}
+          href={"add"}
           type="button"
           variant={"Add"}
         />
