@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRouter } from 'next/navigation';
 
-import { CATEGORIES, CategoryType } from "@/data/categories";
+import { CATEGORIES, CategoryType } from "@/lib/categories";
 
 import Input from "../../components/Input";
 import Form from "../../components/Form";
@@ -107,7 +107,7 @@ const AddFeedBack: React.FC = () => {
             name={"feedback-title"} 
             placeholder={"Please add a dark theme option"} 
             value={values["feedback-title"].value} 
-            isInValid={values["feedback-title"].validator() !== ""}
+            isinvalid={values["feedback-title"].validator() !== "" ? true : false}
             error={values["feedback-title"].error}
             onChange={handleValues}
           />
@@ -126,7 +126,7 @@ const AddFeedBack: React.FC = () => {
                      value={values["feedback-detail"].value}
                      rows={4} cols={50} 
                      placeholder={"Please input your feedback here"}
-                     isInValid={values["feedback-detail"].validator() !== ""}
+                     isinvalid={values["feedback-detail"].validator() !== "" ? true : false}
                      error={values["feedback-detail"].error}
                      onChange={handleValues}
           />

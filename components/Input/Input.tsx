@@ -9,7 +9,7 @@ interface InputTypeProp {
     name: string;
     placeholder: string;
     value: string;
-    isInValid: boolean;
+    isinvalid: boolean;
     error: any;
     onChange:(event: React.ChangeEvent<HTMLInputElement>) => void; 
 }
@@ -23,11 +23,11 @@ const Input: React.FC<InputTypeProp> = ({...props}) => {
                               text-[15px]
                               border-1 outline-0 rounded-[5px] 
                               text-pfBlueDark 
-                              mt-4 bg-pfGrayLight ${props.isInValid && "border-error border-2"}
+                              mt-4 bg-pfGrayLight ${props.isinvalid && "border-error border-2"}
                               {...props}`}
                     {...props}
             />
-            {props.isInValid && <span className="text-sm text-error block mt-2">{props.error}</span>}
+            {props.isinvalid && <span className="text-sm text-error block mt-2">{props.error}</span>}
         </div>
     )
 }
