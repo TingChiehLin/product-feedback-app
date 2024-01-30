@@ -7,6 +7,11 @@ const jost = Jost({
   variable: "--font-jost",
 });
 
+export const metadata = {
+  title: "Product Feedback App",
+  description: "Product Feedback App developed by Jay Lin",
+}
+
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" className={`${jost.className}`}>
