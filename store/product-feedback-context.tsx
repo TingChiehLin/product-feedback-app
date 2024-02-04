@@ -1,6 +1,9 @@
 "use client"
 
-import {createContext} from 'react';
+//context => share state across components
+//useReducer => better state management (useState)
+
+import {createContext, useReducer} from 'react';
 
 import {COMMENTS} from '../lib/comments';
 
@@ -12,9 +15,16 @@ const fbCtxValue = {
 
 export const FeedbackContext = createContext(fbCtxValue);
 
+const feedbackReducer = (state: any, action: any) => {
+    
+    return state;
+}
+
 export const FeedbackProvider = ({children}: {children: React.ReactNode}) => {
+    const [feedbackState, feedbackDispatch] = useReducer(feedbackReducer, fbCtxValue);
+
     return (
-        <FeedbackContext.Provider value={fbCtxValue}>
+        <FeedbackContext.Provider value={feedbackState}>
             {children}
         </FeedbackContext.Provider>
     )

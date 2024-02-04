@@ -26,7 +26,6 @@ interface requestFormType {
 
 const validateTitle = () => {
   // return "Can’t be empty"
-
   return ""
 }
 
@@ -47,7 +46,6 @@ const AddFeedBack: React.FC = () => {
   const [categories, setCategories] = React.useState<CategoryType[]>(CATEGORIES);
 
   const { push } = useRouter();
-  console.log(values["feedback-detail"].validator())  
 
   const handleValues = (event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = event.target;
@@ -106,7 +104,6 @@ const AddFeedBack: React.FC = () => {
             name={"feedback-title"} 
             placeholder={"Please add a dark theme option"} 
             value={values["feedback-title"].value} 
-            isinvalid={values["feedback-title"].validator() !== "" ? true : false}
             error={values["feedback-title"].error}
             onChange={handleValues}
           />
@@ -125,7 +122,6 @@ const AddFeedBack: React.FC = () => {
                      value={values["feedback-detail"].value}
                      rows={4} cols={50} 
                      placeholder={"Please input your feedback here"}
-                     isinvalid={values["feedback-detail"].validator() !== "" ? true : false}
                      error={values["feedback-detail"].error}
                      onChange={handleValues}
           />
