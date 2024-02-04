@@ -44,7 +44,7 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [TailwindCSS](https://tailwindcss.com/) - Styling CSS-In-JS
-- [Zustand](https://zustand-demo.pmnd.rs/) - State management library
+- Context API & Reducer for shared state across components and advanced state management
 - [Node](https://nodejs.org/en/) - JavaScript runtime environment outside of browser
 
 ### Future Plan
@@ -54,6 +54,7 @@ Users should be able to:
 - [NextAuth](https://next-auth.js.org/) - Authentication for Next.js
 - [GraphQL](https://graphql.org/) - Query language for APIs
 - [React Query](https://tanstack.com/query/v3/) - A new way to fetch data and implementation
+- [Zustand](https://zustand-demo.pmnd.rs/) - State management library
 - [Framer Motion](https://www.framer.com/motion/) - Better User Experience for animation
   
 ### What I learned
