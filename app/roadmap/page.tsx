@@ -1,8 +1,9 @@
-import Image from "next/image";
+"use client"
 
-import { FC } from "react";
+import { FC, useContext } from "react";
 
-import { comments, roadmapsections } from "../../lib";
+import { FeedbackContext } from "../../store/product-feedback-context";
+import { roadmapsections } from "../../lib";
 
 import Button from "../../components/Button";
 import RoadMapSection from "../../components/RoadMapSection";
@@ -10,6 +11,7 @@ import Link from "next/link";
 import { FaAngleLeft, FaPlus } from "react-icons/fa";
 
 const RoadMap: FC = () => {
+  const fbCtx = useContext(FeedbackContext);
   return (
     <>
       <div
@@ -48,7 +50,7 @@ const RoadMap: FC = () => {
             title={r.title}
             subTitle={r.subTitle}
             status={r.status}
-            data={comments}
+            data={fbCtx.feedbacks}
           />
         ))}
       </div>

@@ -31,7 +31,6 @@ const validateTitle = () => {
 }
 
 const validateDetail = () => {
-
   // return "Can’t be empty"
   return ""
 }

@@ -10,7 +10,7 @@ export interface commentType {
   status: RoadmapItemStatus;
 }
 
-export const comments: commentType[] = [
+export const COMMENTS: commentType[] = [
   {
     id: 0,
     title: "Add tags for solutions",

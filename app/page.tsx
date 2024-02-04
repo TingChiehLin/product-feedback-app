@@ -1,6 +1,7 @@
 "use client"
 
-import React from "react";
+import React, { useContext } from "react";
+import { FeedbackContext } from "../store/product-feedback-context";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -10,13 +11,14 @@ import BULBIMG from "../assets/bulb.svg";
 import NO_FEEDBACK from "../assets/nofeedback.svg";
 
 import { FaPlus } from "react-icons/fa";
-import { process, tags, comments } from "../lib";
+import { process, tags } from "../lib";
 import Tag from "../components/Tag";
 import Process from "../components/ProcessStatus";
 import Button from "../components/Button";
 
 import Menu from "../components/Menu";
 import CommentItem from "../components/CommentItem";
+import {COMMENTS} from '../lib/comments';
 
 const gradientBG = {
   width: "255px",
@@ -28,6 +30,7 @@ const gradientBG = {
 
 const Home = () => {
   const id = React.useId();
+  const fbCtx = useContext(FeedbackContext);
 
   const [values, setValues] = React.useState<MenuState[]>(MENU_ITEMS);
 
@@ -100,7 +103,7 @@ const Home = () => {
                 height={24}
               />
               <h1 className="text-white text-lg font-bold">
-                <span>{comments.length}</span> Suggestions
+                <span>{fbCtx.feedbacks.length}</span> Suggestions
               </h1>
             </div>
           <Menu data={values} onClick={handleValues}/>
@@ -113,7 +116,7 @@ const Home = () => {
             variant={"Add"}
           />
         </div>
-        {comments.length === 0 ? (
+        {fbCtx.feedbacks.length === 0 ? (
           <div className="w-full h-full flex justify-center items-center bg-wgite mt-6 shadow rounded-[10px]">
             <div className="w-full xl:max-w-[480px] flex items-center flex-col">
               <Image
@@ -140,7 +143,7 @@ const Home = () => {
           </div>
         ) : (
           <div className="mt-6">
-            {comments.map((comment) => (
+            {fbCtx.feedbacks.map((comment) => (
               <CommentItem
                 key={id}
                 title={comment.title}
