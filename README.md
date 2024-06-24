@@ -2,8 +2,6 @@
 
 This is [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6).
 
-I am planning to develop different techniques with areas which included backend with REST API and GraphQL.
-
 ![Preview](./public/preview.jpg)
 
 ## Table of contents
@@ -15,9 +13,8 @@ I am planning to develop different techniques with areas which included backend 
     - [The challenge](#the-challenge)
     - [Built with](#built-with)
     - [Future Plan](#future-plan)
-    - [What I learned](#what-i-learned)
     - [Useful resources](#useful-resources)
-  - [Developer](#developer)
+  - [Contact Me](#contact-me)
 
 ## Overview
 
@@ -40,12 +37,15 @@ Users should be able to:
 
 ### Built with
 
-- Semantic HTML5 match from Figma File
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [TailwindCSS](https://tailwindcss.com/) - Styling CSS-In-JS
-- Context API & Reducer for shared state across components and advanced state management
+- [React](https://reactjs.org/) - JavaScript UI library
+- [Next.js](https://nextjs.org/) - React Meta framework
+- [TailwindCSS](https://tailwindcss.com/) - Styling CSS-In-JS to make a beautiful website
+- [React Query](https://tanstack.com/query/v3/) - A new way to fetch data and async state manager 
+- [zustand](https://github.com/pmndrs/zustand) - State-management library
 - [Node](https://nodejs.org/en/) - JavaScript runtime environment outside of browser
+- [Figma](https://www.figma.com/) - With semantic HTML5 match from Figma File
+- [Python](https://www.python.org/) - Written backend service with Python 3
+- [Flask](https://flask.palletsprojects.com/en/3.0.x/) - Developed backend REST API
 
 ### Future Plan
 
@@ -53,30 +53,14 @@ Users should be able to:
 - [PostgreSQL](https://www.postgresql.org/) - Relational Database
 - [NextAuth](https://next-auth.js.org/) - Authentication for Next.js
 - [GraphQL](https://graphql.org/) - Query language for APIs
-- [React Query](https://tanstack.com/query/v3/) - A new way to fetch data and implementation
-- [Zustand](https://zustand-demo.pmnd.rs/) - State management library
 - [Framer Motion](https://www.framer.com/motion/) - Better User Experience for animation
   
-### What I learned
-
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
-
-```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
-```
-
 ### Useful resources
 
-- [Counting occurrences of particular property value in array of objects](https://stackoverflow.com/questions/45547504/counting-occurrences-of-particular-property-value-in-array-of-objects) - Using reduce to count the sum of value in the array
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-- [The Full Stack React Course 2023](https://developedbyed.com/p/the-full-stack-react-course) - Learning Full Stack  
+- [Array Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) - Using reduce to count the sum of value in the array
 
-## Developer
+  
+## Contact Me
 
-- Website - [Ting Chieh Lin](https://tingchiehlin.com/)
-- Mentor Cruise - [Jay Lin](https://mentorcruise.com/mentor/tingchiehlin/)
-- Linkedin - [Ting Chieh Lin](https://www.linkedin.com/in/cooloojayoo/)
+- Website - [Jay Lin](https://tingchiehlin.com/)
+- Linkedin - [Jay Lin](https://www.linkedin.com/in/cooloojayoo/)
