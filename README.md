@@ -41,7 +41,7 @@ Users should be able to:
 - [Next.js](https://nextjs.org/) - React Meta framework
 - [TailwindCSS](https://tailwindcss.com/) - Styling CSS-In-JS to make a beautiful website
 - [React Query](https://tanstack.com/query/v3/) - A new way to fetch data and async state manager 
-- [zustand](https://github.com/pmndrs/zustand) - State-management library
+- [Zustand](https://github.com/pmndrs/zustand) - State-management library
 - [Node](https://nodejs.org/en/) - JavaScript runtime environment outside of browser
 - [Figma](https://www.figma.com/) - With semantic HTML5 match from Figma File
 - [Python](https://www.python.org/) - Written backend service with Python 3
@@ -49,9 +49,7 @@ Users should be able to:
 
 ### Future Plan
 
-- [Prisma](https://www.prisma.io/) - Working with databases thanks to data model, type-safety & auto-completion
 - [PostgreSQL](https://www.postgresql.org/) - Relational Database
-- [NextAuth](https://next-auth.js.org/) - Authentication for Next.js
 - [GraphQL](https://graphql.org/) - Query language for APIs
 - [Framer Motion](https://www.framer.com/motion/) - Better User Experience for animation
   
