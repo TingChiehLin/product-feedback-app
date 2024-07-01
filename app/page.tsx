@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useContext } from "react";
 import { FeedbackContext } from "../store/product-feedback-context";
@@ -18,7 +18,7 @@ import Button from "../components/Button";
 
 import Menu from "../components/Menu";
 import CommentItem from "../components/CommentItem";
-import {COMMENTS} from '../lib/comments';
+import { COMMENTS } from "../lib/comments";
 
 const gradientBG = {
   width: "255px",
@@ -76,7 +76,7 @@ const Home = () => {
             <h1 className="font-bold text-lg text-pfBlue_dark">Roadmap</h1>
             <Link
               href="/roadmap"
-              className="text-sm text-pfBlue_normal hover:text-[#8397F8] hover:underline cursor-pointer"
+              className="text-sm text-pfBlue_normal text-[#8397F8] hover:underline cursor-pointer"
             >
               View
             </Link>
@@ -106,7 +106,7 @@ const Home = () => {
                 <span>{fbCtx.feedbacks.length}</span> Suggestions
               </h1>
             </div>
-          <Menu data={values} onClick={handleValues}/>
+            <Menu data={values} onClick={handleValues} />
           </nav>
           <Button
             text={"Add Feedback"}
