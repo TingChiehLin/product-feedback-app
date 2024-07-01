@@ -101,6 +101,7 @@ const Home = () => {
                 alt="bulb"
                 width={24}
                 height={24}
+                priority={true}
               />
               <h1 className="text-white text-lg font-bold">
                 <span>{fbCtx.feedbacks.length}</span> Suggestions
@@ -145,7 +146,7 @@ const Home = () => {
           <div className="mt-6">
             {fbCtx.feedbacks.map((comment) => (
               <CommentItem
-                key={id}
+                key={comment.id}
                 title={comment.title}
                 description={comment.description}
                 voteNum={comment.voteNum}
