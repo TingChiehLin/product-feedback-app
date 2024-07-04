@@ -1,6 +1,6 @@
 # Product Feedback App
 
-This is [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6)
+With an intuitive interface, users can submit feedbacks, vote on ideas, and track feedback progress, ensuring their voices are heard and valued.
 
 ![Preview](./preview.jpg)
 
@@ -58,8 +58,8 @@ Users should be able to:
 ### Useful resources
 
 - [Array Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) - Using reduce to count the sum of value in the array
+- [Product Feedback Design file](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6)
 
-  
 ## Contact Me
 
 - Website - [Jay Lin](https://tingchiehlin.com/)
