@@ -20,7 +20,7 @@ This is [Product feedback app challenge on Frontend Mentor](https://www.frontend
 
 ### Links
 
-- Live Demo Site URL: [Product Feedback App](https://product-feedback-oatt6lwwp-jay-lins-projects.vercel.app)
+- Live Demo Site URL: [Product Feedback App](https://product-feedback-nl4gaxci4-jay-lins-projects.vercel.app)
 
 ### The challenge
 
