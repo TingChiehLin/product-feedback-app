@@ -1,6 +1,6 @@
 # Product Feedback App
 
-This is [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6).
+This is [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6)
 
 ![Preview](./preview.jpg)
 
@@ -47,6 +47,7 @@ Users should be able to:
 - [Figma](https://www.figma.com/) - With semantic HTML5 match from Figma File
 - [Python](https://www.python.org/) - Written backend service with Python 3
 - [Flask](https://flask.palletsprojects.com/en/3.0.x/) - Developed backend REST API
+- [SQL Alchemy](https://www.sqlalchemy.org/) - Python SQL toolkit and Object-Relational Mapping library
 
 ### Future Plan
 
