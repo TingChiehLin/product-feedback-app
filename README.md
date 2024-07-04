@@ -2,7 +2,7 @@
 
 This is [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6).
 
-![Preview](./public/preview.jpg)
+![Preview](./preview.jpg)
 
 ## Table of contents
 
