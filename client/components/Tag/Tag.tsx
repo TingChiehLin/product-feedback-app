@@ -7,8 +7,9 @@ export interface TagPropType {
 }
 
 const Tag: FC<TagPropType> = ({ text, isActive, customClass }) => {
-  const tagStatus =
-    isActive && "text-white bg-pfBlueNormal hover:bg-pfBlueNormal";
+  const tagStatus = isActive
+    ? "text-white bg-pfBlueNormal hover:bg-pfBlueNormal"
+    : "text-pfBlueNormal bg-pfGrayNormal hover:bg-[#CFD7FF]";
   return (
     <div
       className={`
@@ -21,9 +22,7 @@ const Tag: FC<TagPropType> = ({ text, isActive, customClass }) => {
         justify-center 
         items-center 
         font-semibold
-        bg-pfGrayNormal hover:bg-[#CFD7FF] 
         cursor-pointer rounded-[10px]
-        text-pfBlueNormal
         select-none 
       `}
     >

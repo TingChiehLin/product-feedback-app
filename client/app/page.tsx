@@ -65,7 +65,7 @@ const Home = () => {
           className="bg-pfWhite shadow w-64 h-auto px-6 py-6 my-6 rounded-[10px] flex justify-start flex-wrap gap-x-2 gap-y-[14px]"
         >
           {tags.map((t) => (
-            <Tag key={t.text} text={t.text} isActive={true} />
+            <Tag key={t.text} text={t.text} isActive={t.isActive} />
           ))}
         </div>
         <div

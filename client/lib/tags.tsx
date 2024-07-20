@@ -1,8 +1,8 @@
 export const tags = [
-  { text: "All" },
-  { text: "UI" },
-  { text: "UX" },
-  { text: "Enhancement" },
-  { text: "Bug" },
-  { text: "Feature" },
+  { text: "All", isActive: true },
+  { text: "UI", isActive: false },
+  { text: "UX", isActive: false },
+  { text: "Enhancement", isActive: false },
+  { text: "Bug", isActive: false },
+  { text: "Feature", isActive: false },
 ];
