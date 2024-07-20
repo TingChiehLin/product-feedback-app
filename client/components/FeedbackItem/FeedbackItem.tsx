@@ -1,21 +1,23 @@
 import Tag from "../Tag";
-import CommentSection from "../CommentSection";
+import FeedbackNumber from "../FeedbackNumber";
 import VoteSection from "../VoteTag";
 
-interface CommentItemProp {
+interface FeedbackItemProp {
   title: string;
   description: string;
   voteNum: number;
   tagName: string;
-  commentNum: number;
+  isActive: boolean;
+  feedbackNum: number;
 }
 
-const CommentItem: React.FC<CommentItemProp> = ({
+const FeedbackItem: React.FC<FeedbackItemProp> = ({
   title,
   description,
   voteNum,
   tagName,
-  commentNum,
+  isActive,
+  feedbackNum,
 }) => {
   return (
     <div className="w-full mt-5 shadow bg-white rounded-[10px] cursor-pointer">
@@ -28,14 +30,14 @@ const CommentItem: React.FC<CommentItemProp> = ({
             </h4>
             <p className="text-pfGrayDark mb-3">{description}</p>
             <div className="flex gap-2">
-              <Tag text={tagName} />
+              <Tag text={tagName} isActive={isActive} />
             </div>
           </div>
         </div>
-        <CommentSection commentNum={commentNum} />
+        <FeedbackNumber feedbackNum={feedbackNum} />
       </div>
     </div>
   );
 };
 
-export default CommentItem;
+export default FeedbackItem;

@@ -2,14 +2,18 @@ import { FC } from "react";
 
 export interface TagPropType {
   text: string;
+  isActive: boolean;
   customClass?: string;
 }
 
-const Tag: FC<TagPropType> = ({ text, customClass }) => {
+const Tag: FC<TagPropType> = ({ text, isActive, customClass }) => {
+  const tagStatus =
+    isActive && "text-white bg-pfBlueNormal hover:bg-pfBlueNormal";
   return (
     <div
       className={`
         ${customClass}
+        ${tagStatus}
         px-4 py-2 
         w-fit
         text-sm 
@@ -19,8 +23,7 @@ const Tag: FC<TagPropType> = ({ text, customClass }) => {
         font-semibold
         bg-pfGrayNormal hover:bg-[#CFD7FF] 
         cursor-pointer rounded-[10px]
-        text-pfBlueNormal active:text-white
-        active:bg-pfBlueNormal
+        text-pfBlueNormal
         select-none 
       `}
     >

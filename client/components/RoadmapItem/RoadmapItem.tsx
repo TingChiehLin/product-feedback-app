@@ -1,5 +1,5 @@
 import { FC } from "react";
-import CommentSection from "../CommentSection";
+import CommentSection from "../FeedbackNumber";
 import Tag from "../Tag";
 import VoteSection from "../VoteTag";
 
@@ -11,20 +11,20 @@ interface RoadmapItemProp {
   description: string;
   tagName: string;
   voteNum: number;
-  commentNum: number; 
+  commentNum: number;
 }
 
-const bgColorMapper: {[key in RoadmapItemStatus]: string} = {
-  "Planned": "bg-pfOrangeWarm",
+const bgColorMapper: { [key in RoadmapItemStatus]: string } = {
+  Planned: "bg-pfOrangeWarm",
   "In Progress": "bg-pfPink",
-  "Live": "bg-pfBlueLight",
-}
+  Live: "bg-pfBlueLight",
+};
 
-const LineColorMapper: {[key in RoadmapItemStatus]: string} = {
-  "Planned": "border-pfOrangeWarm",
+const LineColorMapper: { [key in RoadmapItemStatus]: string } = {
+  Planned: "border-pfOrangeWarm",
   "In Progress": "border-pfPink",
-  "Live": "border-pfBlueLight",
-}
+  Live: "border-pfBlueLight",
+};
 
 const RoadmapItem: FC<RoadmapItemProp> = ({
   status,
@@ -34,7 +34,6 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
   voteNum,
   commentNum,
 }) => {
-
   const bgColor = bgColorMapper[status];
   const borderColor = LineColorMapper[status];
 

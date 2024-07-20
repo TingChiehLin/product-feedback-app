@@ -22,7 +22,6 @@ const VoteTag: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
                       rounded-[10px] 
                     bg-pfWhiteLight hover:bg-lightPurple
                     active:bg-pfBlueNormal
-                      cursor-pointer
                       select-none 
                       group
                   `}

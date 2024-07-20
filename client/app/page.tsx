@@ -17,7 +17,7 @@ import Process from "../components/ProcessStatus";
 import Button from "../components/Button";
 
 import Menu from "../components/Menu";
-import CommentItem from "../components/CommentItem";
+import FeedbackItem from "../components/FeedbackItem";
 import { COMMENTS } from "../lib/comments";
 
 const gradientBG = {
@@ -65,7 +65,7 @@ const Home = () => {
           className="bg-pfWhite shadow w-64 h-auto px-6 py-6 my-6 rounded-[10px] flex justify-start flex-wrap gap-x-2 gap-y-[14px]"
         >
           {tags.map((t) => (
-            <Tag key={t.text} text={t.text} />
+            <Tag key={t.text} text={t.text} isActive={true} />
           ))}
         </div>
         <div
@@ -144,14 +144,15 @@ const Home = () => {
           </div>
         ) : (
           <div className="mt-6">
-            {fbCtx.feedbacks.map((comment) => (
-              <CommentItem
-                key={comment.id}
-                title={comment.title}
-                description={comment.description}
-                voteNum={comment.voteNum}
-                tagName={comment.tagName}
-                commentNum={comment.commentNum}
+            {fbCtx.feedbacks.map((feedback) => (
+              <FeedbackItem
+                key={feedback.id}
+                title={feedback.title}
+                description={feedback.description}
+                voteNum={feedback.voteNum}
+                tagName={feedback.tagName}
+                isActive={feedback.isActive}
+                feedbackNum={feedback.commentNum}
               />
             ))}
           </div>

@@ -1,12 +1,7 @@
-import * as React from 'react';
+import * as React from "react";
 
 const EditFeedback: React.FC = () => {
-  return (
-    <div>
-      
-
-    </div>
-  );
-}
+  return <div></div>;
+};
 
 export default EditFeedback;

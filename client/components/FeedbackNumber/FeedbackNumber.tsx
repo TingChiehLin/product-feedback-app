@@ -3,10 +3,10 @@ import { FC } from "react";
 import COMMENT from "../../assets/comment.svg";
 
 interface CommentTypeProp {
-  commentNum: number;
+  feedbackNum: number;
 }
 
-const CommentNumber: FC<CommentTypeProp> = ({ commentNum }) => {
+const FeedbackNumber: FC<CommentTypeProp> = ({ feedbackNum }) => {
   return (
     <>
       <div className="flex gap-2 items-center">
@@ -17,10 +17,10 @@ const CommentNumber: FC<CommentTypeProp> = ({ commentNum }) => {
           width={18}
           height={16}
         />
-        <span className="text-pfBlue_dark font-bold">{commentNum}</span>
+        <span className="text-pfBlue_dark font-bold">{feedbackNum}</span>
       </div>
     </>
   );
 };
 
-export default CommentNumber;
+export default FeedbackNumber;
