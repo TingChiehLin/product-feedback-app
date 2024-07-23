@@ -13,11 +13,11 @@ from config import app, db, api
 
 # Views go here!
 
-@app.route('/')
+
+@app.route("/")
 def index():
-    return '<h1>Project Server</h1>'
+    return "<h1>Project Server</h1>"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(port=5555, debug=True)
-
