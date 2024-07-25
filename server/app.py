@@ -8,15 +8,17 @@ from flask_restful import Resource
 
 # Local imports
 from config import app, db, api
-# Add your model imports
 
+# Add your model imports
+from models import Home
 
 # Views go here!
+api.add_resource(Home, "/")
 
 
-@app.route("/")
-def index():
-    return "<h1>Project Server</h1>"
+# @app.route("/")
+# def index():
+#     return "<h1>Project Server</h1>"
 
 
 if __name__ == "__main__":
