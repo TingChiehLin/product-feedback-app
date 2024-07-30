@@ -24,7 +24,7 @@ metadata = MetaData(
 )
 
 db = SQLAlchemy(metadata=metadata)
-from models import Feedback
+from models import Feedback, User, Comment, Category
 
 migrate = Migrate(app, db)
 db.init_app(app)
