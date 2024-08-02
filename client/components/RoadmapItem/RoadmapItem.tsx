@@ -1,5 +1,5 @@
 import { FC } from "react";
-import CommentSection from "../FeedbackNumber";
+import FeedbackNumber from "../FeedbackNumber";
 import Tag from "../Tag";
 import VoteSection from "../VoteTag";
 
@@ -40,10 +40,10 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
   return (
     <div
       className={`w-full max-w-[350px] h-full px-8 pt-6 pb-8
-                 rounded-md
-                 border-t-[6px] ${borderColor}
-                 bg-white
-               `}
+                  rounded-md
+                  border-t-[6px] ${borderColor}
+                bg-white
+                `}
     >
       <div className="flex items-center gap-4 mb-2">
         <div className={`w-2 h-2 ${bgColor} rounded-full`}></div>
@@ -53,11 +53,11 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
         <h4 className="text-lg text-pfBlueDark font-bold mb-1">{title}</h4>
         <p className="text-base text-pfGrayDark">{description}</p>
       </div>
-      <Tag text={tagName} />
+      <Tag text={tagName} isActive={false} />
       <div className="mb-4"></div>
       <div className="flex justify-between">
         <VoteSection voteNum={voteNum} fieldDirection={"horizental"} />
-        <CommentSection commentNum={commentNum} />
+        <FeedbackNumber feedbackNum={commentNum} />
       </div>
     </div>
   );
