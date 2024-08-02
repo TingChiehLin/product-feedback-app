@@ -9,6 +9,7 @@ import Button from "../../components/Button";
 import RoadMapSection from "../../components/RoadMapSection";
 import Link from "next/link";
 import { FaAngleLeft, FaPlus } from "react-icons/fa";
+import BackButton from "@/components/BackButton";
 
 const RoadMap: FC = () => {
   const fbCtx = useContext(FeedbackContext);
@@ -24,14 +25,7 @@ const RoadMap: FC = () => {
       >
         <div>
           <div className="flex gap-3.5">
-            <Link href="/">
-              <FaAngleLeft size={"1.2rem"} color={"white"} />
-            </Link>
-            <Link href="/">
-              <h4 className="font-bold text-sm hover:underline cursor-pointer text-white">
-                Go Back
-              </h4>
-            </Link>
+            <BackButton href={"/"} />
           </div>
           <h3 className="font-bold text-white text-2xl mt-2">RoadMap</h3>
         </div>

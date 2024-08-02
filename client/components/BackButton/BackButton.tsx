@@ -1,23 +1,48 @@
 import Link from "next/link";
 import { FaAngleLeft } from "react-icons/fa";
 
+type Buttons = "Default" | "AddFeedback";
+
+type Colors = { arrowColor: string; textColor: string };
+
 interface BackButtonPropType {
-    href: string;
+  type?: Buttons;
+  href: string;
 }
 
-const BackButton: React.FC<BackButtonPropType> = ({ href }) => {
-    return (
-      <div className="flex gap-3.5 self-start">
-        <Link href={href}>
-          <FaAngleLeft size={"1.2rem"} className="text-pfBlueNormal" />
-        </Link>
-        <Link href={href}>
-          <h4 className="font-bold text-sm hover:underline cursor-pointer text-pfGrayDark">
-            Go Back
-          </h4>
-        </Link>
-      </div>    
-    )
-}
+const buttonsColorMapper: {
+  [key in Buttons]: Colors;
+} = {
+  Default: {
+    arrowColor: "text-white",
+    textColor: "text-white",
+  },
+  AddFeedback: {
+    arrowColor: "text-pfBlueNormal",
+    textColor: "text-pfGrayDark",
+  },
+};
+
+const BackButton: React.FC<BackButtonPropType> = ({
+  type = "Default",
+  href,
+}) => {
+  const arrowColor = buttonsColorMapper[type].arrowColor;
+  const textColor = buttonsColorMapper[type].textColor;
+  return (
+    <div className="flex gap-3.5 self-start">
+      <Link href={href}>
+        <FaAngleLeft size={"1.2rem"} className={arrowColor} />
+      </Link>
+      <Link href={href}>
+        <span
+          className={`block font-bold text-sm hover:underline cursor-pointer ${textColor}`}
+        >
+          Go Back
+        </span>
+      </Link>
+    </div>
+  );
+};
 
 export default BackButton;

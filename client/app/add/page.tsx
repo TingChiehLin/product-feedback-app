@@ -97,7 +97,7 @@ const AddFeedBack: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center gap-[68px] max-w-[540px] mx-auto">
-      <BackButton href="/" />
+      <BackButton type="AddFeedback" href="/" />
       <Form type="Add" title="Create New Feedback" onSubmit={handleSubmit}>
         <Input
           id={"feedback-title"}

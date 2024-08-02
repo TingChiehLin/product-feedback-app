@@ -9,11 +9,7 @@ interface slugField {
 }
 
 const FeedbackDetail: FC<FeedbackDetailPropType> = ({ params }) => {
-  return (
-    <div className="bg-red-300">
-        <header></header>
-    </div>
-  );
+  return <div className="bg-red-300"></div>;
 };
 
 export default FeedbackDetail;
