@@ -1,14 +1,20 @@
-import { CATEGORIES, CategoryType } from "@/lib";
 import * as React from "react";
+import { requestFormType, CategoryType } from "@/lib";
+
 import { FaPlus } from "react-icons/fa";
+
 import Input from "../Input";
 import DropDownMenu from "../DropDownMenu";
+import Button from "../Button";
+import TextField from "../TextField";
 
 type FormType = "Add" | "Edit";
 
 interface FormPropType {
   title: string;
   type: FormType;
+  values: requestFormType;
+  categories: CategoryType[];
   onChangeValues: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -17,37 +23,11 @@ interface FormPropType {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-type FieldConfig = {
-  value: string;
-  error: string;
-  validator: () => string;
-};
-
-interface requestFormType {
-  "feedback-title": FieldConfig;
-  "feedback-category": CategoryType[];
-  "feedback-detail": FieldConfig;
-}
-
-const validateTitle = () => {
-  // return "Can’t be empty"
-  return "";
-};
-
-const validateDetail = () => {
-  // return "Can’t be empty"
-  return "";
-};
-
-const initialData: requestFormType = {
-  "feedback-title": { value: "", error: "", validator: validateTitle },
-  "feedback-category": CATEGORIES,
-  "feedback-detail": { value: "", error: "", validator: validateDetail },
-};
-
 const Form: React.FC<FormPropType> = ({
   title,
   type,
+  values,
+  categories,
   onChangeValues,
   onChangeCategory,
   onCancel,
@@ -85,7 +65,7 @@ const Form: React.FC<FormPropType> = ({
           placeholder={"Please add a dark theme option"}
           value={values["feedback-title"].value}
           error={values["feedback-title"].error}
-          onChange={handleValues}
+          onChange={onChangeValues}
         />
         <DropDownMenu
           id={"feedback-category"}
@@ -93,7 +73,7 @@ const Form: React.FC<FormPropType> = ({
           description={"Choose a category for your feedback"}
           name={"feedback-category"}
           data={categories}
-          onClick={handleCategory}
+          onClick={onChangeCategory}
         />
         <TextField
           id={"feedback-detail"}
@@ -107,20 +87,20 @@ const Form: React.FC<FormPropType> = ({
           cols={50}
           placeholder={"Please input your feedback here"}
           error={values["feedback-detail"].error}
-          onChange={handleValues}
+          onChange={onChangeValues}
         />
         <div className="flex justify-end gap-x-4">
           <Button
             text={"Cancel"}
             variant={"Cancel"}
             type="button"
-            onClick={handleCancel}
+            onClick={onCancel}
           />
           <Button
             text={"Add Feedback"}
             variant={"Add"}
             type="submit"
-            onClick={() => handleSubmit}
+            onClick={() => onSubmit}
           />
         </div>
       </div>

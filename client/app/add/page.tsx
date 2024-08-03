@@ -3,12 +3,14 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 
+import { CATEGORIES, CategoryType, FORMDATA, requestFormType } from "@/lib";
+
 import Form from "../../components/Form";
 import FeedbackContainer from "@/layouts/FeedbackContainer";
 import BackButton from "@/components/BackButton";
 
 const AddFeedBack: React.FC = () => {
-  const [values, setValues] = React.useState(initialData);
+  const [values, setValues] = React.useState(FORMDATA);
   const [categories, setCategories] =
     React.useState<CategoryType[]>(CATEGORIES);
 
@@ -54,12 +56,13 @@ const AddFeedBack: React.FC = () => {
   };
 
   const handleCancel = () => {
-    setValues(initialData);
+    setValues(FORMDATA);
     push("/");
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log(values);
   };
 
   return (
@@ -68,18 +71,12 @@ const AddFeedBack: React.FC = () => {
       <Form
         type="Add"
         title="Create New Feedback"
+        values={values}
+        categories={categories}
         onSubmit={handleSubmit}
-        onChangeValues={function (
-          event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
-        onChangeCategory={function (i: CategoryType): void {
-          throw new Error("Function not implemented.");
-        }}
-        onCancel={function (): void {
-          throw new Error("Function not implemented.");
-        }}
+        onChangeValues={handleValues}
+        onChangeCategory={handleCategory}
+        onCancel={handleCancel}
       />
     </FeedbackContainer>
   );

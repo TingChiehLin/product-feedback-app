@@ -9,8 +9,8 @@ const EditFeedback: React.FC = () => {
     <FeedbackContainer>
       <BackButton href="/" />
       {/* <Form
-        type="Add"
-        title="Create New Feedback"
+        type="Edit"
+        title="Editing ‘Add a dark theme option’"
         onSubmit={handleSubmit}
       ></Form> */}
     </FeedbackContainer>
