@@ -39,7 +39,7 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
 
   return (
     <div
-      className={`w-full max-w-[350px] h-full px-8 pt-6 pb-8
+      className={`w-full h-full px-8 pt-6 pb-8
                   rounded-md
                   border-t-[6px] ${borderColor}
                 bg-white

@@ -25,7 +25,7 @@ const RoadMap: FC = () => {
       >
         <div>
           <div className="flex gap-3.5">
-            <BackButton href={"/"} />
+            <BackButton type={"Roadmap"} href={"/"} />
           </div>
           <h3 className="font-bold text-white text-2xl mt-2">RoadMap</h3>
         </div>
@@ -37,7 +37,7 @@ const RoadMap: FC = () => {
           variant={"Add"}
         />
       </div>
-      <div className="w-full mt-12 flex gap-7.5">
+      <div className="mt-12 grid grid-cols-3 gap-[30px]">
         {roadmapsections.map((r) => (
           <RoadMapSection
             key={r.title}

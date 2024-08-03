@@ -16,7 +16,6 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
   status,
   data,
 }) => {
-
   const plannedTotalCount = data.reduce(
     (acc: number, cur: commentType) => (cur.status === "Planned" ? ++acc : acc),
     0
@@ -44,7 +43,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
   const liveItems = data.filter((cur: commentType) => cur.status === "Live");
 
   return (
-    <div className="w-full">
+    <div>
       <div>
         <h4 className="text-[18px] font-bold text-pfBlueDark">
           {title}&nbsp;(
@@ -54,7 +53,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
         </h4>
         <h5 className="text-pfGrayDark mt-1">{subTitle}</h5>
       </div>
-      <div className="mt-8 flex gap-6 flex-wrap">
+      <div className="mt-8 flex flex-col gap-6 ">
         {status === "Planned" &&
           plannedItems.map((r) => (
             <RoadmapItem

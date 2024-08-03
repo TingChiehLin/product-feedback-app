@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaAngleLeft } from "react-icons/fa";
 
-type Buttons = "Default" | "AddFeedback";
+type Buttons = "Default" | "Roadmap";
 
 type Colors = { arrowColor: string; textColor: string };
 
@@ -14,12 +14,12 @@ const buttonsColorMapper: {
   [key in Buttons]: Colors;
 } = {
   Default: {
-    arrowColor: "text-white",
-    textColor: "text-white",
-  },
-  AddFeedback: {
     arrowColor: "text-pfBlueNormal",
     textColor: "text-pfGrayDark",
+  },
+  Roadmap: {
+    arrowColor: "text-white",
+    textColor: "text-white",
   },
 };
 
