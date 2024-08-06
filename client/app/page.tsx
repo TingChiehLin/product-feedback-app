@@ -18,7 +18,6 @@ import Button from "../components/Button";
 
 import Menu from "../components/Menu";
 import FeedbackItem from "../components/FeedbackItem";
-import { COMMENTS } from "../lib/comments";
 
 const gradientBG = {
   width: "255px",
@@ -43,6 +42,10 @@ const Home = () => {
     });
   };
 
+  const handleTagActive = () => {
+    console.log("click");
+  };
+
   return (
     <div className="flex">
       <aside className="mr-[30px]">
@@ -65,7 +68,12 @@ const Home = () => {
           className="bg-pfWhite shadow w-64 h-auto px-6 py-6 my-6 rounded-[10px] flex justify-start flex-wrap gap-x-2 gap-y-[14px]"
         >
           {tags.map((t) => (
-            <Tag key={t.text} text={t.text} isActive={t.isActive} />
+            <Tag
+              key={t.text}
+              text={t.text}
+              isActive={t.isActive}
+              onClick={handleTagActive}
+            />
           ))}
         </div>
         <div
@@ -151,7 +159,6 @@ const Home = () => {
                 description={feedback.description}
                 voteNum={feedback.voteNum}
                 tagName={feedback.tagName}
-                isActive={feedback.isActive}
                 feedbackNum={feedback.commentNum}
               />
             ))}

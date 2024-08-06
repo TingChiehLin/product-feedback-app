@@ -7,7 +7,6 @@ interface FeedbackItemProp {
   description: string;
   voteNum: number;
   tagName: string;
-  isActive: boolean;
   feedbackNum: number;
 }
 
@@ -16,7 +15,6 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
   description,
   voteNum,
   tagName,
-  isActive,
   feedbackNum,
 }) => {
   return (
@@ -30,7 +28,7 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
             </h4>
             <p className="text-pfGrayDark mb-3">{description}</p>
             <div className="flex gap-2">
-              <Tag text={tagName} isActive={isActive} />
+              <Tag text={tagName} />
             </div>
           </div>
         </div>

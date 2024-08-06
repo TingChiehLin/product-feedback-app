@@ -2,14 +2,16 @@ import { FC } from "react";
 
 export interface TagPropType {
   text: string;
-  isActive: boolean;
+  isActive?: boolean;
+  onClick?: () => void;
   customClass?: string;
 }
 
-const Tag: FC<TagPropType> = ({ text, isActive, customClass }) => {
+const Tag: FC<TagPropType> = ({ text, isActive, onClick, customClass }) => {
   const tagStatus = isActive
     ? "text-white bg-pfBlueNormal hover:bg-pfBlueNormal"
     : "text-pfBlueNormal bg-pfGrayNormal hover:bg-[#CFD7FF]";
+
   return (
     <div
       className={`
@@ -25,6 +27,7 @@ const Tag: FC<TagPropType> = ({ text, isActive, customClass }) => {
         cursor-pointer rounded-[10px]
         select-none 
       `}
+      onClick={onClick}
     >
       <span>{text}</span>
     </div>
