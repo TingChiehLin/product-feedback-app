@@ -12,7 +12,7 @@ import NO_FEEDBACK from "../assets/nofeedback.svg";
 
 import { FaPlus } from "react-icons/fa";
 import { process, tags } from "../lib";
-import Tag from "../components/Tag";
+import Tag, { TagPropType } from "../components/Tag";
 import Process from "../components/ProcessStatus";
 import Button from "../components/Button";
 
@@ -32,6 +32,7 @@ const Home = () => {
   const fbCtx = useContext(FeedbackContext);
 
   const [values, setValues] = React.useState<MenuState[]>(MENU_ITEMS);
+  const [tagValues, setTagValues] = React.useState(tags);
 
   const handleValues = (m: MenuState) => {
     setValues((prevState) => {
@@ -42,9 +43,14 @@ const Home = () => {
     });
   };
 
-  const handleTagActive = () => {
-    console.log("click");
-  };
+  // const handleTagActive = (t: any) => {
+  //   setTagValues((prevState) => {
+  //     return prevState.map((tag) => ({
+  //       ...tag,
+  //       isActive: tag.text === t.text,
+  //     }));
+  //   });
+  // };
 
   return (
     <div className="flex">
@@ -67,12 +73,12 @@ const Home = () => {
           id="broder-tag"
           className="bg-pfWhite shadow w-64 h-auto px-6 py-6 my-6 rounded-[10px] flex justify-start flex-wrap gap-x-2 gap-y-[14px]"
         >
-          {tags.map((t) => (
+          {tagValues.map((t) => (
             <Tag
               key={t.text}
               text={t.text}
               isActive={t.isActive}
-              onClick={handleTagActive}
+              // onClick={handleTagActive}
             />
           ))}
         </div>
@@ -157,8 +163,8 @@ const Home = () => {
                 key={feedback.id}
                 title={feedback.title}
                 description={feedback.description}
-                voteNum={feedback.voteNum}
-                tagName={feedback.tagName}
+                upvote={feedback.upvote}
+                category={feedback.tagName}
                 feedbackNum={feedback.commentNum}
               />
             ))}

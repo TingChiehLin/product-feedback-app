@@ -18,7 +18,10 @@ interface FormPropType {
   onChangeValues: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  onChangeCategory: (i: CategoryType) => void;
+  onChangeCategory: (
+    i: CategoryType,
+    event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
+  ) => void;
   onCancel: () => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -37,6 +40,8 @@ const Form: React.FC<FormPropType> = ({
     background:
       "radial-gradient(128.88% 128.88% at 103.9% -10.39%, #E84D70 0%, #A337F6 53.09%, #28A7ED 100%)",
   };
+
+  const alignButton = type === "Add" && "justify-end";
 
   return (
     <form
@@ -62,7 +67,7 @@ const Form: React.FC<FormPropType> = ({
           description={"Add a short, descriptive headline"}
           type={"text"}
           name={"feedback-title"}
-          placeholder={"Please add a dark theme option"}
+          placeholder={"Please input Title"}
           value={values["feedback-title"].value}
           error={values["feedback-title"].error}
           onChange={onChangeValues}
@@ -89,7 +94,16 @@ const Form: React.FC<FormPropType> = ({
           error={values["feedback-detail"].error}
           onChange={onChangeValues}
         />
-        <div className="flex justify-end gap-x-4">
+        <div className={`flex ${alignButton} gap-x-4`}>
+          {type === "Edit" && (
+            <Button
+              text={"Delete"}
+              variant={"Delete"}
+              type="button"
+              onClick={onCancel}
+            />
+          )}
+          {type === "Edit" && <div className="ml-auto"></div>}
           <Button
             text={"Cancel"}
             variant={"Cancel"}

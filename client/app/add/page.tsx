@@ -21,7 +21,7 @@ const AddFeedBack: React.FC = () => {
   ) => {
     const { name, value } = event.target;
 
-    setValues((preState) => {
+    setValues((preState: typeof values) => {
       return {
         ...preState,
         [name]: {
@@ -32,8 +32,16 @@ const AddFeedBack: React.FC = () => {
     });
   };
 
-  const handleCategory = (i: CategoryType) => {
-    setValues((preState: any) => {
+  const handleCategory = (
+    i: CategoryType,
+    event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
+  ) => {
+    if (event) {
+      event.preventDefault();
+      console.log("Prevent refresh");
+    }
+
+    setValues((preState) => {
       return {
         ...preState,
         "feedback-category": preState["feedback-category"].map(
@@ -62,7 +70,24 @@ const AddFeedBack: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(values);
+
+    const validateTitleError = values["feedback-title"].validator(
+      values["feedback-title"].value
+    );
+
+    if (validateTitleError !== "") {
+      setValues((preState: typeof values) => {
+        return {
+          ...preState,
+          "feedback-title": {
+            ...preState["feedback-title"],
+            error: validateTitleError,
+          },
+        };
+      });
+    }
+
+    console.log("Form Submit Value:", values);
   };
 
   return (

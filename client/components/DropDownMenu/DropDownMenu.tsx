@@ -13,13 +13,17 @@ interface DropDownMenuProps {
   name: string;
   description: string;
   data: CategoryType[];
-  onClick: (item: CategoryType) => void;
+  onClick: (
+    item: CategoryType,
+    event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
+  ) => void;
 }
 
 const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
-  const handleOpen = () => {
+  const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     setIsOpen(!isOpen);
   };
 
@@ -41,7 +45,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
                                text-[15px]
                                rounded-[5px] 
                                cursor-pointer"
-        onClick={handleOpen}
+        onClick={(event) => handleOpen(event)}
       >
         <span>{props.data.find((item) => item.isActive)?.name}</span>
         <Image
@@ -78,7 +82,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
                                                "
                     id={item.name}
                     value={item.name}
-                    onClick={() => props.onClick(item)}
+                    onClick={(event) => props.onClick(item, event)}
                   >
                     {item.name}
                     {item.isActive && (
