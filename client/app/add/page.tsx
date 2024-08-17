@@ -27,6 +27,7 @@ const AddFeedBack: React.FC = () => {
         [name]: {
           ...preState[name as keyof requestFormType],
           value: value,
+          error: "",
         },
       };
     });
@@ -71,17 +72,33 @@ const AddFeedBack: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const validateTitleError = values["feedback-title"].validator(
+    const titleHasError = values["feedback-title"].validator(
       values["feedback-title"].value
     );
 
-    if (validateTitleError !== "") {
+    const detailHasError = values["feedback-detail"].validator(
+      values["feedback-detail"].value
+    );
+
+    if (titleHasError !== "") {
       setValues((preState: typeof values) => {
         return {
           ...preState,
           "feedback-title": {
             ...preState["feedback-title"],
-            error: validateTitleError,
+            error: titleHasError,
+          },
+        };
+      });
+    }
+
+    if (detailHasError !== "") {
+      setValues((preState: typeof values) => {
+        return {
+          ...preState,
+          "feedback-detail": {
+            ...preState["feedback-detail"],
+            error: detailHasError,
           },
         };
       });
