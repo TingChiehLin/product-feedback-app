@@ -1,7 +1,7 @@
 import * as React from "react";
-import { requestFormType, CategoryType } from "@/lib";
+import { RequestFormType, CategoryType, StatusType } from "@/lib";
 
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaEdit } from "react-icons/fa";
 
 import Input from "../Input";
 import DropDownMenu from "../DropDownMenu";
@@ -13,14 +13,19 @@ type FormType = "Add" | "Edit";
 interface FormPropType {
   title: string;
   type: FormType;
-  values: requestFormType;
+  values: RequestFormType;
   categories: CategoryType[];
+  updateStatus?: StatusType[];
   onChangeValues: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onChangeCategory: (
     i: CategoryType,
-    event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
+    event: React.MouseEvent<HTMLLIElement>
+  ) => void;
+  onUpdateStatus?: (
+    u: StatusType,
+    event: React.MouseEvent<HTMLLIElement>
   ) => void;
   onCancel: () => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -31,8 +36,10 @@ const Form: React.FC<FormPropType> = ({
   type,
   values,
   categories,
+  updateStatus,
   onChangeValues,
   onChangeCategory,
+  onUpdateStatus,
   onCancel,
   onSubmit,
 }) => {
@@ -57,7 +64,8 @@ const Form: React.FC<FormPropType> = ({
                             flex justify-center items-center"
         style={addButtonStyle}
       >
-        {type == "Add" && <FaPlus size={"1rem"} color={"white"} className="" />}
+        {type == "Add" && <FaPlus size={"1rem"} color={"white"} />}
+        {type == "Edit" && <FaEdit size={"1rem"} color={"white"} />}
       </div>
       <h1 className="text-pfBlueDark text-2xl font-bold mb-10">{title}</h1>
       <div className="flex flex-col gap-y-6">
@@ -80,6 +88,16 @@ const Form: React.FC<FormPropType> = ({
           data={categories}
           onClick={onChangeCategory}
         />
+        {type === "Edit" && (
+          <DropDownMenu
+            id={"feedback-status"}
+            label={"Update Status"}
+            description={"Change feedback state"}
+            name={"feedback-status"}
+            data={updateStatus ?? []}
+            onClick={onUpdateStatus ?? (() => {})}
+          />
+        )}
         <TextField
           id={"feedback-detail"}
           label={"Feedback Detail"}

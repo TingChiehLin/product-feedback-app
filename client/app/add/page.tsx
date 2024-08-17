@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 
-import { CATEGORIES, CategoryType, FORMDATA, requestFormType } from "@/lib";
+import { CATEGORIES, CategoryType, FORMDATA, RequestFormType } from "@/lib";
 
 import Form from "../../components/Form";
 import FeedbackContainer from "@/layouts/FeedbackContainer";
@@ -25,7 +25,7 @@ const AddFeedBack: React.FC = () => {
       return {
         ...preState,
         [name]: {
-          ...preState[name as keyof requestFormType],
+          ...preState[name as keyof RequestFormType],
           value: value,
           error: "",
         },

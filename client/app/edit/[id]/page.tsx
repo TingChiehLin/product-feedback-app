@@ -1,19 +1,32 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 
-import { CATEGORIES, CategoryType, FORMDATA } from "@/lib";
+import { CATEGORIES, STATUS, CategoryType, StatusType, FORMDATA } from "@/lib";
 
 import BackButton from "@/components/BackButton";
 import Form from "@/components/Form";
 import FeedbackContainer from "@/layouts/FeedbackContainer";
 
 const EditFeedback: React.FC = () => {
-  const [values] = React.useState(FORMDATA);
+  const [values, setValues] = React.useState(FORMDATA);
   const [categories, setCategories] =
     React.useState<CategoryType[]>(CATEGORIES);
+  const [updateStatus, setUpdateStatus] = React.useState<StatusType[]>(STATUS);
+
+  const { push } = useRouter();
+
+  const handleValues = () => {};
+
+  const handleCategory = () => {};
 
   const handleSubmit = () => {};
+
+  const handleCancel = () => {
+    setValues(FORMDATA);
+    push("/");
+  };
 
   return (
     <FeedbackContainer>
@@ -24,17 +37,10 @@ const EditFeedback: React.FC = () => {
         onSubmit={handleSubmit}
         values={values}
         categories={categories}
-        onChangeValues={function (
-          event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-        ): void {
-          throw new Error("Function not implemented.");
-        }}
-        onChangeCategory={function (i: CategoryType): void {
-          throw new Error("Function not implemented.");
-        }}
-        onCancel={function (): void {
-          throw new Error("Function not implemented.");
-        }}
+        updateStatus={updateStatus}
+        onChangeValues={handleValues}
+        onChangeCategory={handleCategory}
+        onCancel={handleCancel}
       />
     </FeedbackContainer>
   );

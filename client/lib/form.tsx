@@ -7,7 +7,7 @@ type FieldConfig = {
   validator: (value: string) => string;
 };
 
-export interface requestFormType {
+export interface RequestFormType {
   "feedback-title": FieldConfig;
   "feedback-category": CategoryType[];
   "feedback-status": StatusType[];
@@ -19,7 +19,7 @@ const validateValue = (value: string) => {
   return "";
 };
 
-export const FORMDATA: requestFormType = {
+export const FORMDATA: RequestFormType = {
   "feedback-title": {
     value: "",
     error: "",

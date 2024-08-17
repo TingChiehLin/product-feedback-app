@@ -5,17 +5,17 @@ import TICK from "../../assets/tick.svg";
 
 import Image from "next/image";
 
-import { CategoryType } from "@/lib";
+import { CategoryType, StatusType } from "@/lib";
 
 interface DropDownMenuProps {
   id: string;
   label: string;
   name: string;
   description: string;
-  data: CategoryType[];
+  data: CategoryType[] | StatusType[];
   onClick: (
-    item: CategoryType,
-    event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
+    item: CategoryType | StatusType,
+    event: React.MouseEvent<HTMLLIElement>
   ) => void;
 }
 
@@ -36,15 +36,15 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
         {props.description}
       </span>
       <button
-        className="relative z-10
-                               flex justify-between 
-                               w-full bg-pfGrayLight
-                               text-pfBlueDark
-                               px-6 py-3
-                               mt-4
-                               text-[15px]
-                               rounded-[5px] 
-                               cursor-pointer"
+        className="relative
+                    flex justify-between 
+                    w-full bg-pfGrayLight
+                    text-pfBlueDark
+                    px-6 py-3
+                    mt-4
+                    text-[15px]
+                    rounded-[5px] 
+                    cursor-pointer"
         onClick={(event) => handleOpen(event)}
       >
         <span>{props.data.find((item) => item.isActive)?.name}</span>
@@ -63,23 +63,23 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
         {isOpen && (
           <ul
             className="w-full 
-                                        shadow-lg 
-                                        bg-white 
-                                        rounded-[10px]
-                                        absolute top-16 left-0 z-30"
+                      shadow-lg 
+                      bg-white 
+                      rounded-[10px]
+                      absolute top-16 left-0 z-30"
           >
             {props.data.map((item, index) => {
               return (
                 <>
                   <li
                     key={item.name}
-                    className=" cursor-pointer
-                                                text-[15px]
-                                                px-6 py-3 
-                                                text-pfGrayDark
-                                                hover:text-pfPurple
-                                                flex justify-between items-center
-                                               "
+                    className="cursor-pointer
+                              text-[15px]
+                              px-6 py-3 
+                              text-pfGrayDark
+                              hover:text-pfPurple
+                              flex justify-between items-center
+                              "
                     id={item.name}
                     value={item.name}
                     onClick={(event) => props.onClick(item, event)}
