@@ -49,6 +49,7 @@ class Feedback(db.Model, SerializerMixin):
     comments = db.relationship("Comment", backref=db.backref("feedback"))
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
 
     def __init__(self, title, description, upvote):
         self.title = title
@@ -101,6 +102,8 @@ class Category(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String)
+
+    feedbacks = db.relationship("Feedback", backref=db.backref("category"))
 
     def __repr__(self):
         return f"""

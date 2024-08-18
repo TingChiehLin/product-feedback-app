@@ -11,10 +11,12 @@ from config import app, db, api
 
 # Add your model imports
 
+from models import Feedback
 
 # Views here!
 
 
+## Get path
 class Home(Resource):
     def get(self):
         response_dict = {"message": "Welcome to product feedback RESTful API"}
@@ -27,18 +29,24 @@ class Home(Resource):
 api.add_resource(Home, "/")
 
 
-class Feedback:
-    def get(self):
-        response_dict_list = [n.to_dict() for n in Feedback.query.all()]
+# class Feedback:
+#     def get(self):
+#         response_dict_list = [f.to_dict() for f in Feedback.query.all()]
 
-        response = make_response(response_dict_list, 200)
+#         response = make_response(response_dict_list, 200)
 
-        return response
+#         return response
 
 
-# @app.route("/")
-# def index():
-#     return "<h1>Project Server</h1>"
+# api.add_resource(Feedback, "/feedbacks")
+
+
+@app.route("/feedbacks", methods=["GET"])
+def all_feedbacks():
+    if request.method == "GET":
+        feedbacks = Feedback.query.all()
+        feedback_list = [f.to_dict() for f in feedbacks]
+        return make_response(feedback_list, 200)
 
 
 if __name__ == "__main__":
