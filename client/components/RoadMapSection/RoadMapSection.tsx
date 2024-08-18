@@ -62,7 +62,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
               title={r.title}
               description={r.description}
               tagName={r.tagName}
-              voteNum={r.voteNum}
+              voteNum={r.upvote}
               commentNum={r.commentNum}
             />
           ))}
@@ -74,7 +74,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
               title={r.title}
               description={r.description}
               tagName={r.tagName}
-              voteNum={r.voteNum}
+              voteNum={r.upvote}
               commentNum={r.commentNum}
             />
           ))}
@@ -86,7 +86,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
               title={r.title}
               description={r.description}
               tagName={r.tagName}
-              voteNum={r.voteNum}
+              voteNum={r.upvote}
               commentNum={r.commentNum}
             />
           ))}

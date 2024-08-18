@@ -7,8 +7,7 @@ import { roadmapsections } from "../../lib";
 
 import Button from "../../components/Button";
 import RoadMapSection from "../../components/RoadMapSection";
-import Link from "next/link";
-import { FaAngleLeft, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import BackButton from "@/components/BackButton";
 
 const RoadMap: FC = () => {

@@ -24,6 +24,7 @@ const VoteTag: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
                     active:bg-pfBlueNormal
                       select-none 
                       group
+                      cursor-pointer
                   `}
       >
         <FaAngleUp
