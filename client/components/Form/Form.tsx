@@ -27,6 +27,7 @@ interface FormPropType {
     u: StatusType,
     event: React.MouseEvent<HTMLLIElement>
   ) => void;
+  onDelete?: () => void;
   onCancel: () => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -40,6 +41,7 @@ const Form: React.FC<FormPropType> = ({
   onChangeValues,
   onChangeCategory,
   onUpdateStatus,
+  onDelete,
   onCancel,
   onSubmit,
 }) => {
@@ -118,7 +120,7 @@ const Form: React.FC<FormPropType> = ({
               text={"Delete"}
               variant={"Delete"}
               type="button"
-              onClick={onCancel}
+              onClick={onDelete}
             />
           )}
           {type === "Edit" && <div className="ml-auto"></div>}
@@ -128,12 +130,21 @@ const Form: React.FC<FormPropType> = ({
             type="button"
             onClick={onCancel}
           />
-          <Button
-            text={"Add Feedback"}
-            variant={"Add"}
-            type="submit"
-            onClick={() => onSubmit}
-          />
+          {type === "Edit" ? (
+            <Button
+              text={"Save Changes"}
+              variant={"Add"}
+              type="submit"
+              onClick={() => onSubmit}
+            />
+          ) : (
+            <Button
+              text={"Add Feedback"}
+              variant={"Add"}
+              type="submit"
+              onClick={() => onSubmit}
+            />
+          )}
         </div>
       </div>
     </form>

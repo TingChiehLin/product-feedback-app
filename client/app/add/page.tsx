@@ -39,7 +39,6 @@ const AddFeedBack: React.FC = () => {
   ) => {
     if (event) {
       event.preventDefault();
-      console.log("Prevent refresh");
     }
 
     setValues((preState) => {

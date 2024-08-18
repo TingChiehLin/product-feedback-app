@@ -26,7 +26,6 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
     event.preventDefault();
     setIsOpen(!isOpen);
   };
-
   return (
     <div>
       <label className="text-pfBlueDark text-sm font-bold" htmlFor={props.id}>
@@ -47,7 +46,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
                     cursor-pointer"
         onClick={(event) => handleOpen(event)}
       >
-        <span>{props.data.find((item) => item.isActive)?.name}</span>
+        <span>{props.data.find((item) => item.isActive)!.name}</span>
         <Image
           className={`w-3 cursor-pointer 
                                     absolute top-1/2 right-6 -translate-y-1/2
@@ -70,9 +69,8 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
           >
             {props.data.map((item, index) => {
               return (
-                <>
+                <React.Fragment key={`${item.name}-${index}`}>
                   <li
-                    key={item.name}
                     className="cursor-pointer
                               text-[15px]
                               px-6 py-3 
@@ -96,8 +94,10 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
                       />
                     )}
                   </li>
-                  {index !== props.data.length - 1 && <hr />}
-                </>
+                  {index !== props.data.length - 1 && (
+                    <hr key={`hr-${index}`} />
+                  )}
+                </React.Fragment>
               );
             })}
           </ul>

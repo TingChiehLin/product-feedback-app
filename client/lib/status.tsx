@@ -4,7 +4,6 @@ export type StatusType = {
 };
 
 export const STATUS: StatusType[] = [
-  { name: "Suggestion", isActive: false },
   { name: "Planned", isActive: true },
   { name: "In-Progress", isActive: false },
   { name: "Live", isActive: false },
