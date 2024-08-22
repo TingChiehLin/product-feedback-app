@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from random import randint, choice as rc, random
+from random import randint, choice, random
 
 # Remote library imports
 from faker import Faker
@@ -24,29 +24,37 @@ if __name__ == "__main__":
 
         feedbacks = []
         status = ["Planned", "In-Progress", "Live"]
-        categories = ["UI", "UX", "Enhancement", "Bug", "Feature"]
+        sample_categories = ["UI", "UX", "Enhancement", "Bug", "Feature"]
+        categories = []
 
-        # Generate Random Feedbacks
-        for f in range(5):
-            random_status = random.choice(status)
-            random_categpry = random.choice(categories)
-            feedback = Feedback(
-                title=fake.unique.text(max_nb_chars=20).title(),
-                description=fake.unique.paragraph(nb_sentences=3),
-                upvote=random.randint(1, 1000),
-                status=random_status,
-                # commentNum=random.randint(0, 20),
-                # feedback.category = random_category
-                # How to add comment into feedback
-            )
+        # Create Categories Records
+        for c in sample_categories:
+            category = Category(type=c)
+            categories.append(category)
 
-            # Generate rnadom 5 categoies
-            # Assing to feedback
-            feedback.category_id = random_categpry
-            feedbacks.append(feedback)
-
-        db.session.add_all(feedbacks)
+        db.session.add_all(categories)
         db.session.commit()
+        # Generate Random Feedbacks
+        # for f in range(5):
+        #     random_status = choice(status)
+        #     # random_categpry = random.choice(categories)
+        #     feedback = Feedback(
+        #         title=fake.unique.text(max_nb_chars=20).title(),
+        #         description=fake.unique.paragraph(nb_sentences=3),
+        #         upvote=random.randint(1, 1000),
+        #         status=random_status,
+        #         # commentNum=random.randint(0, 20),
+        #         # feedback.category = random_category
+        #         # How to add comment into feedback
+        #     )
+
+        #     # Generate rnadom 5 categoies
+        #     # # Assing to feedback
+        #     # feedback.category_id = random_categpry
+        #     feedbacks.append(feedback)
+
+        # db.session.add_all(feedbacks)
+        # db.session.commit()
 
     # ?? How to do this with no any relationship
     # tagName: "Enhancement",
