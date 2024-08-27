@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from random import randint, choice, random
+from random import randint, choice
 
 # Remote library imports
 from faker import Faker
@@ -22,10 +22,29 @@ if __name__ == "__main__":
         Comment.query.delete()
         Category.query.delete()
 
-        feedbacks = []
         status = ["Planned", "In-Progress", "Live"]
         sample_categories = ["UI", "UX", "Enhancement", "Bug", "Feature"]
         categories = []
+        users = []
+
+        # Generate Random Users
+        for u in range(10):
+            user = User(
+                first_name=fake.first_name(),
+                last_name=fake.last_name(),
+                username=fake.user_name(),
+                role=fake.random_element(
+                    elements=(
+                        "admin",
+                        "user",
+                    )
+                ),
+                created_at=fake.date_time_this_year(),
+            )
+            users.append(user)
+
+        db.session.add_all(users)
+        db.session.commit()
 
         # Create Categories Records
         for c in sample_categories:
@@ -34,30 +53,32 @@ if __name__ == "__main__":
 
         db.session.add_all(categories)
         db.session.commit()
+
         # Generate Random Feedbacks
-        # for f in range(5):
-        #     random_status = choice(status)
-        #     # random_categpry = random.choice(categories)
-        #     feedback = Feedback(
-        #         title=fake.unique.text(max_nb_chars=20).title(),
-        #         description=fake.unique.paragraph(nb_sentences=3),
-        #         upvote=random.randint(1, 1000),
-        #         status=random_status,
-        #         # commentNum=random.randint(0, 20),
-        #         # feedback.category = random_category
-        #         # How to add comment into feedback
-        #     )
+        for f in range(5):
+            random_status = choice(status)
+            random_category = choice(categories)
+            random_user = choice(users)
+            feedback = Feedback(
+                title=fake.unique.text(max_nb_chars=20).title(),
+                description=fake.unique.paragraph(nb_sentences=3),
+                upvote=randint(1, 1000),
+                status=random_status,
+                # category_id=random_category.id,
+                # user_id=random_user.id
+            )
+            feedback.category = random_category
+            feedback.user = random_user
+            db.session.add(feedback)
+            db.session.commit()
 
-        #     # Generate rnadom 5 categoies
-        #     # # Assing to feedback
-        #     # feedback.category_id = random_categpry
-        #     feedbacks.append(feedback)
-
-        # db.session.add_all(feedbacks)
-        # db.session.commit()
-
-    # ?? How to do this with no any relationship
-    # tagName: "Enhancement",
-    # commentNum: 2,
-
-    # Generate Random Users
+            # Create random comments for each feedback
+            for _ in range(randint(min=1, max=15)):
+                comment = Comment(
+                    description=fake.sentence(),
+                    # feedback_id=feedback.id
+                )
+                comment.feedback = feedback
+                comment.user = choice(users)
+                db.session.add(comment)
+                db.session.commit()
