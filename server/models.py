@@ -51,10 +51,11 @@ class Feedback(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
 
-    def __init__(self, title, description, upvote):
+    def __init__(self, title, description, upvote, status):
         self.title = title
         self.description = description
         self.upvote = upvote
+        self.status = status
 
     def __repr__(self):
         return f"""
