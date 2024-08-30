@@ -40,6 +40,12 @@ class User(db.Model, SerializerMixin):
 class Feedback(db.Model, SerializerMixin):
     __tablename__ = "feedbacks"
 
+    serialize_rules = (
+        "-comments",
+        "-user",
+        "-category.feedbacks",
+    )
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
@@ -68,6 +74,8 @@ class Feedback(db.Model, SerializerMixin):
 
 class Comment(db.Model, SerializerMixin):
     __tablename__ = "comments"
+
+    serialize_rules = ("-feedback",)
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String)

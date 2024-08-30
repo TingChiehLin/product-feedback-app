@@ -62,7 +62,7 @@ if __name__ == "__main__":
             feedback = Feedback(
                 title=fake.unique.text(max_nb_chars=20).title(),
                 description=fake.unique.paragraph(nb_sentences=3),
-                upvote=randint(1, 1000),
+                upvote=randint(1, len(users)),
                 status=random_status,
                 # category_id=random_category.id,
                 # user_id=random_user.id
@@ -73,7 +73,7 @@ if __name__ == "__main__":
             db.session.commit()
 
             # Create random comments for each feedback
-            for _ in range(randint(min=1, max=15)):
+            for _ in range(randint(1, 15)):
                 comment = Comment(
                     description=fake.sentence(),
                     # feedback_id=feedback.id

@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, make_response
+from flask import jsonify, request, make_response
 from flask_restful import Resource
 
 # Local imports
@@ -29,14 +29,12 @@ class Home(Resource):
 api.add_resource(Home, "/")
 
 
-# class Feedback:
+# class FeedbackResources(Resource):
 #     def get(self):
-#         response_dict_list = [f.to_dict() for f in Feedback.query.all()]
-
-#         response = make_response(response_dict_list, 200)
-
+#         feedbacks = Feedback.query.all()
+#         feedback_list = [f.to_dict() for f in feedbacks]
+#         response = make_response(jsonify(feedback_list), 200)
 #         return response
-
 
 # api.add_resource(Feedback, "/feedbacks")
 
@@ -46,7 +44,8 @@ def all_feedbacks():
     if request.method == "GET":
         feedbacks = Feedback.query.all()
         feedback_list = [f.to_dict() for f in feedbacks]
-        return make_response(feedback_list, 200)
+        response = make_response(feedback_list, 200)
+        return response
 
 
 if __name__ == "__main__":
