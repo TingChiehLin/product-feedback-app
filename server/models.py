@@ -9,6 +9,8 @@ from config import db
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
+    serialize_rules = ("-feedbacks",)
+
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String, nullable=False)
@@ -19,7 +21,7 @@ class User(db.Model, SerializerMixin):
     feedbacks = db.relationship("Feedback", backref=db.backref("user"))
     comments = db.relationship("Comment", backref=db.backref("user"))
 
-    def __init__(self, first_name, last_name, username, role, created_at):
+    def __init__(self, first_name, last_name, username, role, created_at=None):
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
@@ -41,8 +43,8 @@ class Feedback(db.Model, SerializerMixin):
     __tablename__ = "feedbacks"
 
     serialize_rules = (
-        "-comments",
-        "-user",
+        "-user.feedbacks",
+        "-comments.feedback",
         "-category.feedbacks",
     )
 
