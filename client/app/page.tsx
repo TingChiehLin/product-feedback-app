@@ -2,6 +2,7 @@
 
 import React, { useContext } from "react";
 import { FeedbackContext } from "../store/product-feedback-context";
+import { useFeedback } from "@/query/useFeedback";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -12,7 +13,7 @@ import NO_FEEDBACK from "../assets/nofeedback.svg";
 
 import { FaPlus } from "react-icons/fa";
 import { process, tags } from "../lib";
-import Tag, { TagPropType } from "../components/Tag";
+import Tag from "../components/Tag";
 import Process from "../components/ProcessStatus";
 import Button from "../components/Button";
 
@@ -30,6 +31,7 @@ const gradientBG = {
 const Home = () => {
   const id = React.useId();
   const fbCtx = useContext(FeedbackContext);
+  const { data } = useFeedback();
 
   const [values, setValues] = React.useState<MenuState[]>(MENU_ITEMS);
   const [tagValues, setTagValues] = React.useState(tags);
@@ -51,6 +53,8 @@ const Home = () => {
   //     }));
   //   });
   // };
+
+  console.log(data);
 
   return (
     <div className="flex">
