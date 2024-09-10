@@ -3,7 +3,7 @@ import FeedbackNumber from "../FeedbackNumber";
 import Tag from "../Tag";
 import VoteSection from "../VoteTag";
 
-export type RoadmapItemStatus = "Planned" | "In Progress" | "Live";
+export type RoadmapItemStatus = "Planned" | "In-Progress" | "Live";
 
 interface RoadmapItemProp {
   status: RoadmapItemStatus;
@@ -16,13 +16,13 @@ interface RoadmapItemProp {
 
 const bgColorMapper: { [key in RoadmapItemStatus]: string } = {
   Planned: "bg-pfOrangeWarm",
-  "In Progress": "bg-pfPink",
+  "In-Progress": "bg-pfPink",
   Live: "bg-pfBlueLight",
 };
 
 const LineColorMapper: { [key in RoadmapItemStatus]: string } = {
   Planned: "border-pfOrangeWarm",
-  "In Progress": "border-pfPink",
+  "In-Progress": "border-pfPink",
   Live: "border-pfBlueLight",
 };
 

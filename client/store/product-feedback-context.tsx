@@ -6,6 +6,9 @@
 import { createContext, useReducer, useEffect } from "react";
 import { FeedbackData, useFeedback } from "@/query/useFeedback";
 
+import LoadingImg from "@/assets/spinning-loading.svg";
+import Image from "next/image";
+
 type FeedbackState = {
   feedbacks: FeedbackData[];
   addFeedback: (feedback: FeedbackData) => void;
@@ -25,9 +28,22 @@ export const FeedbackContext = createContext(fbCtxValue);
 const feedbackReducer = (state: FeedbackState, action: any) => {
   switch (action.type) {
     case "ADD_FEEDBACK":
-      return { ...state };
+      return {
+        ...state,
+        feedback: [...state.feedbacks, action.payload],
+      };
     case "UPDATE_FEEDBACK":
-      return { ...state };
+      const updatedFeedbacks = [...state.feedbacks];
+      updatedFeedbacks[action.index] = action.payload;
+      return {
+        ...state,
+        feedbacks: updatedFeedbacks,
+      };
+    case "SET_FEEDBACKS":
+      return {
+        ...state,
+        feedbacks: action.payload,
+      };
     default:
       return state;
   }
@@ -38,7 +54,7 @@ export const FeedbackProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { data: feedbackData } = useFeedback();
+  const { data: feedbackData, isLoading } = useFeedback();
   const [feedbackState, feedbackDispatch] = useReducer(
     feedbackReducer,
     fbCtxValue
@@ -50,7 +66,12 @@ export const FeedbackProvider = ({
     }
   }, [feedbackData]);
 
-  console.log(feedbackData);
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Image src={LoadingImg} width={64} height={64} alt={"loading image"} />
+      </div>
+    );
 
   return (
     <FeedbackContext.Provider value={feedbackState}>

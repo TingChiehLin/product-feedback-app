@@ -15,7 +15,7 @@ export const roadmapsections: RoadmapSectionDataType[] = [
   {
     title: "In-Progress",
     subTitle: "Currently being developed",
-    status: "In Progress",
+    status: "In-Progress",
   },
   {
     title: "Live",

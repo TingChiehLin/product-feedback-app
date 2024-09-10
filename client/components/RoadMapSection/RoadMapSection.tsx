@@ -23,7 +23,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
 
   const InProgressTotalCount = data.reduce(
     (acc: number, cur: commentType) =>
-      cur.status === "In Progress" ? ++acc : acc,
+      cur.status === "In-Progress" ? ++acc : acc,
     0
   );
 
@@ -37,7 +37,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
   );
 
   const inProgressItems = data.filter(
-    (cur: commentType) => cur.status === "In Progress"
+    (cur: commentType) => cur.status === "In-Progress"
   );
 
   const liveItems = data.filter((cur: commentType) => cur.status === "Live");
@@ -48,7 +48,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
         <h4 className="text-[18px] font-bold text-pfBlueDark">
           {title}&nbsp;(
           {status === "Planned" && plannedTotalCount}
-          {status === "In Progress" && InProgressTotalCount}
+          {status === "In-Progress" && InProgressTotalCount}
           {status === "Live" && LiveTotalCount})
         </h4>
         <h5 className="text-pfGrayDark mt-1">{subTitle}</h5>
@@ -66,7 +66,7 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
               commentNum={r.commentNum}
             />
           ))}
-        {status === "In Progress" &&
+        {status === "In-Progress" &&
           inProgressItems.map((r) => (
             <RoadmapItem
               key={r.id}
