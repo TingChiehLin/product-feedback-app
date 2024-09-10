@@ -1,6 +1,7 @@
 import Tag from "../Tag";
 import FeedbackNumber from "../FeedbackNumber";
 import VoteSection from "../VoteTag";
+import Link from "next/link";
 
 interface FeedbackItemProp {
   title: string;
@@ -18,7 +19,10 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
   feedbackNum,
 }) => {
   return (
-    <div className="w-full mt-5 shadow bg-white rounded-[10px] cursor-pointer">
+    <Link
+      href={`/feedbackdetail/${title}`}
+      className="w-full mt-5 shadow bg-white rounded-[10px] cursor-pointer"
+    >
       <div className="px-8 py-7 flex items-center justify-between">
         <div className="flex justify-start gap-10">
           <VoteSection voteNum={upvote} fieldDirection={"vertical"} />
@@ -34,7 +38,7 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
         </div>
         <FeedbackNumber feedbackNum={feedbackNum} />
       </div>
-    </div>
+    </Link>
   );
 };
 
