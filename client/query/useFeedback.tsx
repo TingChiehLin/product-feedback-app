@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 
 // Category interface
-interface Category {
+export interface Category {
   id: number;
   type: string;
 }
 
 // Comment interface
-interface Comment {
+export interface Comment {
   id: number;
   feedback_id: number;
   description: string;
@@ -15,7 +15,7 @@ interface Comment {
 }
 
 // User interface
-interface User {
+export interface User {
   id: number;
   username: string;
   first_name: string;
@@ -24,7 +24,7 @@ interface User {
   created_at: string;
 }
 
-interface FeedbackData {
+export interface FeedbackData {
   id: number;
   title: string;
   description: string;

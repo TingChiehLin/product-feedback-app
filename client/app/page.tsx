@@ -151,8 +151,9 @@ const Home = () => {
               <Button
                 text={"Add Feedback"}
                 icon={<FaPlus color="white" size="0.8rem" />}
-                variant={"Add"}
+                href={"add"}
                 type="button"
+                variant={"Add"}
               />
             </div>
           </div>
@@ -164,8 +165,8 @@ const Home = () => {
                 title={feedback.title}
                 description={feedback.description}
                 upvote={feedback.upvote}
-                category={feedback.tagName}
-                feedbackNum={feedback.commentNum}
+                category={feedback.category.type}
+                feedbackNum={feedback.comments.length}
               />
             ))}
           </div>

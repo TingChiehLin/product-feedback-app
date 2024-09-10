@@ -4,20 +4,33 @@
 //useReducer => better state management (useState)
 
 import { createContext, useReducer, useEffect } from "react";
-import { useFeedback } from "@/query/useFeedback";
+import { FeedbackData, useFeedback } from "@/query/useFeedback";
 
-// import { COMMENTS } from "../lib/comments";
-
-const fbCtxValue = {
-  feedbacks: [],
-  addFeedback: (feedback: any) => {},
-  updateFeedback: (feedback: any, index: number) => {},
+type FeedbackState = {
+  feedbacks: FeedbackData[];
+  addFeedback: (feedback: FeedbackData) => void;
+  updateFeedback: (feedback: FeedbackData, index: number) => void;
 };
 
+const fbCtxValue: FeedbackState = {
+  feedbacks: [],
+  addFeedback: (feedback: FeedbackData) => {},
+  updateFeedback: (feedback: FeedbackData, index: number) => {},
+};
+
+// Context for feedback management
 export const FeedbackContext = createContext(fbCtxValue);
 
-const feedbackReducer = (state: any, action: any) => {
-  return state;
+// Reducer function for feedback actions
+const feedbackReducer = (state: FeedbackState, action: any) => {
+  switch (action.type) {
+    case "ADD_FEEDBACK":
+      return { ...state };
+    case "UPDATE_FEEDBACK":
+      return { ...state };
+    default:
+      return state;
+  }
 };
 
 export const FeedbackProvider = ({
@@ -33,9 +46,11 @@ export const FeedbackProvider = ({
 
   useEffect(() => {
     if (feedbackData) {
-      feedbackDispatch({});
+      feedbackDispatch({ type: "SET_FEEDBACKS", payload: feedbackData });
     }
   }, [feedbackData]);
+
+  console.log(feedbackData);
 
   return (
     <FeedbackContext.Provider value={feedbackState}>
