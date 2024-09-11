@@ -21,13 +21,13 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
     0
   );
 
-  const InProgressTotalCount = data.reduce(
+  const inProgressTotalCount = data.reduce(
     (acc: number, cur: commentType) =>
       cur.status === "In-Progress" ? ++acc : acc,
     0
   );
 
-  const LiveTotalCount = data.reduce(
+  const liveTotalCount = data.reduce(
     (acc: number, cur: commentType) => (cur.status === "Live" ? ++acc : acc),
     0
   );
@@ -48,8 +48,8 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
         <h4 className="text-[18px] font-bold text-pfBlueDark">
           {title}&nbsp;(
           {status === "Planned" && plannedTotalCount}
-          {status === "In-Progress" && InProgressTotalCount}
-          {status === "Live" && LiveTotalCount})
+          {status === "In-Progress" && inProgressTotalCount}
+          {status === "Live" && liveTotalCount})
         </h4>
         <h5 className="text-pfGrayDark mt-1">{subTitle}</h5>
       </div>

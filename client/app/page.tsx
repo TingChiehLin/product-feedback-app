@@ -96,7 +96,7 @@ const Home = () => {
             </Link>
           </div>
           {process.map((p) => (
-            <Process key={p.title} title={p.title} number={p.number} />
+            <Process key={p.title} title={p.title} />
           ))}
         </div>
       </aside>

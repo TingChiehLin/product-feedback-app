@@ -1,18 +1,37 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
+import { FeedbackContext } from "@/store/product-feedback-context";
+import { FeedbackData } from "@/query/useFeedback";
 
 export type ProcessType = "Planned" | "In-Progress" | "Live";
 
 export interface ProcessTypeProp {
   title: ProcessType;
-  number: number;
 }
 
-const ProcessStatus: FC<ProcessTypeProp> = ({ title, number }) => {
+const ProcessStatus: FC<ProcessTypeProp> = ({ title }) => {
+  const fbCtx = useContext(FeedbackContext);
   const titleMapper: { [k in ProcessType]: string } = {
     Planned: "bg-pfOrangeWarm",
     "In-Progress": "bg-pfPurple",
     Live: "bg-pfBlueLight",
   };
+
+  const plannedTotalCount = fbCtx.feedbacks.reduce(
+    (acc: number, cur: FeedbackData) =>
+      cur.status === "Planned" ? ++acc : acc,
+    0
+  );
+
+  const inProgressTotalCount = fbCtx.feedbacks.reduce(
+    (acc: number, cur: FeedbackData) =>
+      cur.status === "In-Progress" ? ++acc : acc,
+    0
+  );
+
+  const liveTotalCount = fbCtx.feedbacks.reduce(
+    (acc: number, cur: FeedbackData) => (cur.status === "Live" ? ++acc : acc),
+    0
+  );
 
   return (
     <>
@@ -23,7 +42,11 @@ const ProcessStatus: FC<ProcessTypeProp> = ({ title, number }) => {
           ></div>
           <div className="text-base font-normal text-pfGrayDark">{title}</div>
         </div>
-        <div className="text-base font-bold text-pfGrayDark">{number}</div>
+        <div className="text-base font-bold text-pfGrayDark">
+          {title === "Planned" && plannedTotalCount}
+          {title === "In-Progress" && inProgressTotalCount}
+          {title === "Live" && liveTotalCount}
+        </div>
       </div>
     </>
   );
