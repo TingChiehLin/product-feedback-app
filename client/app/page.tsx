@@ -34,6 +34,7 @@ const Home = () => {
   const [values, setValues] = React.useState<MenuState[]>(MENU_ITEMS);
   const [tagValues, setTagValues] = React.useState(tags);
 
+  //To handle the menu state updates
   const handleValues = (m: MenuState) => {
     setValues((prevState) => {
       return prevState.map((menuItem) => ({
@@ -42,6 +43,28 @@ const Home = () => {
       }));
     });
   };
+
+  // To filter or sort feedbacks based on menu state
+  const filteredFeedbacks = React.useMemo(() => {
+    const activeMenu = values.find((item) => item.isActive);
+
+    switch (activeMenu?.name) {
+      case "Most Upvotes":
+        return [...fbCtx.feedbacks].sort((a, b) => b.upvote - a.upvote);
+      case "Least Upvotes":
+        return [...fbCtx.feedbacks].sort((a, b) => a.upvote - b.upvote);
+      case "Most Comments":
+        return [...fbCtx.feedbacks].sort(
+          (a, b) => b.comments.length - a.comments.length
+        );
+      case "Least Comments":
+        return [...fbCtx.feedbacks].sort(
+          (a, b) => a.comments.length - b.comments.length
+        );
+      default:
+        return fbCtx.feedbacks;
+    }
+  }, [values, fbCtx.feedbacks]);
 
   // const handleTagActive = (t: any) => {
   //   setTagValues((prevState) => {
@@ -131,7 +154,7 @@ const Home = () => {
             variant={"Add"}
           />
         </div>
-        {fbCtx.feedbacks.length === 0 ? (
+        {filteredFeedbacks.length === 0 ? (
           <div className="w-full h-full flex justify-center items-center bg-wgite mt-6 shadow rounded-[10px]">
             <div className="w-full xl:max-w-[480px] flex items-center flex-col">
               <Image
@@ -159,7 +182,7 @@ const Home = () => {
           </div>
         ) : (
           <div className="mt-6">
-            {fbCtx.feedbacks.map((feedback) => (
+            {filteredFeedbacks.map((feedback) => (
               <FeedbackItem
                 key={feedback.id}
                 title={feedback.title}
