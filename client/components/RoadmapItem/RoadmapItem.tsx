@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Comment } from "@/query/useFeedback";
 import FeedbackNumber from "../FeedbackNumber";
 import Tag from "../Tag";
 import VoteSection from "../VoteTag";
@@ -9,9 +10,9 @@ interface RoadmapItemProp {
   status: RoadmapItemStatus;
   title: string;
   description: string;
-  tagName: string;
+  category: string;
   voteNum: number;
-  commentNum: number;
+  comments: Comment[];
 }
 
 const bgColorMapper: { [key in RoadmapItemStatus]: string } = {
@@ -30,9 +31,9 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
   status,
   title,
   description,
-  tagName,
+  category,
   voteNum,
-  commentNum,
+  comments,
 }) => {
   const bgColor = bgColorMapper[status];
   const borderColor = LineColorMapper[status];
@@ -53,11 +54,11 @@ const RoadmapItem: FC<RoadmapItemProp> = ({
         <h4 className="text-lg text-pfBlueDark font-bold mb-1">{title}</h4>
         <p className="text-base text-pfGrayDark">{description}</p>
       </div>
-      <Tag text={tagName} isActive={false} />
+      <Tag text={category} isActive={false} />
       <div className="mb-4"></div>
       <div className="flex justify-between">
         <VoteSection voteNum={voteNum} fieldDirection={"horizental"} />
-        <FeedbackNumber feedbackNum={commentNum} />
+        <FeedbackNumber feedbackNum={comments.length} />
       </div>
     </div>
   );

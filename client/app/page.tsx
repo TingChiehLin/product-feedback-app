@@ -28,7 +28,7 @@ const gradientBG = {
 };
 
 const Home = () => {
-  const id = React.useId();
+  // const id = React.useId();
   const fbCtx = useContext(FeedbackContext);
 
   const [values, setValues] = React.useState<MenuState[]>(MENU_ITEMS);
@@ -77,7 +77,7 @@ const Home = () => {
 
   return (
     <div className="flex">
-      <aside className="mr-[30px]">
+      <aside className="mr-8">
         <figure
           id="broder-title"
           style={gradientBG}

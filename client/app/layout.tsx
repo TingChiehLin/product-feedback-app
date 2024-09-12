@@ -19,12 +19,12 @@ export const metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en" className={`${jost.className} h-full`}>
+    <html lang="en" className={`${jost.className}`}>
       <head />
-      <body className="min-h-screen grid grid-rows-[auto,1fr,auto] bg-pfGrayLight leading-loose tracking-wider">
+      <body className="min-h-screen flex flex-col bg-pfGrayLight leading-loose tracking-wider">
         <FeedbackQuery>
           <FeedbackProvider>
-            <main className="w-full max-w-7xl py-24 mx-auto">{children}</main>
+            <main className="w-full max-w-7xl mx-auto py-24">{children}</main>
             <Footer />
           </FeedbackProvider>
         </FeedbackQuery>

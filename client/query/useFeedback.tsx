@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { RoadmapItemStatus } from "@/components/RoadmapItem";
 
 // Category interface
 export interface Category {
@@ -10,8 +11,8 @@ export interface Category {
 export interface Comment {
   id: number;
   feedback_id: number;
-  description: string;
   user_id: number;
+  description: string;
 }
 
 // User interface
@@ -28,7 +29,7 @@ export interface FeedbackData {
   id: number;
   title: string;
   description: string;
-  status: string;
+  status: RoadmapItemStatus;
   upvote: number;
   user_id: number;
   user: User;

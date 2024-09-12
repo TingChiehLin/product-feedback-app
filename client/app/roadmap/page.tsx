@@ -17,7 +17,7 @@ const RoadMap: FC = () => {
       <div
         className="w-full h-[113px] px-8 py-7
                  bg-pfBluePrimary
-                  flex justify-between
+                  flex justify-between items-center
                   rounded-[10px]
                   shadow
        "

@@ -1,13 +1,13 @@
 import { FC } from "react";
 
 import RoadmapItem, { RoadmapItemStatus } from "../RoadmapItem";
-import { commentType } from "../../lib";
+import { FeedbackData } from "@/query/useFeedback";
 
 interface RoadMapSectionProp {
   title: string;
   subTitle: string;
   status: RoadmapItemStatus;
-  data: commentType[];
+  data: FeedbackData[];
 }
 
 const RoadMapSection: FC<RoadMapSectionProp> = ({
@@ -17,30 +17,31 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
   data,
 }) => {
   const plannedTotalCount = data.reduce(
-    (acc: number, cur: commentType) => (cur.status === "Planned" ? ++acc : acc),
+    (acc: number, cur: FeedbackData) =>
+      cur.status === "Planned" ? ++acc : acc,
     0
   );
 
   const inProgressTotalCount = data.reduce(
-    (acc: number, cur: commentType) =>
+    (acc: number, cur: FeedbackData) =>
       cur.status === "In-Progress" ? ++acc : acc,
     0
   );
 
   const liveTotalCount = data.reduce(
-    (acc: number, cur: commentType) => (cur.status === "Live" ? ++acc : acc),
+    (acc: number, cur: FeedbackData) => (cur.status === "Live" ? ++acc : acc),
     0
   );
 
   const plannedItems = data.filter(
-    (cur: commentType) => cur.status === "Planned"
+    (cur: FeedbackData) => cur.status === "Planned"
   );
 
   const inProgressItems = data.filter(
-    (cur: commentType) => cur.status === "In-Progress"
+    (cur: FeedbackData) => cur.status === "In-Progress"
   );
 
-  const liveItems = data.filter((cur: commentType) => cur.status === "Live");
+  const liveItems = data.filter((cur: FeedbackData) => cur.status === "Live");
 
   return (
     <div>
@@ -61,9 +62,9 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
               status={r.status}
               title={r.title}
               description={r.description}
-              tagName={r.tagName}
+              category={r.category.type}
               voteNum={r.upvote}
-              commentNum={r.commentNum}
+              comments={r.comments}
             />
           ))}
         {status === "In-Progress" &&
@@ -73,9 +74,9 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
               status={r.status}
               title={r.title}
               description={r.description}
-              tagName={r.tagName}
+              category={r.category.type}
               voteNum={r.upvote}
-              commentNum={r.commentNum}
+              comments={r.comments}
             />
           ))}
         {status === "Live" &&
@@ -85,9 +86,9 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
               status={r.status}
               title={r.title}
               description={r.description}
-              tagName={r.tagName}
+              category={r.category.type}
               voteNum={r.upvote}
-              commentNum={r.commentNum}
+              comments={r.comments}
             />
           ))}
       </div>
