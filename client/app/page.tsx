@@ -185,6 +185,7 @@ const Home = () => {
             {filteredFeedbacks.map((feedback) => (
               <FeedbackItem
                 key={feedback.id}
+                id={feedback.id}
                 title={feedback.title}
                 description={feedback.description}
                 upvote={feedback.upvote}
