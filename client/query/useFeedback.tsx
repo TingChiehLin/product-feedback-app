@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { RoadmapItemStatus } from "@/components/RoadmapItem";
 
@@ -42,11 +43,12 @@ export const useFeedback = () => {
   return useQuery({
     queryKey: ["feedback"],
     queryFn: async (): Promise<Array<FeedbackData>> => {
-      const response = await fetch("http://127.0.0.1:5555/feedbacks");
-      if (!response.ok) {
+      // const response = await fetch("http://127.0.0.1:5555/feedbacks");
+      const response = await axios.get("http://127.0.0.1:5555/feedbacks");
+      if (response.status !== 200) {
         throw new Error(`Request failed with status: ${response.status}`);
       }
-      return response.json();
+      return response.data;
     },
   });
 };
