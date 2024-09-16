@@ -8,6 +8,7 @@ import { CATEGORIES, CategoryType, FORMDATA, RequestFormType } from "@/lib";
 import Form from "../../components/Form";
 import FeedbackContainer from "@/layouts/FeedbackContainer";
 import BackButton from "@/components/BackButton";
+import axios from "axios";
 
 const AddFeedBack: React.FC = () => {
   const [values, setValues] = React.useState(FORMDATA);
@@ -68,7 +69,7 @@ const AddFeedBack: React.FC = () => {
     push("/");
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const titleHasError = values["feedback-title"].validator(
@@ -102,9 +103,25 @@ const AddFeedBack: React.FC = () => {
         };
       });
     }
+
     try {
-      // const response = await axios.post()
-    } catch {}
+      const response = await axios.post(
+        "http://localhost:5555/add-new-feedback",
+        {
+          "feedback-title": values["feedback-title"].value,
+          "feedback-detail": values["feedback-detail"].value,
+          category:
+            categories.find((category) => category.isActive)?.name || "UX",
+        }
+      );
+
+      if (response.status === 201) {
+        console.log("Feedback submitted successfully:", response.data);
+        push("/");
+      }
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+    }
     console.log("Form Submit Value:", values);
   };
 

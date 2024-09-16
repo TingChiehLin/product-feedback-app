@@ -69,7 +69,13 @@ export const FeedbackProvider = ({
   if (isLoading)
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Image src={LoadingImg} width={64} height={64} alt={"loading image"} />
+        <Image
+          priority
+          src={LoadingImg}
+          width={64}
+          height={64}
+          alt={"loading image"}
+        />
       </div>
     );
 
