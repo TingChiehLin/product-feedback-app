@@ -3,19 +3,27 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 
-import { CATEGORIES, CategoryType, FORMDATA, RequestFormType } from "@/lib";
+import { CATEGORIES, FORMDATA, RequestFormType } from "@/lib";
 
 import Form from "../../components/Form";
 import FeedbackContainer from "@/layouts/FeedbackContainer";
 import BackButton from "@/components/BackButton";
 import axios from "axios";
+import { FeedbackCategory, useCategory } from "@/query/querycategory";
 
 const AddFeedBack: React.FC = () => {
+  const { data: categoryData } = useCategory();
   const [values, setValues] = React.useState(FORMDATA);
-  const [categories, setCategories] =
-    React.useState<CategoryType[]>(CATEGORIES);
-
+  const [categories, setCategories] = React.useState<FeedbackCategory[]>([]);
   const { push } = useRouter();
+
+  React.useEffect(() => {
+    if (categoryData) {
+      setCategories(categoryData);
+    }
+  }, [categoryData]);
+
+  console.log(categories);
 
   const handleValues = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -35,31 +43,30 @@ const AddFeedBack: React.FC = () => {
   };
 
   const handleCategory = (
-    i: CategoryType,
+    selectedCategory: FeedbackCategory,
     event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
   ) => {
     if (event) {
       event.preventDefault();
     }
 
+    // Update the active category in `values`
     setValues((preState) => {
       return {
         ...preState,
-        "feedback-category": preState["feedback-category"].map(
-          (item: CategoryType) => {
-            return {
-              ...item,
-              isActive: item.name === i.name,
-            };
-          }
-        ),
+        "feedback-category": {
+          ...preState["feedback-category"],
+          value: selectedCategory.type, // Set the selected category type
+          error: "",
+        },
       };
     });
 
+    // Update the active category in the `categories` state
     setCategories((preState) => {
       return preState.map((item) => ({
         ...item,
-        isActive: item.name === i.name,
+        isActive: item.id === selectedCategory.id, // Set active category by id
       }));
     });
   };
@@ -111,7 +118,7 @@ const AddFeedBack: React.FC = () => {
           "feedback-title": values["feedback-title"].value,
           "feedback-detail": values["feedback-detail"].value,
           category:
-            categories.find((category) => category.isActive)?.name || "UX",
+            categories.find((category) => category.isActive)?.type || "UX",
         }
       );
 

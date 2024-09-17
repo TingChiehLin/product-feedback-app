@@ -4,21 +4,21 @@
 //useReducer => better state management (useState)
 
 import { createContext, useReducer, useEffect } from "react";
-import { FeedbackData, useFeedback } from "@/query/useFeedback";
+import { FeedbackItem, useFeedback } from "@/query/useFeedback";
 
 import LoadingImg from "@/assets/spinning-loading.svg";
 import Image from "next/image";
 
 type FeedbackState = {
-  feedbacks: FeedbackData[];
-  addFeedback: (feedback: FeedbackData) => void;
-  updateFeedback: (feedback: FeedbackData, index: number) => void;
+  feedbacks: FeedbackItem[];
+  addFeedback: (feedback: FeedbackItem) => void;
+  updateFeedback: (feedback: FeedbackItem, index: number) => void;
 };
 
 const fbCtxValue: FeedbackState = {
   feedbacks: [],
-  addFeedback: (feedback: FeedbackData) => {},
-  updateFeedback: (feedback: FeedbackData, index: number) => {},
+  addFeedback: (feedback: FeedbackItem) => {},
+  updateFeedback: (feedback: FeedbackItem, index: number) => {},
 };
 
 // Context for feedback management

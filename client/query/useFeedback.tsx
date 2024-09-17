@@ -26,7 +26,7 @@ export interface User {
   created_at: string;
 }
 
-export interface FeedbackData {
+export interface FeedbackItem {
   id: number;
   title: string;
   description: string;
@@ -42,7 +42,7 @@ export interface FeedbackData {
 export const useFeedback = () => {
   return useQuery({
     queryKey: ["feedback"],
-    queryFn: async (): Promise<Array<FeedbackData>> => {
+    queryFn: async (): Promise<Array<FeedbackItem>> => {
       // const response = await fetch("http://127.0.0.1:5555/feedbacks");
       const response = await axios.get("http://127.0.0.1:5555/feedbacks");
       if (response.status !== 200) {

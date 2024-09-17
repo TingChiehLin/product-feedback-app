@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RequestFormType, CategoryType, StatusType } from "@/lib";
+import { RequestFormType, CategoryType, Status } from "@/lib";
 
 import { FaPlus, FaEdit } from "react-icons/fa";
 
@@ -7,6 +7,7 @@ import Input from "../Input";
 import DropDownMenu from "../DropDownMenu";
 import Button from "../Button";
 import TextField from "../TextField";
+import { FeedbackCategory } from "@/query/querycategory";
 
 type FormType = "Add" | "Edit";
 
@@ -14,19 +15,16 @@ interface FormPropType {
   title: string;
   type: FormType;
   values: RequestFormType;
-  categories: CategoryType[];
-  updateStatus?: StatusType[];
+  categories: FeedbackCategory[];
+  updateStatus?: Status[];
   onChangeValues: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onChangeCategory: (
-    i: CategoryType,
+    selectedCategory: FeedbackCategory,
     event: React.MouseEvent<HTMLLIElement>
   ) => void;
-  onUpdateStatus?: (
-    u: StatusType,
-    event: React.MouseEvent<HTMLLIElement>
-  ) => void;
+  onUpdateStatus?: (u: Status, event: React.MouseEvent<HTMLLIElement>) => void;
   onDelete?: () => void;
   onCancel: () => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -97,7 +95,7 @@ const Form: React.FC<FormPropType> = ({
             description={"Change feedback state"}
             name={"feedback-status"}
             data={updateStatus ?? []}
-            onClick={onUpdateStatus ?? (() => {})}
+            onClick={onUpdateStatus}
           />
         )}
         <TextField

@@ -5,16 +5,17 @@ import TICK from "../../assets/tick.svg";
 
 import Image from "next/image";
 
-import { CategoryType, StatusType } from "@/lib";
+import { CategoryType, Status } from "@/lib";
+import { FeedbackCategory } from "@/query/querycategory";
 
 interface DropDownMenuProps {
   id: string;
   label: string;
   name: string;
   description: string;
-  data: CategoryType[] | StatusType[];
+  data: FeedbackCategory[] | Status[];
   onClick: (
-    item: CategoryType | StatusType,
+    item: FeedbackCategory | Status,
     event: React.MouseEvent<HTMLLIElement>
   ) => void;
 }
@@ -26,6 +27,12 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
     event.preventDefault();
     setIsOpen(!isOpen);
   };
+
+  //Determine the active item
+  const activeItem = props.data.find(
+    (item) => "isActive" in item && item.isActive
+  );
+
   return (
     <div>
       <label className="text-pfBlueDark text-sm font-bold" htmlFor={props.id}>
@@ -46,7 +53,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
                     cursor-pointer"
         onClick={(event) => handleOpen(event)}
       >
-        <span>{props.data.find((item) => item.isActive)!.name}</span>
+        <span>{activeItem?.type ?? "UX"}</span>
         <Image
           className={`w-3 cursor-pointer 
                                     absolute top-1/2 right-6 -translate-y-1/2
@@ -69,7 +76,7 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
           >
             {props.data.map((item, index) => {
               return (
-                <React.Fragment key={`${item.name}-${index}`}>
+                <React.Fragment key={`${item.type}-${index}`}>
                   <li
                     className="cursor-pointer
                               text-[15px]
@@ -78,11 +85,11 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
                               hover:text-pfPurple
                               flex justify-between items-center
                               "
-                    id={item.name}
-                    value={item.name}
+                    id={item.type}
+                    value={item.type}
                     onClick={(event) => props.onClick(item, event)}
                   >
-                    {item.name}
+                    {item.type}
                     {item.isActive && (
                       <Image
                         src={TICK}
