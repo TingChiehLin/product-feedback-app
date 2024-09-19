@@ -3,26 +3,26 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import {
-  CATEGORIES,
-  STATUS,
-  CategoryType,
-  StatusType,
-  FORMDATA,
-  RequestFormType,
-} from "@/lib";
+import { CATEGORIES, STATUS, Status, FORMDATA, RequestFormType } from "@/lib";
 
 import BackButton from "@/components/BackButton";
 import Form from "@/components/Form";
 import FeedbackContainer from "@/layouts/FeedbackContainer";
+import { FeedbackCategory, useCategory } from "@/query/querycategory";
 
 const EditFeedback: React.FC = () => {
+  const { data: categoryData } = useCategory();
   const [values, setValues] = React.useState(FORMDATA);
-  const [categories, setCategories] =
-    React.useState<CategoryType[]>(CATEGORIES);
-  const [updateStatus, setUpdateStatus] = React.useState<StatusType[]>(STATUS);
+  const [categories, setCategories] = React.useState<FeedbackCategory[]>([]);
+  const [updateStatus, setUpdateStatus] = React.useState<Status[]>(STATUS);
 
   const { push } = useRouter();
+
+  React.useEffect(() => {
+    if (categoryData) {
+      setCategories(categoryData);
+    }
+  }, [categoryData]);
 
   const handleValues = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,41 +40,36 @@ const EditFeedback: React.FC = () => {
       };
     });
   };
-
   const handleCategory = (
-    i: CategoryType,
+    selectedCategory: FeedbackCategory,
     event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
   ) => {
     if (event) {
       event.preventDefault();
     }
 
+    // Update the active category in `values`
     setValues((preState) => {
       return {
         ...preState,
-        "feedback-category": preState["feedback-category"].map(
-          (item: CategoryType) => {
-            return {
-              ...item,
-              isActive: item.name === i.name,
-            };
-          }
-        ),
+        "feedback-category": {
+          ...preState["feedback-category"],
+          value: selectedCategory.type, // Set the selected category type
+          error: "",
+        },
       };
     });
 
+    // Update the active category in the `categories` state
     setCategories((preState) => {
       return preState.map((item) => ({
         ...item,
-        isActive: item.name === i.name,
+        isActive: item.id === selectedCategory.id, // Set active category by id
       }));
     });
   };
 
-  const handleStatus = (
-    s: StatusType,
-    event: React.MouseEvent<HTMLLIElement>
-  ) => {
+  const handleStatus = (s: Status, event: React.MouseEvent<HTMLLIElement>) => {
     if (event) {
       event.preventDefault();
     }
@@ -82,14 +77,12 @@ const EditFeedback: React.FC = () => {
     setValues((preState) => {
       return {
         ...preState,
-        "feedback-status": preState["feedback-status"].map(
-          (status: StatusType) => {
-            return {
-              ...status,
-              isActive: status.name === s.name,
-            };
-          }
-        ),
+        "feedback-status": preState["feedback-status"].map((status: Status) => {
+          return {
+            ...status,
+            isActive: status.type === s.type,
+          };
+        }),
       };
     });
 
@@ -97,7 +90,7 @@ const EditFeedback: React.FC = () => {
       return preState.map((status) => {
         return {
           ...status,
-          isActive: status.name === s.name,
+          isActive: status.type === s.type,
         };
       });
     });

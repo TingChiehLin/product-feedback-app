@@ -10,20 +10,23 @@ import FeedbackContainer from "@/layouts/FeedbackContainer";
 import BackButton from "@/components/BackButton";
 import axios from "axios";
 import { FeedbackCategory, useCategory } from "@/query/querycategory";
+import { Category } from "@/query/useFeedback";
 
 const AddFeedBack: React.FC = () => {
   const { data: categoryData } = useCategory();
   const [values, setValues] = React.useState(FORMDATA);
-  const [categories, setCategories] = React.useState<FeedbackCategory[]>([]);
+  const [selectedCategory, setSelectedCategory] = React.useState();
+  //selected category
+  // const [categories, setCategories] = React.useState<FeedbackCategory[]>([]);
+  const [categories, setCategories] = React.useState<any[]>(CATEGORIES);
   const { push } = useRouter();
 
-  React.useEffect(() => {
-    if (categoryData) {
-      setCategories(categoryData);
-    }
-  }, [categoryData]);
-
-  console.log(categories);
+  // React.useEffect(() => {
+  //   if (categoryData) {
+  //     setCategories(categoryData);
+  //     // setSelectedCategory(categoryData[0]);
+  //   }
+  // }, [categoryData]);
 
   const handleValues = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -43,7 +46,8 @@ const AddFeedBack: React.FC = () => {
   };
 
   const handleCategory = (
-    selectedCategory: FeedbackCategory,
+    // selectedCategory: FeedbackCategory,
+    selectedCategory: any,
     event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
   ) => {
     if (event) {
@@ -51,14 +55,40 @@ const AddFeedBack: React.FC = () => {
     }
 
     // Update the active category in `values`
+    // setValues((preState) => {
+    //   return {
+    //     ...preState,
+    //     "feedback-category": preState["feedback-category"].map((item) => {
+    //       return {
+    //         ...item,
+    //         isActive: item.type === item.type,
+    //       };
+    //     }),
+    //   };
+    // });
+
+    // Update the active category in `values`
+    // setValues((preState) => {
+    //   return {
+    //     ...preState,
+    //     "feedback-category": {
+    //       ...preState["feedback-category"],
+
+    //     },
+    //   };
+    // });
+
+    // Update the active category in `values`
     setValues((preState) => {
+      // Map through the existing `feedback-category` array and update isActive
+      const updatedCategories = preState["feedback-category"].map((item) => ({
+        ...item,
+        isActive: item.type === selectedCategory.type, // Set selected category's isActive to true, others to false
+      }));
+
       return {
         ...preState,
-        "feedback-category": {
-          ...preState["feedback-category"],
-          value: selectedCategory.type, // Set the selected category type
-          error: "",
-        },
+        "feedback-category": updatedCategories, // Update with new categories array
       };
     });
 
@@ -66,7 +96,7 @@ const AddFeedBack: React.FC = () => {
     setCategories((preState) => {
       return preState.map((item) => ({
         ...item,
-        isActive: item.id === selectedCategory.id, // Set active category by id
+        isActive: item.type === selectedCategory.type, // Set active category by id
       }));
     });
   };
@@ -112,20 +142,19 @@ const AddFeedBack: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5555/add-new-feedback",
-        {
-          "feedback-title": values["feedback-title"].value,
-          "feedback-detail": values["feedback-detail"].value,
-          category:
-            categories.find((category) => category.isActive)?.type || "UX",
-        }
-      );
-
-      if (response.status === 201) {
-        console.log("Feedback submitted successfully:", response.data);
-        push("/");
-      }
+      // const response = await axios.post(
+      //   "http://localhost:5555/add-new-feedback",
+      //   {
+      //     "feedback-title": values["feedback-title"].value,
+      //     "feedback-detail": values["feedback-detail"].value,
+      //     category:
+      //       categories.find((category) => category.isActive)?.type || "UX",
+      //   }
+      // );
+      // if (response.status === 201) {
+      //   console.log("Feedback submitted successfully:", response.data);
+      //   push("/");
+      // }
     } catch (error) {
       console.error("Error submitting feedback:", error);
     }
@@ -139,6 +168,7 @@ const AddFeedBack: React.FC = () => {
         type="Add"
         title="Create New Feedback"
         values={values}
+        // categories={categories}
         categories={categories}
         onSubmit={handleSubmit}
         onChangeValues={handleValues}

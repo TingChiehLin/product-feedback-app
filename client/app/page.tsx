@@ -28,7 +28,6 @@ const gradientBG = {
 };
 
 const Home = () => {
-  // const id = React.useId();
   const fbCtx = useContext(FeedbackContext);
 
   const [values, setValues] = React.useState<MenuState[]>(MENU_ITEMS);

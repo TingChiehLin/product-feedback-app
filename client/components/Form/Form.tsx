@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RequestFormType, CategoryType, Status } from "@/lib";
+import { RequestFormType, Status } from "@/lib";
 
 import { FaPlus, FaEdit } from "react-icons/fa";
 
@@ -7,7 +7,7 @@ import Input from "../Input";
 import DropDownMenu from "../DropDownMenu";
 import Button from "../Button";
 import TextField from "../TextField";
-import { FeedbackCategory } from "@/query/querycategory";
+import { FeedbackCategory, useCategory } from "@/query/querycategory";
 
 type FormType = "Add" | "Edit";
 
@@ -47,7 +47,7 @@ const Form: React.FC<FormPropType> = ({
     background:
       "radial-gradient(128.88% 128.88% at 103.9% -10.39%, #E84D70 0%, #A337F6 53.09%, #28A7ED 100%)",
   };
-
+  // const { data: categories } = useCategory();
   const alignButton = type === "Add" && "justify-end";
 
   return (
@@ -88,13 +88,13 @@ const Form: React.FC<FormPropType> = ({
           data={categories}
           onClick={onChangeCategory}
         />
-        {type === "Edit" && (
+        {type === "Edit" && updateStatus && onUpdateStatus && (
           <DropDownMenu
             id={"feedback-status"}
             label={"Update Status"}
             description={"Change feedback state"}
             name={"feedback-status"}
-            data={updateStatus ?? []}
+            data={updateStatus}
             onClick={onUpdateStatus}
           />
         )}

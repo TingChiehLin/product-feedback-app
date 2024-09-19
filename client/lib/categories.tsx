@@ -1,12 +1,7 @@
-export interface CategoryType {
-  name: string;
-  isActive: boolean;
-}
-
-export const CATEGORIES: CategoryType[] = [
-  { name: "UI", isActive: false },
-  { name: "UX", isActive: true },
-  { name: "Enhancement", isActive: false },
-  { name: "Bug", isActive: false },
-  { name: "Feature", isActive: false },
+export const CATEGORIES: any = [
+  { type: "UI", isActive: false },
+  { type: "UX", isActive: true },
+  { type: "Enhancement", isActive: false },
+  { type: "Bug", isActive: false },
+  { type: "Feature", isActive: false },
 ];

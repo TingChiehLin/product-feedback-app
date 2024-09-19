@@ -5,28 +5,28 @@ import TICK from "../../assets/tick.svg";
 
 import Image from "next/image";
 
-import { CategoryType, Status } from "@/lib";
+import { Status } from "@/lib";
 import { FeedbackCategory } from "@/query/querycategory";
 
-interface DropDownMenuProps {
+interface DropDownMenuProps<T> {
   id: string;
   label: string;
   name: string;
   description: string;
-  data: FeedbackCategory[] | Status[];
-  onClick: (
-    item: FeedbackCategory | Status,
-    event: React.MouseEvent<HTMLLIElement>
-  ) => void;
+  data: T[];
+  onClick: (item: T, event: React.MouseEvent<HTMLLIElement>) => void;
 }
 
-const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
+const DropDownMenu = <T extends { type: string; isActive?: boolean }>({
+  ...props
+}: DropDownMenuProps<T>): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setIsOpen(!isOpen);
   };
+  // console.log("Data:", props.data);
 
   //Determine the active item
   const activeItem = props.data.find(
@@ -54,12 +54,13 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
         onClick={(event) => handleOpen(event)}
       >
         <span>{activeItem?.type ?? "UX"}</span>
+        {/* <span>{props.data[1].type ?? "UX"}</span> */}
         <Image
           className={`w-3 cursor-pointer 
-                                    absolute top-1/2 right-6 -translate-y-1/2
-                                    transition ease-out duration-200
-                                    ${isOpen && "-rotate-180"}
-                                    `}
+                      absolute top-1/2 right-6 -translate-y-1/2
+                      transition ease-out duration-200
+                      ${isOpen && "-rotate-180"}
+                    `}
           src={ARROW_UPIMG}
           alt="arrow-up"
           width={0}
@@ -78,13 +79,13 @@ const DropDownMenu: React.FC<DropDownMenuProps> = ({ ...props }) => {
               return (
                 <React.Fragment key={`${item.type}-${index}`}>
                   <li
-                    className="cursor-pointer
-                              text-[15px]
-                              px-6 py-3 
-                              text-pfGrayDark
-                              hover:text-pfPurple
-                              flex justify-between items-center
-                              "
+                    className={`cursor-pointer
+                                text-[15px]
+                                px-6 py-3 
+                                text-pfGrayDark
+                                hover:text-pfPurple
+                                flex justify-between items-center
+                              `}
                     id={item.type}
                     value={item.type}
                     onClick={(event) => props.onClick(item, event)}

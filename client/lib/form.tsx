@@ -1,5 +1,6 @@
-import { CATEGORIES, CategoryType } from "./categories";
-import { STATUS, StatusType } from "./status";
+import { Category } from "@/query/useFeedback";
+import { CATEGORIES } from "./categories";
+import { STATUS, Status } from "./status";
 
 type FieldConfig = {
   value: string;
@@ -9,8 +10,8 @@ type FieldConfig = {
 
 export interface RequestFormType {
   "feedback-title": FieldConfig;
-  "feedback-category": CategoryType[];
-  "feedback-status": StatusType[];
+  "feedback-category": Category[];
+  "feedback-status": Status[];
   "feedback-detail": FieldConfig;
 }
 
