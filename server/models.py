@@ -44,7 +44,9 @@ class Feedback(db.Model, SerializerMixin):
 
     serialize_rules = (
         "-user.feedbacks",
+        "-user.comments",
         "-comments.feedback",
+        "-comments.user",
         "-category.feedbacks",
     )
 
