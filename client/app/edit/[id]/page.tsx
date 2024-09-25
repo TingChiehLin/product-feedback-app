@@ -143,17 +143,8 @@ const EditFeedback: React.FC = () => {
     <FeedbackContainer>
       <BackButton href="/" />
       <Form
-        type="Edit"
-        title="Editing ‘Add a dark theme option’"
-        onSubmit={handleSubmit}
-        values={values}
-        categories={categories}
-        updateStatus={updateStatus}
-        onChangeValues={handleValues}
-        onChangeCategory={handleCategory}
-        onUpdateStatus={handleStatus}
-        onDelete={handleDelete}
-        onCancel={handleCancel}
+      // updateStatus={updateStatus}
+      // onUpdateStatus={handleStatus}
       />
     </FeedbackContainer>
   );

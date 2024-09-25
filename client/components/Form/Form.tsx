@@ -1,5 +1,7 @@
 import * as React from "react";
-import { RequestFormType, Status } from "@/lib";
+import { useRouter, usePathname } from "next/navigation";
+
+import { RequestFormType, Status, FORMDATA } from "@/lib";
 
 import { FaPlus, FaEdit } from "react-icons/fa";
 
@@ -9,50 +11,175 @@ import Button from "../Button";
 import TextField from "../TextField";
 import { FeedbackCategory, useCategory } from "@/query/querycategory";
 
-type FormType = "Add" | "Edit";
+// updateStatus?: Status[];;
+// onUpdateStatus?: (u: Status, event: React.MouseEvent<HTMLLIElement>) => void;
 
-interface FormPropType {
-  title: string;
-  type: FormType;
-  values: RequestFormType;
-  categories: FeedbackCategory[];
-  updateStatus?: Status[];
-  onChangeValues: (
+const addButtonStyle = {
+  background:
+    "radial-gradient(128.88% 128.88% at 103.9% -10.39%, #E84D70 0%, #A337F6 53.09%, #28A7ED 100%)",
+};
+
+const Form: React.FC = () => {
+  const { data: categoryData } = useCategory();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [values, setValues] = React.useState(FORMDATA);
+
+  const addfeedbackPage = pathname === "/addfeedback";
+  const editfeedbackPage = pathname?.includes("/edit");
+
+  //Get Edit title from the feedbackdetail page
+  const editTitle = "‘Add a dark theme option";
+
+  const formTitle = addfeedbackPage
+    ? "Create New Feedback"
+    : `Editing ${editTitle}`;
+  const alignButton = addfeedbackPage && "justify-end";
+
+  const handleValue = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-  onChangeCategory: (
-    selectedCategory: FeedbackCategory,
-    event: React.MouseEvent<HTMLLIElement>
-  ) => void;
-  onUpdateStatus?: (u: Status, event: React.MouseEvent<HTMLLIElement>) => void;
-  onDelete?: () => void;
-  onCancel: () => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-}
+  ) => {
+    const { name, value } = event.target;
 
-const Form: React.FC<FormPropType> = ({
-  title,
-  type,
-  values,
-  categories,
-  updateStatus,
-  onChangeValues,
-  onChangeCategory,
-  onUpdateStatus,
-  onDelete,
-  onCancel,
-  onSubmit,
-}) => {
-  const addButtonStyle = {
-    background:
-      "radial-gradient(128.88% 128.88% at 103.9% -10.39%, #E84D70 0%, #A337F6 53.09%, #28A7ED 100%)",
+    setValues((preState: typeof values) => {
+      return {
+        ...preState,
+        [name]: {
+          ...preState[name as keyof RequestFormType],
+          value: value,
+          error: "",
+        },
+      };
+    });
   };
-  // const { data: categories } = useCategory();
-  const alignButton = type === "Add" && "justify-end";
+
+  const handleCategory = (
+    selectedCategory: FeedbackCategory,
+    // selectedCategory: any,
+    event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
+  ) => {
+    if (event) {
+      event.preventDefault();
+    }
+
+    // Update the active category in `values`
+    // setValues((preState) => {
+    //   return {
+    //     ...preState,
+    //     "feedback-category": preState["feedback-category"].map((item) => {
+    //       return {
+    //         ...item,
+    //         isActive: item.type === item.type,
+    //       };
+    //     }),
+    //   };
+    // });
+
+    // Update the active category in `values`
+    // setValues((preState) => {
+    //   return {
+    //     ...preState,
+    //     "feedback-category": {
+    //       ...preState["feedback-category"],
+
+    //     },
+    //   };
+    // });
+
+    // Update the active category in `values`
+    // setValues((preState) => {
+    //   // Map through the existing `feedback-category` array and update isActive
+    //   const updatedCategories = preState["feedback-category"].map((item) => ({
+    //     ...item,
+    //     isActive: item.type === selectedCategory.type, // Set selected category's isActive to true, others to false
+    //   }));
+
+    //   return {
+    //     ...preState,
+    //     "feedback-category": updatedCategories, // Update with new categories array
+    //   };
+    // });
+
+    // Update the active category in the `categories` state
+
+    // setCategories((preState) => {
+    //   return preState.map((item) => ({
+    //     ...item,
+    //     isActive: item.type === selectedCategory.type, // Set active category by id
+    //   }));
+    // });
+  };
+
+  const handleUpdateStatus = () => {};
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("Submit");
+    //   const titleHasError = values["feedback-title"].validator(
+    //     values["feedback-title"].value
+    //   );
+
+    //   const detailHasError = values["feedback-detail"].validator(
+    //     values["feedback-detail"].value
+    //   );
+
+    //   if (titleHasError !== "") {
+    //     setValues((preState: typeof values) => {
+    //       return {
+    //         ...preState,
+    //         "feedback-title": {
+    //           ...preState["feedback-title"],
+    //           error: titleHasError,
+    //         },
+    //       };
+    //     });
+    //   }
+
+    //   if (detailHasError !== "") {
+    //     setValues((preState: typeof values) => {
+    //       return {
+    //         ...preState,
+    //         "feedback-detail": {
+    //           ...preState["feedback-detail"],
+    //           error: detailHasError,
+    //         },
+    //       };
+    //     });
+    //   }
+
+    //   try {
+    //     // const response = await axios.post(
+    //     //   "http://localhost:5555/add-new-feedback",
+    //     //   {
+    //     //     "feedback-title": values["feedback-title"].value,
+    //     //     "feedback-detail": values["feedback-detail"].value,
+    //     //     category:
+    //     //       categories.find((category) => category.isActive)?.type || "UX",
+    //     //   }
+    //     // );
+    //     // if (response.status === 201) {
+    //     //   console.log("Feedback submitted successfully:", response.data);
+    //     //   push("/");
+    //     // }
+    //   } catch (error) {
+    //     console.error("Error submitting feedback:", error);
+    //   }
+    //   // console.log("Form Submit Value:", values);
+
+    // router.push("/");
+  };
+
+  const handleCancel = () => {
+    setValues(FORMDATA);
+    router.push("/");
+  };
+
+  const handleDelete = () => {};
 
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       className="w-full max-w-[540px] 
                          rounded-[10px] shadow
                          px-[42px] pt-[52px] pb-10
@@ -64,10 +191,10 @@ const Form: React.FC<FormPropType> = ({
                             flex justify-center items-center"
         style={addButtonStyle}
       >
-        {type == "Add" && <FaPlus size={"1rem"} color={"white"} />}
-        {type == "Edit" && <FaEdit size={"1rem"} color={"white"} />}
+        {addfeedbackPage && <FaPlus size={"1rem"} color={"white"} />}
+        {editfeedbackPage && <FaEdit size={"1rem"} color={"white"} />}
       </div>
-      <h1 className="text-pfBlueDark text-2xl font-bold mb-10">{title}</h1>
+      <h1 className="text-pfBlueDark text-2xl font-bold mb-10">{formTitle}</h1>
       <div className="flex flex-col gap-y-6">
         <Input
           id={"feedback-title"}
@@ -78,24 +205,24 @@ const Form: React.FC<FormPropType> = ({
           placeholder={"Please input Title"}
           value={values["feedback-title"].value}
           error={values["feedback-title"].error}
-          onChange={onChangeValues}
+          onChange={handleValue}
         />
         <DropDownMenu
           id={"feedback-category"}
           label={"Category"}
           description={"Choose a category for your feedback"}
           name={"feedback-category"}
-          data={categories}
-          onClick={onChangeCategory}
+          data={categoryData ?? []}
+          onClick={handleCategory}
         />
-        {type === "Edit" && updateStatus && onUpdateStatus && (
+        {editfeedbackPage && (
           <DropDownMenu
             id={"feedback-status"}
             label={"Update Status"}
             description={"Change feedback state"}
             name={"feedback-status"}
-            data={updateStatus}
-            onClick={onUpdateStatus}
+            data={[]}
+            onClick={handleUpdateStatus}
           />
         )}
         <TextField
@@ -110,38 +237,28 @@ const Form: React.FC<FormPropType> = ({
           cols={50}
           placeholder={"Please input your feedback here"}
           error={values["feedback-detail"].error}
-          onChange={onChangeValues}
+          onChange={handleValue}
         />
         <div className={`flex ${alignButton} gap-x-4`}>
-          {type === "Edit" && (
+          {editfeedbackPage && (
             <Button
               text={"Delete"}
               variant={"Delete"}
               type="button"
-              onClick={onDelete}
+              onClick={handleDelete}
             />
           )}
-          {type === "Edit" && <div className="ml-auto"></div>}
+          {editfeedbackPage && <div className="ml-auto"></div>}
           <Button
             text={"Cancel"}
             variant={"Cancel"}
             type="button"
-            onClick={onCancel}
+            onClick={handleCancel}
           />
-          {type === "Edit" ? (
-            <Button
-              text={"Save Changes"}
-              variant={"Add"}
-              type="submit"
-              onClick={() => onSubmit}
-            />
+          {editfeedbackPage ? (
+            <Button text={"Save Changes"} variant={"Add"} type="submit" />
           ) : (
-            <Button
-              text={"Add Feedback"}
-              variant={"Add"}
-              type="submit"
-              onClick={() => onSubmit}
-            />
+            <Button text={"Add Feedback"} variant={"Add"} type="submit" />
           )}
         </div>
       </div>

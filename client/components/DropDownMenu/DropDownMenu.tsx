@@ -21,6 +21,13 @@ const DropDownMenu = <T extends { type: string; isActive?: boolean }>({
   ...props
 }: DropDownMenuProps<T>): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [selectedCategory, setSelectedCategory] = React.useState(
+    props.data[0]?.type ?? "UI"
+  );
+
+  function changeSelectedCategory(type: string) {
+    setSelectedCategory(type);
+  }
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -88,10 +95,14 @@ const DropDownMenu = <T extends { type: string; isActive?: boolean }>({
                               `}
                     id={item.type}
                     value={item.type}
-                    onClick={(event) => props.onClick(item, event)}
+                    // onClick={(event) => props.onClick(item, event)}
+                    onClick={(event) => {
+                      changeSelectedCategory(item.type);
+                      props.onClick(item, event);
+                    }}
                   >
                     {item.type}
-                    {item.isActive && (
+                    {item.type === selectedCategory && (
                       <Image
                         src={TICK}
                         alt="tick"
