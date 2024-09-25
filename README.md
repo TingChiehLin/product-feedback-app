@@ -20,7 +20,7 @@ With an intuitive interface, users can submit feedbacks, vote on ideas, and trac
 
 ### Links
 
-- Live Demo Site URL: [Product Feedback App](https://product-feedback-nl4gaxci4-jay-lins-projects.vercel.app)
+- Live Demo Site URL: [Product Feedback App](https://product-feedback-app-gray.vercel.app/)
 
 ### The challenge
 
@@ -42,7 +42,6 @@ Users should be able to:
 - [TailwindCSS](https://tailwindcss.com/) - Styling CSS-In-JS to make a beautiful website
 - [React Query](https://tanstack.com/query/v3/) - A new way to fetch data and async state manager 
 - [React Hook Form](https://react-hook-form.com/) - Performant, flexible and extensible forms with easy-to-use validation
-- [Zustand](https://github.com/pmndrs/zustand) - State-management library
 - [Node](https://nodejs.org/en/) - JavaScript runtime environment outside of browser
 - [Figma](https://www.figma.com/) - With semantic HTML5 match from Figma File
 - [Python](https://www.python.org/) - Written backend service with Python 3
@@ -54,6 +53,7 @@ Users should be able to:
 - [PostgreSQL](https://www.postgresql.org/) - Relational Database
 - [GraphQL](https://graphql.org/) - Query language for APIs
 - [Framer Motion](https://www.framer.com/motion/) - Better User Experience for animation
+- [Zustand](https://github.com/pmndrs/zustand) - Stat Management library
   
 ### Useful resources
 
