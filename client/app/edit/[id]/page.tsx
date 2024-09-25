@@ -3,7 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-import { CATEGORIES, STATUS, Status, FORMDATA, RequestFormType } from "@/lib";
+import { STATUS, Status, FORMDATA, RequestFormType } from "@/lib";
 
 import BackButton from "@/components/BackButton";
 import Form from "@/components/Form";
