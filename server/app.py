@@ -67,7 +67,7 @@ def add_feedback():
         # Extract data from the request
         title = data.get("feedback-title")
         description = data.get("feedback-detail")
-        category = data.get("category")
+        category = data.get("feedback-category")
         upvote = 0
         status = "Planned"
 
