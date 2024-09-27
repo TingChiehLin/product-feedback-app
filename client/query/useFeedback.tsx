@@ -2,13 +2,11 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { RoadmapItemStatus } from "@/components/RoadmapItem";
 
-// Category interface
 export interface Category {
   id: number;
   type: string;
 }
 
-// Comment interface
 export interface Comment {
   id: number;
   feedback_id: number;
@@ -16,7 +14,6 @@ export interface Comment {
   description: string;
 }
 
-// User interface
 export interface User {
   id: number;
   username: string;

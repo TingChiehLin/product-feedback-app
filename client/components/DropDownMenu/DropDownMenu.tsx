@@ -5,9 +5,9 @@ import TICK from "../../assets/tick.svg";
 
 import Image from "next/image";
 
-import { Status } from "@/lib";
 import { FeedbackCategory } from "@/query/querycategory";
 
+// Generic props interface, allowing either string arrays or object arrays
 interface DropDownMenuProps<T> {
   id: string;
   label: string;
@@ -17,12 +17,17 @@ interface DropDownMenuProps<T> {
   onClick: (item: T, event: React.MouseEvent<HTMLLIElement>) => void;
 }
 
-const DropDownMenu = <T extends { type: string; isActive?: boolean }>({
+const DropDownMenu = <T extends string | FeedbackCategory>({
   ...props
 }: DropDownMenuProps<T>): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const [selectedCategory, setSelectedCategory] = React.useState(
-    props.data[0]?.type ?? "UI"
+
+  const [selectedCategory, setSelectedCategory] = React.useState<string>(
+    props.data.length > 0
+      ? typeof props.data[0] === "string"
+        ? props.data[0]
+        : props.data[0]?.type ?? "UI"
+      : "UI"
   );
 
   function changeSelectedCategory(type: string) {
@@ -33,12 +38,6 @@ const DropDownMenu = <T extends { type: string; isActive?: boolean }>({
     event.preventDefault();
     setIsOpen(!isOpen);
   };
-  // console.log("Data:", props.data);
-
-  //Determine the active item
-  const activeItem = props.data.find(
-    (item) => "isActive" in item && item.isActive
-  );
 
   return (
     <div>
@@ -60,8 +59,7 @@ const DropDownMenu = <T extends { type: string; isActive?: boolean }>({
                     cursor-pointer"
         onClick={(event) => handleOpen(event)}
       >
-        <span>{activeItem?.type ?? "UX"}</span>
-        {/* <span>{props.data[1].type ?? "UX"}</span> */}
+        <span>{selectedCategory}</span>
         <Image
           className={`w-3 cursor-pointer 
                       absolute top-1/2 right-6 -translate-y-1/2
@@ -83,8 +81,11 @@ const DropDownMenu = <T extends { type: string; isActive?: boolean }>({
                       absolute top-16 left-0 z-30"
           >
             {props.data.map((item, index) => {
+              // Handle both string items and object items
+              const displayText =
+                typeof item === "string" ? item : item.type ?? "";
               return (
-                <React.Fragment key={`${item.type}-${index}`}>
+                <React.Fragment key={`${displayText}-${index}`}>
                   <li
                     className={`cursor-pointer
                                 text-[15px]
@@ -93,16 +94,15 @@ const DropDownMenu = <T extends { type: string; isActive?: boolean }>({
                                 hover:text-pfPurple
                                 flex justify-between items-center
                               `}
-                    id={item.type}
-                    value={item.type}
-                    // onClick={(event) => props.onClick(item, event)}
+                    id={typeof item === "string" ? item : item.type}
+                    value={typeof item === "string" ? item : item.id}
                     onClick={(event) => {
-                      changeSelectedCategory(item.type);
+                      changeSelectedCategory(displayText);
                       props.onClick(item, event);
                     }}
                   >
-                    {item.type}
-                    {item.type === selectedCategory && (
+                    {displayText}
+                    {displayText === selectedCategory && (
                       <Image
                         src={TICK}
                         alt="tick"

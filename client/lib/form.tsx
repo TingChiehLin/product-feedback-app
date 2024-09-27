@@ -1,17 +1,21 @@
-import { Category } from "@/query/useFeedback";
-import { CATEGORIES } from "./categories";
-import { STATUS, Status } from "./status";
-
 type FieldConfig = {
   value: string;
   error: string;
   validator: (value: string) => string;
 };
 
+type CategoryConfig = {
+  value: number;
+};
+
+type StatusConfig = {
+  value: string;
+};
+
 export interface RequestFormType {
   "feedback-title": FieldConfig;
-  "feedback-category": Category[];
-  "feedback-status": Status[];
+  "feedback-category": CategoryConfig;
+  "feedback-status": StatusConfig;
   "feedback-detail": FieldConfig;
 }
 
@@ -26,8 +30,12 @@ export const FORMDATA: RequestFormType = {
     error: "",
     validator: (value) => validateValue(value),
   },
-  "feedback-category": CATEGORIES,
-  "feedback-status": STATUS,
+  "feedback-category": {
+    value: 1,
+  },
+  "feedback-status": {
+    value: "Planned",
+  },
   "feedback-detail": {
     value: "",
     error: "",

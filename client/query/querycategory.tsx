@@ -6,7 +6,6 @@ export interface FeedbackCategory {
   feedbacks: FeedbackItem[];
   id: number;
   type: string;
-  isActive?: boolean;
 }
 
 export const useCategory = () => {

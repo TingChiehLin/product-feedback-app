@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRouter, usePathname } from "next/navigation";
 
-import { RequestFormType, Status, FORMDATA } from "@/lib";
+import { RequestFormType, STATUS, FORMDATA } from "@/lib";
 
 import { FaPlus, FaEdit } from "react-icons/fa";
 
@@ -10,9 +10,7 @@ import DropDownMenu from "../DropDownMenu";
 import Button from "../Button";
 import TextField from "../TextField";
 import { FeedbackCategory, useCategory } from "@/query/querycategory";
-
-// updateStatus?: Status[];;
-// onUpdateStatus?: (u: Status, event: React.MouseEvent<HTMLLIElement>) => void;
+import axios from "axios";
 
 const addButtonStyle = {
   background:
@@ -56,7 +54,6 @@ const Form: React.FC = () => {
 
   const handleCategory = (
     selectedCategory: FeedbackCategory,
-    // selectedCategory: any,
     event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
   ) => {
     if (event) {
@@ -64,110 +61,79 @@ const Form: React.FC = () => {
     }
 
     // Update the active category in `values`
-    // setValues((preState) => {
-    //   return {
-    //     ...preState,
-    //     "feedback-category": preState["feedback-category"].map((item) => {
-    //       return {
-    //         ...item,
-    //         isActive: item.type === item.type,
-    //       };
-    //     }),
-    //   };
-    // });
-
-    // Update the active category in `values`
-    // setValues((preState) => {
-    //   return {
-    //     ...preState,
-    //     "feedback-category": {
-    //       ...preState["feedback-category"],
-
-    //     },
-    //   };
-    // });
-
-    // Update the active category in `values`
-    // setValues((preState) => {
-    //   // Map through the existing `feedback-category` array and update isActive
-    //   const updatedCategories = preState["feedback-category"].map((item) => ({
-    //     ...item,
-    //     isActive: item.type === selectedCategory.type, // Set selected category's isActive to true, others to false
-    //   }));
-
-    //   return {
-    //     ...preState,
-    //     "feedback-category": updatedCategories, // Update with new categories array
-    //   };
-    // });
-
-    // Update the active category in the `categories` state
-
-    // setCategories((preState) => {
-    //   return preState.map((item) => ({
-    //     ...item,
-    //     isActive: item.type === selectedCategory.type, // Set active category by id
-    //   }));
-    // });
+    setValues((preState) => {
+      return {
+        ...preState,
+        "feedback-category": {
+          ...preState["feedback-category"],
+          value: selectedCategory.id,
+          error: "",
+        },
+      };
+    });
   };
 
-  const handleUpdateStatus = () => {};
+  const handleStatus = (s: string, event: React.MouseEvent<HTMLLIElement>) => {
+    if (event) {
+      event.preventDefault();
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Submit");
-    //   const titleHasError = values["feedback-title"].validator(
-    //     values["feedback-title"].value
-    //   );
+    const titleHasError = values["feedback-title"].validator(
+      values["feedback-title"].value
+    );
 
-    //   const detailHasError = values["feedback-detail"].validator(
-    //     values["feedback-detail"].value
-    //   );
+    const detailHasError = values["feedback-detail"].validator(
+      values["feedback-detail"].value
+    );
 
-    //   if (titleHasError !== "") {
-    //     setValues((preState: typeof values) => {
-    //       return {
-    //         ...preState,
-    //         "feedback-title": {
-    //           ...preState["feedback-title"],
-    //           error: titleHasError,
-    //         },
-    //       };
-    //     });
-    //   }
+    if (titleHasError !== "") {
+      setValues((preState: typeof values) => {
+        return {
+          ...preState,
+          "feedback-title": {
+            ...preState["feedback-title"],
+            error: titleHasError,
+          },
+        };
+      });
+    }
 
-    //   if (detailHasError !== "") {
-    //     setValues((preState: typeof values) => {
-    //       return {
-    //         ...preState,
-    //         "feedback-detail": {
-    //           ...preState["feedback-detail"],
-    //           error: detailHasError,
-    //         },
-    //       };
-    //     });
-    //   }
+    if (detailHasError !== "") {
+      setValues((preState: typeof values) => {
+        return {
+          ...preState,
+          "feedback-detail": {
+            ...preState["feedback-detail"],
+            error: detailHasError,
+          },
+        };
+      });
+    }
 
-    //   try {
-    //     // const response = await axios.post(
-    //     //   "http://localhost:5555/add-new-feedback",
-    //     //   {
-    //     //     "feedback-title": values["feedback-title"].value,
-    //     //     "feedback-detail": values["feedback-detail"].value,
-    //     //     category:
-    //     //       categories.find((category) => category.isActive)?.type || "UX",
-    //     //   }
-    //     // );
-    //     // if (response.status === 201) {
-    //     //   console.log("Feedback submitted successfully:", response.data);
-    //     //   push("/");
-    //     // }
-    //   } catch (error) {
-    //     console.error("Error submitting feedback:", error);
-    //   }
-    //   // console.log("Form Submit Value:", values);
+    try {
+      const response = await axios.post(
+        "http://localhost:5555/add-new-feedback",
+        {
+          "feedback-title": values["feedback-title"].value,
+          "feedback-detail": values["feedback-detail"].value,
+          "feedback-category": values["feedback-category"].value,
+        }
+      );
+      if (response.status === 201) {
+        console.log("Feedback submitted successfully:", response.data);
+        //dispatch a new feedback into context
 
-    // router.push("/");
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+    }
+    console.log("Form Submit Value:", values);
+
+    router.push("/");
   };
 
   const handleCancel = () => {
@@ -221,8 +187,8 @@ const Form: React.FC = () => {
             label={"Update Status"}
             description={"Change feedback state"}
             name={"feedback-status"}
-            data={[]}
-            onClick={handleUpdateStatus}
+            data={STATUS}
+            onClick={handleStatus}
           />
         )}
         <TextField
