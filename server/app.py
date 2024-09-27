@@ -64,27 +64,26 @@ def all_categories():
 def add_feedback():
     try:
         data = request.get_json()
+        print(f"Form Data:${data}")
         # Extract data from the request
-        title = data.get("feedback-title")
-        description = data.get("feedback-detail")
-        category = data.get("feedback-category")
-        upvote = 0
-        status = "Planned"
+        feedback_title = data.get("feedback-title")
+        feedback_description = data.get("feedback-detail")
+        feedback_category = data.get("feedback-category")
 
-        if not title or not description:
+        if not feedback_title or not feedback_description:
             return make_response({"error": "Title and description are required"}, 400)
 
         new_feedback = Feedback(
-            title=title,
-            description=description,
-            category_id=category,
-            upvote=upvote,
-            status=status,
+            title=feedback_title,
+            description=feedback_description,
+            category_id=feedback_category,
+            upvote=0,
+            status="Planned",
         )
-        # new_feedback.category = Category.query.filter(id)
-        print(new_feedback)
+        # new_feedback.category_id = feedback_category
         db.session.add(new_feedback)
         db.session.commit()
+        print(new_feedback)
 
         return make_response(new_feedback.to_dict(), 201)
 
