@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FeedbackContext } from "@/store/product-feedback-context";
 import { useRouter, usePathname } from "next/navigation";
 
 import { RequestFormType, STATUS, FORMDATA } from "@/lib";
@@ -19,6 +20,8 @@ const addButtonStyle = {
 
 const Form: React.FC = () => {
   const { data: categoryData } = useCategory();
+  const fbCtx = React.useContext(FeedbackContext);
+
   const router = useRouter();
   const pathname = usePathname();
 
@@ -123,9 +126,12 @@ const Form: React.FC = () => {
         }
       );
       if (response.status === 201) {
-        console.log("Feedback submitted successfully:", response.data);
-        //dispatch a new feedback into context
-
+        const newFeedback = response.data;
+        console.log("Feedback submitted successfully:", newFeedback);
+        fbCtx.feedbackDispatch({
+          type: "ADD_FEEDBACK",
+          payload: newFeedback,
+        });
         router.push("/");
       }
     } catch (error) {

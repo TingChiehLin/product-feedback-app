@@ -11,18 +11,27 @@ import Image from "next/image";
 
 type FeedbackState = {
   feedbacks: FeedbackItem[];
-  addFeedback: (feedback: FeedbackItem) => void;
-  updateFeedback: (feedback: FeedbackItem, index: number) => void;
 };
 
 const fbCtxValue: FeedbackState = {
   feedbacks: [],
-  addFeedback: (feedback: FeedbackItem) => {},
-  updateFeedback: (feedback: FeedbackItem, index: number) => {},
+};
+
+type FeedbackContextType = {
+  feedbacks: FeedbackItem[];
+  feedbackDispatch: React.Dispatch<any>;
+};
+
+// Create an initial context value (only the structure, no methods here)
+const initialFeedbackContext: FeedbackContextType = {
+  feedbacks: [],
+  feedbackDispatch: () => null, // Placeholder function for dispatch
 };
 
 // Context for feedback management
-export const FeedbackContext = createContext(fbCtxValue);
+export const FeedbackContext = createContext<FeedbackContextType>(
+  initialFeedbackContext
+);
 
 // Reducer function for feedback actions
 const feedbackReducer = (state: FeedbackState, action: any) => {
@@ -30,7 +39,7 @@ const feedbackReducer = (state: FeedbackState, action: any) => {
     case "ADD_FEEDBACK":
       return {
         ...state,
-        feedback: [...state.feedbacks, action.payload],
+        feedbacks: [...state.feedbacks, action.payload],
       };
     case "UPDATE_FEEDBACK":
       const updatedFeedbacks = [...state.feedbacks];
@@ -80,7 +89,9 @@ export const FeedbackProvider = ({
     );
 
   return (
-    <FeedbackContext.Provider value={feedbackState}>
+    <FeedbackContext.Provider
+      value={{ feedbacks: feedbackState.feedbacks, feedbackDispatch }}
+    >
       {children}
     </FeedbackContext.Provider>
   );
