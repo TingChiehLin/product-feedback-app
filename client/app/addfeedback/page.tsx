@@ -9,7 +9,7 @@ import BackButton from "@/components/BackButton";
 const AddFeedBack: React.FC = () => {
   return (
     <FeedbackContainer>
-      <BackButton href="/" />
+      <BackButton />
       <Form />
     </FeedbackContainer>
   );

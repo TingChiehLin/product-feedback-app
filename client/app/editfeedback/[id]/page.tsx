@@ -9,7 +9,7 @@ import FeedbackContainer from "@/layouts/FeedbackContainer";
 const EditFeedback: React.FC = () => {
   return (
     <FeedbackContainer>
-      <BackButton href="/" />
+      <BackButton />
       <Form />
     </FeedbackContainer>
   );
