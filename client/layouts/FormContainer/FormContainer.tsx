@@ -1,8 +1,8 @@
-interface FeedbackContainerProps {
+interface FormContainerProps {
   children: React.ReactNode;
 }
 
-const FeedbackContainer: React.FC<FeedbackContainerProps> = ({ children }) => {
+const FormContainer: React.FC<FormContainerProps> = ({ children }) => {
   return (
     <div className="flex flex-col gap-[68px] max-w-[540px] mx-auto">
       {children}
@@ -10,4 +10,4 @@ const FeedbackContainer: React.FC<FeedbackContainerProps> = ({ children }) => {
   );
 };
 
-export default FeedbackContainer;
+export default FormContainer;

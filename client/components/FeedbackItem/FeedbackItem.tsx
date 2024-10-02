@@ -29,7 +29,7 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
             <Link
               className="cursor-pointer"
               // href={`/feedbackdetail/${id}?slug=${id}`}
-              href={`/feedbackdetail/${id}`}
+              href={`/feedback/${id}`}
             >
               <h4 className="text-[18px] text-pfBlueDark font-bold mb-1">
                 {title}

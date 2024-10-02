@@ -39,7 +39,7 @@ const Button: React.FC<ButtonTypeProp> = ({
   return (
     <>
       {href ? (
-        <Link href={`/${href}${slug ? "/" + slug : ""}`}>
+        <Link href={`/${href}${slug ? "/" + slug + "/edit" : ""}`}>
           <button
             className={`flex items-center gap-2 text-white
                             rounded-[10px] ${buttonTypeMapper[variant]} py-2 px-6

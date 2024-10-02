@@ -138,9 +138,9 @@ const Form: React.FC = () => {
       console.error("Error submitting feedback:", error);
     }
     console.log("Form Submit Value:", values);
-
-    router.push("/");
   };
+
+  const handleUpdate = () => {};
 
   const handleCancel = () => {
     setValues(FORMDATA);

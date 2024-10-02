@@ -3,15 +3,15 @@
 import * as React from "react";
 
 import Form from "../../components/Form";
-import FeedbackContainer from "@/layouts/FeedbackContainer";
+import FormContainer from "@/layouts/FormContainer";
 import BackButton from "@/components/BackButton";
 
 const AddFeedBack: React.FC = () => {
   return (
-    <FeedbackContainer>
+    <FormContainer>
       <BackButton />
       <Form />
-    </FeedbackContainer>
+    </FormContainer>
   );
 };
 
