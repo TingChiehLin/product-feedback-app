@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-export type Buttons = "Add" | "Edit" | "Cancel" | "Delete";
+export type Buttons = "Add" | "Edit" | "Clear" | "Delete";
 
 interface ButtonTypeProp {
   text: string;
@@ -16,14 +16,14 @@ interface ButtonTypeProp {
 const buttonTypeMapper: { [k in Buttons]: string } = {
   Add: "bg-pfPurple",
   Edit: "bg-pfBlueNormal",
-  Cancel: "bg-pfBlueDark",
+  Clear: "bg-pfBlueDark",
   Delete: "bg-pfRed",
 };
 
 const hoverColorMapper: { [k in Buttons]: string } = {
   Add: "hover:bg-pfPinkLight",
   Edit: "hover:bg-pfBlueDark",
-  Cancel: "hover:bg-pfBlueDarkLight",
+  Clear: "hover:bg-pfBlueDarkLight",
   Delete: "hover:bg-pfLightRed",
 };
 

@@ -7,13 +7,13 @@ import Image from "next/image";
 
 import { FeedbackCategory } from "@/query/querycategory";
 
-// Generic props interface, allowing either string arrays or object arrays
 interface DropDownMenuProps<T> {
   id: string;
   label: string;
   name: string;
   description: string;
   data: T[];
+  value: number | string;
   onClick: (item: T, event: React.MouseEvent<HTMLLIElement>) => void;
 }
 
@@ -21,8 +21,7 @@ const DropDownMenu = <T extends string | FeedbackCategory>({
   ...props
 }: DropDownMenuProps<T>): React.ReactElement => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-
-  const [selectedCategory, setSelectedCategory] = React.useState<string>(
+  const [selectedItem, setSelectedItem] = React.useState<string>(
     props.data.length > 0
       ? typeof props.data[0] === "string"
         ? props.data[0]
@@ -30,8 +29,27 @@ const DropDownMenu = <T extends string | FeedbackCategory>({
       : "UI"
   );
 
+  // Sync internal state with prop value
+  React.useEffect(() => {
+    if (typeof props.value === "string" || typeof props.value === "number") {
+      const currentItem =
+        typeof props.value === "number"
+          ? props.data[props.value]
+          : props.data.find(
+              (item) =>
+                (typeof item === "string" ? item : item.type) === props.value
+            );
+
+      if (currentItem) {
+        const displayText =
+          typeof currentItem === "string" ? currentItem : currentItem.type;
+        setSelectedItem(displayText);
+      }
+    }
+  }, [props.value, props.data]);
+
   function changeSelectedCategory(type: string) {
-    setSelectedCategory(type);
+    setSelectedItem(type);
   }
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,7 +77,7 @@ const DropDownMenu = <T extends string | FeedbackCategory>({
                     cursor-pointer"
         onClick={(event) => handleOpen(event)}
       >
-        <span>{selectedCategory}</span>
+        <span>{selectedItem}</span>
         <Image
           className={`w-3 cursor-pointer 
                       absolute top-1/2 right-6 -translate-y-1/2
@@ -102,7 +120,7 @@ const DropDownMenu = <T extends string | FeedbackCategory>({
                     }}
                   >
                     {displayText}
-                    {displayText === selectedCategory && (
+                    {displayText === selectedItem && (
                       <Image
                         src={TICK}
                         alt="tick"

@@ -1,6 +1,8 @@
 import * as React from "react";
+import axios from "axios";
+
 import { FeedbackContext } from "@/store/product-feedback-context";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useParams } from "next/navigation";
 
 import { RequestFormType, STATUS, FORMDATA } from "@/lib";
 
@@ -11,7 +13,6 @@ import DropDownMenu from "../DropDownMenu";
 import Button from "../Button";
 import TextField from "../TextField";
 import { FeedbackCategory, useCategory } from "@/query/querycategory";
-import axios from "axios";
 
 const addButtonStyle = {
   background:
@@ -24,14 +25,17 @@ const Form: React.FC = () => {
 
   const router = useRouter();
   const pathname = usePathname();
+  const params = useParams();
 
   const [values, setValues] = React.useState(FORMDATA);
 
+  React.useEffect(() => {});
+
   const addfeedbackPage = pathname === "/addfeedback";
   const editfeedbackPage = pathname?.includes("/edit");
-
-  //Get Edit title from the feedbackdetail page
-  const editTitle = "‘Add a dark theme option";
+  const id = editfeedbackPage && params?.id[0];
+  const editItem = fbCtx.feedbacks.find((f) => String(f.id) === id);
+  const editTitle = editItem?.title;
 
   const formTitle = addfeedbackPage
     ? "Create New Feedback"
@@ -70,7 +74,6 @@ const Form: React.FC = () => {
         "feedback-category": {
           ...preState["feedback-category"],
           value: selectedCategory.id,
-          error: "",
         },
       };
     });
@@ -80,6 +83,13 @@ const Form: React.FC = () => {
     if (event) {
       event.preventDefault();
     }
+    setValues((preState) => ({
+      ...preState,
+      "feedback-status": {
+        ...preState["feedback-status"],
+        value: s,
+      },
+    }));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -140,11 +150,19 @@ const Form: React.FC = () => {
     console.log("Form Submit Value:", values);
   };
 
-  const handleUpdate = () => {};
+  const handleUpdate = () => {
+    console.log("update");
+  };
 
-  const handleCancel = () => {
+  const handleClear = () => {
     setValues(FORMDATA);
-    router.push("/");
+    // setValues({
+    //   ...FORMDATA,
+    //   "feedback-status": {
+    //     ...FORMDATA["feedback-status"],
+    //     value: "Planned", // Reset status to "Planned"
+    //   },
+    // });
   };
 
   const handleDelete = () => {};
@@ -174,7 +192,9 @@ const Form: React.FC = () => {
           description={"Add a short, descriptive headline"}
           type={"text"}
           name={"feedback-title"}
-          placeholder={"Please input Title"}
+          placeholder={
+            addfeedbackPage ? "Please input Title" : editItem?.title ?? ""
+          }
           value={values["feedback-title"].value}
           error={values["feedback-title"].error}
           onChange={handleValue}
@@ -185,6 +205,7 @@ const Form: React.FC = () => {
           description={"Choose a category for your feedback"}
           name={"feedback-category"}
           data={categoryData ?? []}
+          value={values["feedback-category"].value}
           onClick={handleCategory}
         />
         {editfeedbackPage && (
@@ -194,6 +215,7 @@ const Form: React.FC = () => {
             description={"Change feedback state"}
             name={"feedback-status"}
             data={STATUS}
+            value={values["feedback-status"].value}
             onClick={handleStatus}
           />
         )}
@@ -222,13 +244,18 @@ const Form: React.FC = () => {
           )}
           {editfeedbackPage && <div className="ml-auto"></div>}
           <Button
-            text={"Cancel"}
-            variant={"Cancel"}
+            text={"Clear"}
+            variant={"Clear"}
             type="button"
-            onClick={handleCancel}
+            onClick={handleClear}
           />
           {editfeedbackPage ? (
-            <Button text={"Save Changes"} variant={"Add"} type="submit" />
+            <Button
+              text={"Save Changes"}
+              variant={"Add"}
+              type="button"
+              onClick={handleUpdate}
+            />
           ) : (
             <Button text={"Add Feedback"} variant={"Add"} type="submit" />
           )}

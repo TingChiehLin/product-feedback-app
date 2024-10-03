@@ -1,13 +1,13 @@
 import { FC } from "react";
 
 import RoadmapItem, { RoadmapItemStatus } from "../RoadmapItem";
-import { FeedbackData } from "@/query/useFeedback";
+import { FeedbackItem } from "@/query/useFeedback";
 
 interface RoadMapSectionProp {
   title: string;
   subTitle: string;
   status: RoadmapItemStatus;
-  data: FeedbackData[];
+  data: FeedbackItem[];
 }
 
 const RoadMapSection: FC<RoadMapSectionProp> = ({
@@ -17,31 +17,31 @@ const RoadMapSection: FC<RoadMapSectionProp> = ({
   data,
 }) => {
   const plannedTotalCount = data.reduce(
-    (acc: number, cur: FeedbackData) =>
+    (acc: number, cur: FeedbackItem) =>
       cur.status === "Planned" ? ++acc : acc,
     0
   );
 
   const inProgressTotalCount = data.reduce(
-    (acc: number, cur: FeedbackData) =>
+    (acc: number, cur: FeedbackItem) =>
       cur.status === "In-Progress" ? ++acc : acc,
     0
   );
 
   const liveTotalCount = data.reduce(
-    (acc: number, cur: FeedbackData) => (cur.status === "Live" ? ++acc : acc),
+    (acc: number, cur: FeedbackItem) => (cur.status === "Live" ? ++acc : acc),
     0
   );
 
   const plannedItems = data.filter(
-    (cur: FeedbackData) => cur.status === "Planned"
+    (cur: FeedbackItem) => cur.status === "Planned"
   );
 
   const inProgressItems = data.filter(
-    (cur: FeedbackData) => cur.status === "In-Progress"
+    (cur: FeedbackItem) => cur.status === "In-Progress"
   );
 
-  const liveItems = data.filter((cur: FeedbackData) => cur.status === "Live");
+  const liveItems = data.filter((cur: FeedbackItem) => cur.status === "Live");
 
   return (
     <div>
