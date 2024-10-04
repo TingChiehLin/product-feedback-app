@@ -1,11 +1,9 @@
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.sql import func
 
 from config import db
 
 
-# Models go here!
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
@@ -95,19 +93,6 @@ class Comment(db.Model, SerializerMixin):
             id: {self.id}
             title: {self.title}
         """
-
-
-# class Status(db.Model, SerializerMixin):
-#     __tablename__ = "status"
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     status = db.Column(db.String)
-
-#     def __repr__(self):
-#         return f"""
-#             id: {self.id}
-#             status: {self.status}
-#         """
 
 
 class Category(db.Model, SerializerMixin):

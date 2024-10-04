@@ -91,5 +91,9 @@ def add_feedback():
         return make_response({"error": str(e)}, 500)
 
 
+# Get a specific feedback
+
+# Delete a feedback
+
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

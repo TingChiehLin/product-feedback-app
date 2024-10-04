@@ -74,7 +74,7 @@ if __name__ == "__main__":
             db.session.commit()
 
             # Create random comments for each feedback
-            for _ in range(randint(1, 15)):
+            for _ in range(randint(1, 8)):
                 comment = Comment(
                     description=fake.sentence(),
                     # feedback_id=feedback.id
