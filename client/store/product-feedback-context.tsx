@@ -48,6 +48,15 @@ const feedbackReducer = (state: FeedbackState, action: any) => {
         ...state,
         feedbacks: updatedFeedbacks,
       };
+    case "DELETE_FEEDBACK": {
+      const filteredFeedbacks = state.feedbacks.filter(
+        (feedback) => feedback.id !== action.payload.id
+      );
+      return {
+        ...state,
+        feedbacks: filteredFeedbacks,
+      };
+    }
     case "SET_FEEDBACKS":
       return {
         ...state,

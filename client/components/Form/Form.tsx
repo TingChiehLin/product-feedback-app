@@ -2,6 +2,7 @@ import * as React from "react";
 import axios from "axios";
 
 import { FeedbackContext } from "@/store/product-feedback-context";
+import { useFeedback } from "@/query/useFeedback";
 import { useRouter, usePathname, useParams } from "next/navigation";
 
 import { RequestFormType, STATUS, FORMDATA } from "@/lib";
@@ -21,6 +22,7 @@ const addButtonStyle = {
 
 const Form: React.FC = () => {
   const { data: categoryData } = useCategory();
+  const { refetch } = useFeedback();
   const fbCtx = React.useContext(FeedbackContext);
 
   const router = useRouter();
@@ -40,6 +42,12 @@ const Form: React.FC = () => {
   const formTitle = addfeedbackPage
     ? "Create New Feedback"
     : `Editing ${editTitle}`;
+  const categoryVlaue = addfeedbackPage
+    ? values["feedback-category"].value ?? ""
+    : editItem?.category.type ?? "";
+  const statusValue = addfeedbackPage
+    ? values["feedback-status"].value ?? ""
+    : editItem?.status ?? "";
   const alignButton = addfeedbackPage && "justify-end";
 
   const handleValue = (
@@ -150,22 +158,41 @@ const Form: React.FC = () => {
     console.log("Form Submit Value:", values);
   };
 
-  const handleUpdate = () => {
-    console.log("update");
+  const handleUpdate = async (id: string) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:5555/feedbacks/${id}`,
+        {
+          "feedback-title": values["feedback-title"].value,
+          "feedback-detail": values["feedback-detail"].value,
+          "feedback-category": values["feedback-category"].value,
+          "feedback-status": values["feedback-status"].value,
+        }
+      );
+      if (response.status === 200) {
+        const updatedFeedback = response.data;
+        fbCtx.feedbackDispatch({
+          type: "UPDATE_FEEDBACK",
+          payload: updatedFeedback,
+        });
+      }
+      refetch();
+      router.push("/");
+    } catch (error) {
+      console.error("Error updating feedback:", error);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+    } catch (error) {
+      console.error("Error deleting feedback:", error);
+    }
   };
 
   const handleClear = () => {
     setValues(FORMDATA);
-    // setValues({
-    //   ...FORMDATA,
-    //   "feedback-status": {
-    //     ...FORMDATA["feedback-status"],
-    //     value: "Planned", // Reset status to "Planned"
-    //   },
-    // });
   };
-
-  const handleDelete = () => {};
 
   return (
     <form
@@ -205,7 +232,7 @@ const Form: React.FC = () => {
           description={"Choose a category for your feedback"}
           name={"feedback-category"}
           data={categoryData ?? []}
-          value={values["feedback-category"].value}
+          value={categoryVlaue}
           onClick={handleCategory}
         />
         {editfeedbackPage && (
@@ -215,7 +242,7 @@ const Form: React.FC = () => {
             description={"Change feedback state"}
             name={"feedback-status"}
             data={STATUS}
-            value={values["feedback-status"].value}
+            value={statusValue}
             onClick={handleStatus}
           />
         )}
@@ -229,7 +256,11 @@ const Form: React.FC = () => {
           value={values["feedback-detail"].value}
           rows={4}
           cols={50}
-          placeholder={"Please input your feedback here"}
+          placeholder={
+            addfeedbackPage
+              ? "Please input your feedback here"
+              : editItem?.description ?? ""
+          }
           error={values["feedback-detail"].error}
           onChange={handleValue}
         />
@@ -239,7 +270,7 @@ const Form: React.FC = () => {
               text={"Delete"}
               variant={"Delete"}
               type="button"
-              onClick={handleDelete}
+              onClick={() => handleDelete(String(id))}
             />
           )}
           {editfeedbackPage && <div className="ml-auto"></div>}
@@ -254,7 +285,7 @@ const Form: React.FC = () => {
               text={"Save Changes"}
               variant={"Add"}
               type="button"
-              onClick={handleUpdate}
+              onClick={() => handleUpdate(String(id))}
             />
           ) : (
             <Button text={"Add Feedback"} variant={"Add"} type="submit" />

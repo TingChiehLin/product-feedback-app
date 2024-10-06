@@ -51,10 +51,7 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
         >
           <FeedbackNumber feedbackNum={feedbackNum} />
         </Link> */}
-        <Link
-          className="cursor-pointer"
-          href={`/feedbackdetail/${id}?slug=${id}`}
-        >
+        <Link className="cursor-pointer" href={`/feedback/${id}`}>
           <FeedbackNumber feedbackNum={feedbackNum} />
         </Link>
       </div>

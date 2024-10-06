@@ -29,7 +29,6 @@ const DropDownMenu = <T extends string | FeedbackCategory>({
       : "UI"
   );
 
-  // Sync internal state with prop value
   React.useEffect(() => {
     if (typeof props.value === "string" || typeof props.value === "number") {
       const currentItem =
@@ -99,7 +98,6 @@ const DropDownMenu = <T extends string | FeedbackCategory>({
                       absolute top-16 left-0 z-30"
           >
             {props.data.map((item, index) => {
-              // Handle both string items and object items
               const displayText =
                 typeof item === "string" ? item : item.type ?? "";
               return (
