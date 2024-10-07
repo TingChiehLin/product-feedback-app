@@ -102,6 +102,7 @@ const Form: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const titleHasError = values["feedback-title"].validator(
       values["feedback-title"].value
     );
@@ -159,6 +160,31 @@ const Form: React.FC = () => {
   };
 
   const handleUpdate = async (id: string) => {
+    const titleHasError = values["feedback-title"].validator(
+      values["feedback-title"].value
+    );
+
+    const detailHasError = values["feedback-detail"].validator(
+      values["feedback-detail"].value
+    );
+
+    if (titleHasError || detailHasError) {
+      setValues((preState: typeof values) => {
+        return {
+          ...preState,
+          "feedback-title": {
+            ...preState["feedback-title"],
+            error: titleHasError,
+          },
+          "feedback-detail": {
+            ...preState["feedback-detail"],
+            error: detailHasError,
+          },
+        };
+      });
+      return;
+    }
+
     try {
       const response = await axios.put(
         `http://localhost:5555/feedbacks/${id}`,
@@ -185,6 +211,16 @@ const Form: React.FC = () => {
 
   const handleDelete = async (id: string) => {
     try {
+      const response = await axios.delete(
+        `http://localhost:5555/feedbacks/${id}`
+      );
+      if (response.status === 200) {
+        fbCtx.feedbackDispatch({
+          type: "DELETE_FEEDBACK",
+          payload: id,
+        });
+        router.push("/");
+      }
     } catch (error) {
       console.error("Error deleting feedback:", error);
     }
