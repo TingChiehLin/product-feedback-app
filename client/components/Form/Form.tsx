@@ -219,6 +219,7 @@ const Form: React.FC = () => {
           type: "DELETE_FEEDBACK",
           payload: id,
         });
+        refetch();
         router.push("/");
       }
     } catch (error) {

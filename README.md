@@ -59,6 +59,7 @@ Users should be able to:
 
 - [Array Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) - Using reduce to count the sum of value in the array
 - [Product Feedback Design file](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6)
+- [Deploy Your Flask App with Vercel](https://www.youtube.com/watch?v=miQmOlPF_Gs)
 
 ## Contact Me
 
