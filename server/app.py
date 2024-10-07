@@ -91,9 +91,54 @@ def add_feedback():
         return make_response({"error": str(e)}, 500)
 
 
-# Get a specific feedback
+# Update a specific feedback
+@app.route("/feedbacks/<int:id>", methods=["PUT"])
+def update_feedback(id):
+    try:
+        data = request.get_json()
+
+        feedback = Feedback.query.get(id)
+
+        if not feedback:
+            return make_response({"error": "Feedback not found"}, 404)
+
+        feedback_title = data.get("feedback-title")
+        feedback_description = data.get("feedback-detail")
+        feedback_category = data.get("feedback-category")
+        feedback_status = data.get("feedback-status")
+
+        if not feedback_title or not feedback_description:
+            return make_response({"error": "Title and description are required"}, 400)
+
+        feedback.title = feedback_title
+        feedback.description = feedback_description
+        feedback.category_id = feedback_category
+        feedback.status = feedback_status if feedback_status else feedback.status
+
+        db.session.commit()
+
+        return make_response(feedback.to_dict(), 200)
+
+    except Exception as e:
+        return make_response({"error": str(e)}, 500)
+
 
 # Delete a feedback
+@app.route("/feedbacks/<int:id>", methods=["DELETE"])
+def delete_feedback(id):
+    try:
+        feedback = Feedback.query.get(id)
+        if not feedback:
+            return make_response({"error": "Feedback not found"}, 404)
+
+        db.session.delete(feedback)
+        db.session.commit()
+
+        return make_response({"message": "Feedback deleted successfully"}, 200)
+
+    except Exception as e:
+        return make_response({"error": str(e)}, 500)
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
