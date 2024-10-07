@@ -10,6 +10,7 @@ With an intuitive interface, users can submit feedbacks, vote on ideas, and trac
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
     - [Links](#links)
+  - [Getting Started](#getting-started)
     - [The challenge](#the-challenge)
     - [Built with](#built-with)
     - [Future Plan](#future-plan)
@@ -21,6 +22,38 @@ With an intuitive interface, users can submit feedbacks, vote on ideas, and trac
 ### Links
 
 - Live Demo Site URL: [Product Feedback App](https://product-feedback-app-gray.vercel.app/)
+
+***
+
+## Getting Started
+
+1. First of all, you need to install dependency frontend dependency
+   
+```
+npm install
+#or
+yarn install
+```
+
+2. when you are in the server folder path, you need to install dependency
+
+```
+pipenv install
+```
+
+3. Run the application, you need to start a main entry point for frontend path(client)
+
+```
+npm run dev
+#or
+yarn run dev
+```  
+
+4. Run the application, you need to start a main entry point for backend path(server)
+
+```
+python app.py
+```  
 
 ### The challenge
 
