@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 export interface TagPropType {
-  text: string;
+  text: string | undefined;
   isActive?: boolean;
   onClick?: () => void;
   customClass?: string;

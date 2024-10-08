@@ -4,11 +4,11 @@ import { FaAngleUp } from "react-icons/fa";
 type FeildDirections = "vertical" | "horizental";
 
 interface VoteNumberPropType {
-  voteNum: number;
+  voteNum: number | undefined;
   fieldDirection: FeildDirections;
 }
 
-const VoteTag: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
+const VoteSection: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
   return (
     <>
       <div
@@ -39,4 +39,4 @@ const VoteTag: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
   );
 };
 
-export default VoteTag;
+export default VoteSection;

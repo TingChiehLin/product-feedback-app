@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Comment } from "@/query/useFeedback";
 import FeedbackNumber from "../FeedbackNumber";
 import Tag from "../Tag";
-import VoteSection from "../VoteTag";
+import VoteSection from "../VoteSection";
 
 export type RoadmapItemStatus = "Planned" | "In-Progress" | "Live";
 

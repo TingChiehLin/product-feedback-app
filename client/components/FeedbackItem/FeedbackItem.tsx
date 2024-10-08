@@ -1,6 +1,6 @@
 import Tag from "../Tag";
 import FeedbackNumber from "../FeedbackNumber";
-import VoteSection from "../VoteTag";
+import VoteSection from "../VoteSection";
 import Link from "next/link";
 
 interface FeedbackItemProp {
@@ -21,8 +21,8 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
   feedbackNum,
 }) => {
   return (
-    <div className="w-full mt-5 shadow bg-white rounded-[10px]">
-      <div className="px-8 py-7 flex items-center justify-between">
+    <div className="w-full mt-5 px-8 py-7 shadow bg-white rounded-[10px]">
+      <div className="flex items-center justify-between">
         <div className="flex justify-start gap-10">
           <VoteSection voteNum={upvote} fieldDirection={"vertical"} />
           <div>

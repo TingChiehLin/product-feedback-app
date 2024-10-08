@@ -3,7 +3,7 @@ import { FC } from "react";
 import COMMENT from "../../assets/comment.svg";
 
 interface CommentTypeProp {
-  feedbackNum: number;
+  feedbackNum: number | undefined;
 }
 
 const FeedbackNumber: FC<CommentTypeProp> = ({ feedbackNum }) => {
