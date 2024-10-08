@@ -1,6 +1,7 @@
+import * as React from "react";
 import { FC, useContext } from "react";
 import { FeedbackContext } from "@/store/product-feedback-context";
-import { FeedbackData } from "@/query/useFeedback";
+import { FeedbackItem } from "@/query/useFeedback";
 
 export type ProcessType = "Planned" | "In-Progress" | "Live";
 
@@ -17,19 +18,19 @@ const ProcessStatus: FC<ProcessTypeProp> = ({ title }) => {
   };
 
   const plannedTotalCount = fbCtx.feedbacks.reduce(
-    (acc: number, cur: FeedbackData) =>
+    (acc: number, cur: FeedbackItem) =>
       cur.status === "Planned" ? ++acc : acc,
     0
   );
 
   const inProgressTotalCount = fbCtx.feedbacks.reduce(
-    (acc: number, cur: FeedbackData) =>
+    (acc: number, cur: FeedbackItem) =>
       cur.status === "In-Progress" ? ++acc : acc,
     0
   );
 
   const liveTotalCount = fbCtx.feedbacks.reduce(
-    (acc: number, cur: FeedbackData) => (cur.status === "Live" ? ++acc : acc),
+    (acc: number, cur: FeedbackItem) => (cur.status === "Live" ? ++acc : acc),
     0
   );
 
