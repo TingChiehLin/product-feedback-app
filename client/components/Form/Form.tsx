@@ -31,8 +31,6 @@ const Form: React.FC = () => {
 
   const [values, setValues] = React.useState(FORMDATA);
 
-  React.useEffect(() => {});
-
   const addfeedbackPage = pathname === "/addfeedback";
   const editfeedbackPage = pathname?.includes("/edit");
   const id = editfeedbackPage && params?.id[0];

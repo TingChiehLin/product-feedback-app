@@ -37,7 +37,7 @@ export const COMMENTS: commentType[] = [
     upvote: 65,
     tagName: "UX",
     commentNum: 5,
-    status: "In Progress",
+    status: "In-Progress",
   },
   {
     id: 3,
