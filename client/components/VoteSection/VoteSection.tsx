@@ -1,4 +1,4 @@
-import { FC } from "react";
+import * as React from "react";
 import { FaAngleUp } from "react-icons/fa";
 
 type FeildDirections = "vertical" | "horizental";
@@ -8,7 +8,10 @@ interface VoteNumberPropType {
   fieldDirection: FeildDirections;
 }
 
-const VoteSection: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
+const VoteSection: React.FC<VoteNumberPropType> = ({
+  voteNum,
+  fieldDirection,
+}) => {
   return (
     <>
       <div
@@ -26,6 +29,7 @@ const VoteSection: FC<VoteNumberPropType> = ({ voteNum, fieldDirection }) => {
                       group
                       cursor-pointer
                   `}
+        // onClick={}
       >
         <FaAngleUp
           className="text-pfBlueNormal group-active:text-white"
