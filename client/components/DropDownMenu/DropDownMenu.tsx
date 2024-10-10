@@ -5,7 +5,7 @@ import TICK from "../../assets/tick.svg";
 
 import Image from "next/image";
 
-import { FeedbackCategory } from "@/query/querycategory";
+import { FeedbackCategory } from "@/query/usecategory";
 
 interface DropDownMenuProps<T> {
   id: string;

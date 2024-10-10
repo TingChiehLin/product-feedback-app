@@ -39,7 +39,7 @@ const CommentContainer = () => {
         ...preState,
         [name]: {
           ...preState[name],
-          error: "You have reached the character limit.",
+          error: "You have reached 250 character limit.",
         },
       }));
       return;
@@ -55,6 +55,9 @@ const CommentContainer = () => {
   };
 
   const handleClick = () => {
+    if (values["comment-description"].value === "") {
+      return;
+    }
     console.log("Output Value:", values);
   };
 
@@ -66,7 +69,7 @@ const CommentContainer = () => {
         </span>
         <div>
           {feedbackComs?.map((c) => (
-            <Comment key={c.id} />
+            <Comment key={c.id} userId={c.user_id} />
           ))}
         </div>
       </div>

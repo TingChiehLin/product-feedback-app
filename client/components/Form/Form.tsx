@@ -13,7 +13,7 @@ import Input from "../Input";
 import DropDownMenu from "../DropDownMenu";
 import Button from "../Button";
 import TextField from "../TextField";
-import { FeedbackCategory, useCategory } from "@/query/querycategory";
+import { FeedbackCategory, useCategory } from "@/query/usecategory";
 
 const addButtonStyle = {
   background:
