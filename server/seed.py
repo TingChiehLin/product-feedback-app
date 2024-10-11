@@ -40,6 +40,7 @@ if __name__ == "__main__":
                         "user",
                     )
                 ),
+                # img_url=
                 created_at=fake.date_time_this_year(),
             )
             users.append(user)

@@ -60,7 +60,7 @@ def all_categories():
 
 
 # Add a new feedback
-@app.route("/add-new-feedback", methods=["POST"])
+@app.route("/feedbacks", methods=["POST"])
 def add_feedback():
     try:
         data = request.get_json()
@@ -139,6 +139,22 @@ def delete_feedback(id):
     except Exception as e:
         return make_response({"error": str(e)}, 500)
 
+
+# Add a new upvote
+
+# get comments
+
+
+# Add a new Comment
+@app.route("/comments", methods=["POST"])
+def add_comment():
+    try:
+        pass
+    except Exception as e:
+        return make_response({"error": str(e)}, 500)
+
+
+# Reply the comment
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
