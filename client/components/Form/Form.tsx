@@ -134,14 +134,11 @@ const Form: React.FC = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5555/add-new-feedback",
-        {
-          "feedback-title": values["feedback-title"].value,
-          "feedback-detail": values["feedback-detail"].value,
-          "feedback-category": values["feedback-category"].value,
-        }
-      );
+      const response = await axios.post("http://localhost:5555/feedbacks", {
+        "feedback-title": values["feedback-title"].value,
+        "feedback-detail": values["feedback-detail"].value,
+        "feedback-category": values["feedback-category"].value,
+      });
       if (response.status === 201) {
         const newFeedback = response.data;
         console.log("Feedback submitted successfully:", newFeedback);
