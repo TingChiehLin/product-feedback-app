@@ -2,6 +2,8 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { RoadmapItemStatus } from "@/components/RoadmapItem";
 
+import { User } from "./useUser";
+
 export interface Category {
   id: number;
   type: string;
@@ -12,15 +14,6 @@ export interface Comment {
   feedback_id: number;
   user_id: number;
   description: string;
-}
-
-export interface User {
-  id: number;
-  username: string;
-  first_name: string;
-  last_name: string;
-  role: string;
-  created_at: string;
 }
 
 export interface FeedbackItem {

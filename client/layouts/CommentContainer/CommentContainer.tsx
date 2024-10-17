@@ -63,13 +63,13 @@ const CommentContainer = () => {
 
   return (
     <>
-      <div className="py-6 px-8 mt-6 bg-white">
+      <div className="py-6 px-8 mt-6 bg-white rounded-[10px]">
         <span className="font-bold text-[18px] text-pfBlueDark">
           {feedbackComs?.length ?? 0} Comments
         </span>
         <div>
           {feedbackComs?.map((c) => (
-            <Comment key={c.id} imgURL={""} />
+            <Comment key={c.id} userId={c.user_id} />
           ))}
         </div>
       </div>

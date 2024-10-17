@@ -1,25 +1,27 @@
 import * as React from "react";
-import { usePortrait } from "@/query/usePortrait";
 import Image from "next/image";
+import { useUser } from "@/query/useUser";
 
 interface CommentProps {
-  imgURL: string;
+  userId: number;
 }
 
-const Comment: React.FC<CommentProps> = ({ imgURL }) => {
-  // const { data: imageUrl } = usePortrait(String(userId));
+const Comment: React.FC<CommentProps> = ({ userId }) => {
+  const { data: userData } = useUser();
+  const user = userData?.find((u) => u.id === userId);
+  const imgURL = user?.img_url;
+
   return (
     <>
       <div className="">
-        {/* {imageUrl && (
-          <Image
-            src={imageUrl}
-            alt={`Random User Portrait for user ${userId}`}
-            width={64}
-            height={64}
-            className="rounded-full"
-          />
-        )} */}
+        <Image
+          src={imgURL ?? ""}
+          alt={`Random User Portrait for useId: ${userId} }`}
+          width="0"
+          height="0"
+          sizes="100vw"
+          className="w-16 h-auto rounded-full"
+        />
       </div>
     </>
   );
