@@ -58,6 +58,7 @@ const CommentContainer = () => {
     if (values["comment-description"].value === "") {
       return;
     }
+
     console.log("Output Value:", values);
   };
 
