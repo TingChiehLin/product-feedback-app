@@ -7,7 +7,7 @@ from config import db
 class User(db.Model, SerializerMixin):
     __tablename__ = "users"
 
-    serialize_rules = ("-feedbacks",)
+    serialize_rules = ("-feedbacks.user", "-comments.user")
 
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String, nullable=False)
@@ -74,7 +74,7 @@ class Feedback(db.Model, SerializerMixin):
 class Comment(db.Model, SerializerMixin):
     __tablename__ = "comments"
 
-    serialize_rules = ("-feedback",)
+    serialize_rules = ("-feedback", "-user.feedbacks", "-user.comments")
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String)
@@ -91,6 +91,8 @@ class Comment(db.Model, SerializerMixin):
 
 class Category(db.Model, SerializerMixin):
     __tablename__ = "categories"
+
+    serialize_rules = ("-feedbacks.category",)
 
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String)

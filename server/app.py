@@ -11,7 +11,7 @@ from config import app, db, api
 
 # Add your model imports
 
-from models import Category, Feedback
+from models import Category, Feedback, User
 
 # Views here!
 
@@ -140,11 +140,6 @@ def delete_feedback(id):
         return make_response({"error": str(e)}, 500)
 
 
-# Add a new upvote
-
-# get comments
-
-
 # Add a new Comment
 @app.route("/comments", methods=["POST"])
 def add_comment():
@@ -154,7 +149,15 @@ def add_comment():
         return make_response({"error": str(e)}, 500)
 
 
-# Reply the comment
+# Get a list of users
+@app.route("/users", methods=["GET"])
+def all_users():
+    if request.method == "GET":
+        users = User.query.all()
+        user_list = [u.to_dict() for u in users]
+        response = make_response(user_list, 200)
+        return response
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

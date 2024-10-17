@@ -2,6 +2,7 @@
 
 # Standard library imports
 from random import randint, choice
+import requests
 
 # Remote library imports
 from faker import Faker
@@ -16,8 +17,6 @@ if __name__ == "__main__":
         print("Starting seed...")
         db.create_all()
 
-        fake = Faker()
-
         Feedback.query.delete()
         User.query.delete()
         Comment.query.delete()
@@ -30,6 +29,13 @@ if __name__ == "__main__":
 
         # Generate Random Users
         for u in range(10):
+            response = requests.get("https://randomuser.me/api/")
+            if response.status_code == 200:
+                user_data = response.json()
+                img_url = user_data["results"][0]["picture"]["large"]
+            else:
+                img_url = None
+
             user = User(
                 first_name=fake.first_name(),
                 last_name=fake.last_name(),
@@ -40,7 +46,7 @@ if __name__ == "__main__":
                         "user",
                     )
                 ),
-                # img_url=
+                img_url=img_url,
                 created_at=fake.date_time_this_year(),
             )
             users.append(user)
@@ -57,7 +63,7 @@ if __name__ == "__main__":
         db.session.commit()
 
         # Generate Random Feedbacks
-        for f in range(5):
+        for f in range(randint(1, 8)):
             random_status = choice(status)
             random_category = choice(categories)
             random_user = choice(users)
@@ -75,7 +81,7 @@ if __name__ == "__main__":
             db.session.commit()
 
             # Create random comments for each feedback
-            for _ in range(randint(1, 8)):
+            for _ in range(randint(2, 8)):
                 comment = Comment(
                     description=fake.sentence(),
                     # feedback_id=feedback.id
