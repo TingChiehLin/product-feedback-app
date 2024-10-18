@@ -70,7 +70,11 @@ const CommentContainer = () => {
         </span>
         <div>
           {feedbackComs?.map((c) => (
-            <Comment key={c.id} userId={c.user_id} />
+            <Comment
+              key={c.id}
+              userId={c.user_id}
+              description={c.description}
+            />
           ))}
         </div>
       </div>
