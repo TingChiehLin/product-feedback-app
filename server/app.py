@@ -11,7 +11,7 @@ from config import app, db, api
 
 # Add your model imports
 
-from models import Category, Feedback, User
+from models import Category, Feedback, User, Comment
 
 # Views here!
 
@@ -81,6 +81,7 @@ def add_feedback():
             status="Planned",
         )
         # new_feedback.category_id = feedback_category
+
         db.session.add(new_feedback)
         db.session.commit()
         print(new_feedback)
@@ -144,7 +145,29 @@ def delete_feedback(id):
 @app.route("/comments", methods=["POST"])
 def add_comment():
     try:
-        pass
+        data = request.get_json()
+        print(f"Comment Data:${data}")
+
+        comment_description = data.get("comment-description")
+        feedback_id = data.get("feedback_id")
+        user_id = data.get("user_id")
+
+        if not comment_description:
+            return make_response({"error": "Comment description is required"}, 400)
+        if not feedback_id or not user_id:
+            return make_response({"error": "Feedback ID and User ID are required"}, 400)
+
+        new_comment = Comment(
+            description=comment_description,
+            feedback_id=feedback_id,
+            user_id=user_id,
+        )
+
+        db.session.add(new_comment)
+        db.session.commit()
+
+        return make_response(new_comment.to_dict(), 201)
+
     except Exception as e:
         return make_response({"error": str(e)}, 500)
 
