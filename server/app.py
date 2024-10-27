@@ -84,7 +84,6 @@ def add_feedback():
 
         db.session.add(new_feedback)
         db.session.commit()
-        print(new_feedback)
 
         return make_response(new_feedback.to_dict(), 201)
 
@@ -146,9 +145,9 @@ def delete_feedback(id):
 def add_comment():
     try:
         data = request.get_json()
-        print(f"Comment Data:${data}")
+        print(f"Comment Data:{data}")
 
-        comment_description = data.get("comment-description")
+        comment_description = data.get("description")
         feedback_id = data.get("feedback_id")
         user_id = data.get("user_id")
 
@@ -158,9 +157,9 @@ def add_comment():
             return make_response({"error": "Feedback ID and User ID are required"}, 400)
 
         new_comment = Comment(
-            description=comment_description,
-            feedback_id=feedback_id,
             user_id=user_id,
+            feedback_id=feedback_id,
+            description=comment_description,
         )
 
         db.session.add(new_comment)
