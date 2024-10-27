@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import { useParams } from "next/navigation";
 import TextField from "@/components/TextField";
 import Comment from "@/components/Comment";
+import { useFeedback } from "@/query/useFeedback";
 
 type FormValues = {
   [key: string]: {
@@ -24,9 +25,11 @@ const CommentContainer = () => {
   });
 
   const params = useParams();
+  const { refetch } = useFeedback();
   const fbCtx = React.useContext(FeedbackContext);
-  const id = String(params?.id as string);
+  const id = String(params?.id);
   const feedbackItem = fbCtx.feedbacks.find((f) => String(f.id) === id);
+  const userId = feedbackItem?.user_id;
   const feedbackComs = feedbackItem?.comments;
 
   const charLimit = 250;
@@ -57,8 +60,9 @@ const CommentContainer = () => {
   };
 
   const handleClick = async () => {
-    const commentDescription = values["comment-description"].value;
-    if (commentDescription === "") {
+    const commentText = values["comment-description"].value;
+
+    if (commentText === "") {
       setValues((preState) => ({
         ...preState,
         "comment-description": {
@@ -69,31 +73,44 @@ const CommentContainer = () => {
       return;
     }
 
-    // try {
-    //   const response = await axios.post("http://127.0.0.1:5555/comments", {
-    //     description: commentDescription,
-    //     feedback_id: id, // Include the feedback item ID
-    //     user_id: fbCtx.currentUser.id, // Assuming you have access to the current user from context
-    //   });
+    const newComment = {
+      user_id: userId,
+      feedback_id: id,
+      description: commentText,
+    };
 
-    //   if (response.status === 201) {
-    //     // Optionally clear the comment input field
-    //     setValues((preState) => ({
-    //       ...preState,
-    //       "comment-description": {
-    //         value: "",
-    //         error: "",
-    //       },
-    //     }));
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:5555/comments",
+        newComment,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    //     // Optionally update the feedback item with the new comment
-    //     fbCtx.addComment(id, response.data.comment); // Assuming `addComment` method exists in the context
-
-    //     console.log("Comment added:", response.data.comment);
-    //   }
-    // } catch (error) {
-    //   console.error("Failed to post comment:", error);
-    // }
+      if (response.status === 201) {
+        fbCtx.addComment(id, response.data);
+        setValues((preState) => ({
+          ...preState,
+          "comment-description": {
+            value: "",
+            error: "",
+          },
+        }));
+        refetch();
+      }
+    } catch (error) {
+      console.error("Error posting the comment:", error);
+      setValues((preState) => ({
+        ...preState,
+        "comment-description": {
+          ...preState["comment-description"],
+          error: "Failed to post the comment. Please try again.",
+        },
+      }));
+    }
   };
 
   return (
@@ -126,7 +143,7 @@ const CommentContainer = () => {
         />
         <div className="flex justify-between items-center mt-4">
           <span className="text-pfGrayDark">
-            {charactersRemaining >= 0 ? charactersRemaining : 0} Characters left
+            {Math.max(0, charactersRemaining)} Characters left
           </span>
           <Button
             text={"Post Comment"}

@@ -4,7 +4,7 @@
 //useReducer => better state management (useState)
 
 import { createContext, useReducer, useEffect } from "react";
-import { FeedbackItem, useFeedback } from "@/query/useFeedback";
+import { Comment, FeedbackItem, useFeedback } from "@/query/useFeedback";
 
 import LoadingImg from "@/assets/spinning-loading.svg";
 import Image from "next/image";
@@ -20,12 +20,14 @@ const fbCtxValue: FeedbackState = {
 type FeedbackContextType = {
   feedbacks: FeedbackItem[];
   feedbackDispatch: React.Dispatch<any>;
+  addComment: (feedbackId: string, comment: Comment) => void;
 };
 
 // Create an initial context value (only the structure, no methods here)
 const initialFeedbackContext: FeedbackContextType = {
   feedbacks: [],
   feedbackDispatch: () => null, // Placeholder function for dispatch
+  addComment: () => null, // Placeholder function for addComment
 };
 
 // Context for feedback management
@@ -62,6 +64,23 @@ const feedbackReducer = (state: FeedbackState, action: any) => {
         ...state,
         feedbacks: action.payload,
       };
+    case "ADD_COMMENT": {
+      const { feedbackId, comment } = action.payload;
+      console.log("Adding comment:", comment, "to feedback ID:", feedbackId);
+      const updatedFeedbacks = state.feedbacks.map((feedback) => {
+        if (feedback.id === feedbackId) {
+          return {
+            ...feedback,
+            comments: [...feedback.comments, comment],
+          };
+        }
+        return feedback;
+      });
+      return {
+        ...state,
+        feedbacks: updatedFeedbacks,
+      };
+    }
     default:
       return state;
   }
@@ -77,6 +96,13 @@ export const FeedbackProvider = ({
     feedbackReducer,
     fbCtxValue
   );
+
+  const addComment = (feedbackId: string, comment: Comment) => {
+    feedbackDispatch({
+      type: "ADD_COMMENT",
+      payload: { feedbackId, comment },
+    });
+  };
 
   useEffect(() => {
     if (feedbackData) {
@@ -99,7 +125,11 @@ export const FeedbackProvider = ({
 
   return (
     <FeedbackContext.Provider
-      value={{ feedbacks: feedbackState.feedbacks, feedbackDispatch }}
+      value={{
+        feedbacks: feedbackState.feedbacks,
+        feedbackDispatch,
+        addComment,
+      }}
     >
       {children}
     </FeedbackContext.Provider>

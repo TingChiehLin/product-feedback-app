@@ -14,6 +14,7 @@ export interface Comment {
   feedback_id: number;
   user_id: number;
   description: string;
+  created_at?: string;
 }
 
 export interface FeedbackItem {
