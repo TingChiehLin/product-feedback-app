@@ -29,7 +29,7 @@ const CommentContainer = () => {
   const fbCtx = React.useContext(FeedbackContext);
   const id = String(params?.id);
   const feedbackItem = fbCtx.feedbacks.find((f) => String(f.id) === id);
-  const userId = feedbackItem?.user_id;
+  const userId = 1; //default user
   const feedbackComs = feedbackItem?.comments;
 
   const charLimit = 250;
