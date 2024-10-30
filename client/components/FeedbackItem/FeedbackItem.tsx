@@ -22,9 +22,11 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
 }) => {
   return (
     <div className="w-full mt-5 px-8 py-7 shadow bg-white rounded-[10px]">
-      <div className="flex items-center justify-between">
-        <div className="flex justify-start gap-10">
+      <div className="grid grid-cols-8 items-center justify-between">
+        <div className="col-start-1 col-end-2">
           <VoteSection voteNum={upvote} fieldDirection={"vertical"} />
+        </div>
+        <div className="flex justify-start gap-10 col-start-2 col-end-7 col-span-6">
           <div>
             <Link
               className="cursor-pointer"
@@ -51,7 +53,7 @@ const FeedbackItem: React.FC<FeedbackItemProp> = ({
         >
           <FeedbackNumber feedbackNum={feedbackNum} />
         </Link> */}
-        <Link className="cursor-pointer" href={`/feedback/${id}`}>
+        <Link className="cursor-pointer col-end-9" href={`/feedback/${id}`}>
           <FeedbackNumber feedbackNum={feedbackNum} />
         </Link>
       </div>

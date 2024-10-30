@@ -29,6 +29,23 @@ const DropDownMenu = <T extends string | FeedbackCategory>({
       : "UI"
   );
 
+  React.useEffect(() => {
+    if (typeof props.value === "string" || typeof props.value === "number") {
+      const currentItem =
+        typeof props.value === "number"
+          ? props.data[props.value - 1]
+          : props.data.find(
+              (item) =>
+                (typeof item === "string" ? item : item.type) === props.value
+            );
+      if (currentItem) {
+        const displayText =
+          typeof currentItem === "string" ? currentItem : currentItem.type;
+        setSelectedItem(displayText);
+      }
+    }
+  }, [props.value, props.data]);
+
   function changeSelectedCategory(type: string) {
     setSelectedItem(type);
   }
