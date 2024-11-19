@@ -49,6 +49,30 @@ const Form: React.FC = () => {
 
   const alignButton = addfeedbackPage && "justify-end";
 
+  React.useEffect(() => {
+    if (editfeedbackPage && editItem) {
+      setValues({
+        ...FORMDATA,
+        "feedback-title": {
+          ...FORMDATA["feedback-title"],
+          value: editItem.title,
+        },
+        "feedback-detail": {
+          ...FORMDATA["feedback-detail"],
+          value: editItem.description,
+        },
+        "feedback-category": {
+          ...FORMDATA["feedback-category"],
+          value: editItem.category.id,
+        },
+        "feedback-status": {
+          ...FORMDATA["feedback-status"],
+          value: editItem.status,
+        },
+      });
+    }
+  }, [editfeedbackPage, editItem]);
+
   const handleValue = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
