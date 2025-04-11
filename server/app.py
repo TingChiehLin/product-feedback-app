@@ -115,6 +115,7 @@ def update_feedback(id):
         feedback.category_id = feedback_category
         feedback.status = feedback_status if feedback_status else feedback.status
 
+        db.session.add(feedback)
         db.session.commit()
 
         return make_response(feedback.to_dict(), 200)
