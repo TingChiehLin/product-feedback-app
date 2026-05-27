@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { API_BASE_URL } from "@/lib/api";
 
 export interface User {
   id: number;
@@ -12,7 +13,7 @@ export interface User {
 }
 
 export const fetchUser = async (): Promise<Array<User>> => {
-  const response = await axios.get("http://127.0.0.1:5555/users");
+  const response = await axios.get(`${API_BASE_URL}/users`);
   if (response.status !== 200) {
     throw new Error(`Request failed with status: ${response.status}`);
   }

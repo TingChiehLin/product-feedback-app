@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { RoadmapItemStatus } from "@/components/RoadmapItem";
+import { API_BASE_URL } from "@/lib/api";
 
 import { User } from "./useUser";
 
@@ -34,7 +35,7 @@ export const useFeedback = () => {
   return useQuery({
     queryKey: ["feedback"],
     queryFn: async (): Promise<Array<FeedbackItem>> => {
-      const response = await axios.get("http://127.0.0.1:5555/feedbacks");
+      const response = await axios.get(`${API_BASE_URL}/feedbacks`);
       if (response.status !== 200) {
         throw new Error(`Request failed with status: ${response.status}`);
       }

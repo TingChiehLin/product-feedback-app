@@ -1,4 +1,3 @@
-import { type } from "os";
 import * as React from "react";
 
 interface InputTypeProp {
@@ -13,29 +12,33 @@ interface InputTypeProp {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: React.FC<InputTypeProp> = ({ ...props }) => {
-  const isInvalid = props.error !== "";
+const Input: React.FC<InputTypeProp> = ({
+  id,
+  label,
+  description,
+  error,
+  ...inputProps
+}) => {
+  const isInvalid = error !== "";
   return (
-    <div className="">
-      <label className="font-bold text-pfBlueDark text-sm" htmlFor={props.id}>
-        {props.label}
+    <div>
+      <label className="font-bold text-pfBlueDark text-sm" htmlFor={id}>
+        {label}
       </label>
-      <span className="text-pfGrayDark text-sm block mt-1">
-        {props.description}
-      </span>
+      <span className="text-pfGrayDark text-sm block mt-1">{description}</span>
       <input
-        className={`w-full pl-6 py-3 
-                              text-[15px]
-                              border-1 outline-0 rounded-[5px] 
-                              text-pfBlueDark 
-                              mt-4 bg-pfGrayLight ${
-                                isInvalid && "border-error border-2"
-                              }
-                              {...props}`}
-        {...props}
+        id={id}
+        className={`w-full pl-6 py-3
+                    text-[15px]
+                    border-1 outline-0 rounded-[5px]
+                    text-pfBlueDark
+                    mt-4 bg-pfGrayLight ${
+                      isInvalid ? "border-error border-2" : ""
+                    }`}
+        {...inputProps}
       />
       {isInvalid && (
-        <span className="text-sm text-error block mt-2">{props.error}</span>
+        <span className="text-sm text-error block mt-2">{error}</span>
       )}
     </div>
   );

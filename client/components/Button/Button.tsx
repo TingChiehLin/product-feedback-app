@@ -36,34 +36,25 @@ const Button: React.FC<ButtonTypeProp> = ({
   slug,
   onClick,
 }) => {
+  const className = `flex items-center gap-2 text-white
+    rounded-[10px] ${buttonTypeMapper[variant]} py-2 px-6
+    ${hoverColorMapper[variant]} cursor-pointer`;
+
+  if (href) {
+    const resolvedHref = `/${href}${slug ? "/" + slug + "/edit" : ""}`;
+    return (
+      <Link href={resolvedHref} className={className} onClick={onClick}>
+        {icon}
+        <span>{text}</span>
+      </Link>
+    );
+  }
+
   return (
-    <>
-      {href ? (
-        <Link href={`/${href}${slug ? "/" + slug + "/edit" : ""}`}>
-          <button
-            className={`flex items-center gap-2 text-white
-                            rounded-[10px] ${buttonTypeMapper[variant]} py-2 px-6
-                            ${hoverColorMapper[variant]} cursor-pointer`}
-            type={type}
-            onClick={onClick}
-          >
-            {icon}
-            <span>{text}</span>
-          </button>
-        </Link>
-      ) : (
-        <button
-          className={`flex items-center gap-2 text-white
-                            rounded-[10px] ${buttonTypeMapper[variant]} py-2 px-6
-                            ${hoverColorMapper[variant]} cursor-pointer`}
-          type={type}
-          onClick={onClick}
-        >
-          {icon}
-          <span>{text}</span>
-        </button>
-      )}
-    </>
+    <button className={className} type={type} onClick={onClick}>
+      {icon}
+      <span>{text}</span>
+    </button>
   );
 };
 

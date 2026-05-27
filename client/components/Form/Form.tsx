@@ -6,6 +6,7 @@ import { useFeedback } from "@/query/useFeedback";
 import { useRouter, usePathname, useParams } from "next/navigation";
 
 import { RequestFormType, STATUS, FORMDATA } from "@/lib";
+import { API_BASE_URL } from "@/lib/api";
 
 import { FaPlus, FaEdit } from "react-icons/fa";
 
@@ -32,45 +33,51 @@ const Form: React.FC = () => {
   const [values, setValues] = React.useState(FORMDATA);
 
   const addfeedbackPage = pathname === "/addfeedback";
-  const editfeedbackPage = pathname?.includes("/edit");
-  const id = editfeedbackPage && params?.id[0];
+  const editfeedbackPage = Boolean(pathname?.includes("/edit"));
+  const rawId = params?.id;
+  const id = editfeedbackPage
+    ? Array.isArray(rawId)
+      ? rawId[0]
+      : rawId
+    : undefined;
   const editItem = fbCtx.feedbacks.find((f) => String(f.id) === id);
   const editTitle = editItem?.title;
 
   const formTitle = addfeedbackPage
     ? "Create New Feedback"
     : `Editing ${editTitle}`;
-  const categoryVlaue = addfeedbackPage
-    ? values["feedback-category"].value ?? ""
-    : editItem?.category.type ?? "";
-  const statusValue = addfeedbackPage
-    ? values["feedback-status"].value ?? ""
-    : editItem?.status ?? "";
+  // Always read from form state so dropdown selections re-render the UI.
+  // In edit mode the form state is hydrated from editItem in the effect below.
+  const categoryValue = values["feedback-category"].value ?? "";
+  const statusValue = values["feedback-status"].value ?? "";
 
   const alignButton = addfeedbackPage && "justify-end";
 
   React.useEffect(() => {
-    if (editfeedbackPage && editItem) {
-      setValues({
-        ...FORMDATA,
-        "feedback-title": {
-          ...FORMDATA["feedback-title"],
-          value: editItem.title,
-        },
-        "feedback-detail": {
-          ...FORMDATA["feedback-detail"],
-          value: editItem.description,
-        },
-        "feedback-category": {
-          ...FORMDATA["feedback-category"],
-          value: editItem.category.id,
-        },
-        "feedback-status": {
-          ...FORMDATA["feedback-status"],
-          value: editItem.status,
-        },
-      });
-    }
+    if (!editfeedbackPage || !editItem) return;
+    // Hydrate form from async-loaded feedback. This is a legitimate
+    // external-data sync; React's set-state-in-effect rule warns but the
+    // alternative (reseting via key=) would require restructuring callers.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setValues({
+      ...FORMDATA,
+      "feedback-title": {
+        ...FORMDATA["feedback-title"],
+        value: editItem.title,
+      },
+      "feedback-detail": {
+        ...FORMDATA["feedback-detail"],
+        value: editItem.description,
+      },
+      "feedback-category": {
+        ...FORMDATA["feedback-category"],
+        value: editItem.category.id,
+      },
+      "feedback-status": {
+        ...FORMDATA["feedback-status"],
+        value: editItem.status,
+      },
+    });
   }, [editfeedbackPage, editItem]);
 
   const handleValue = (
@@ -92,28 +99,23 @@ const Form: React.FC = () => {
 
   const handleCategory = (
     selectedCategory: FeedbackCategory,
-    event: React.MouseEvent<HTMLLIElement | HTMLAnchorElement>
+    event: React.MouseEvent<HTMLButtonElement>
   ) => {
-    if (event) {
-      event.preventDefault();
-    }
-
-    // Update the active category in `values`
-    setValues((preState) => {
-      return {
-        ...preState,
-        "feedback-category": {
-          ...preState["feedback-category"],
-          value: selectedCategory.id,
-        },
-      };
-    });
+    event?.preventDefault();
+    setValues((preState) => ({
+      ...preState,
+      "feedback-category": {
+        ...preState["feedback-category"],
+        value: selectedCategory.id,
+      },
+    }));
   };
 
-  const handleStatus = (s: string, event: React.MouseEvent<HTMLLIElement>) => {
-    if (event) {
-      event.preventDefault();
-    }
+  const handleStatus = (
+    s: string,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event?.preventDefault();
     setValues((preState) => ({
       ...preState,
       "feedback-status": {
@@ -134,32 +136,23 @@ const Form: React.FC = () => {
       values["feedback-detail"].value
     );
 
-    if (titleHasError !== "") {
-      setValues((preState: typeof values) => {
-        return {
-          ...preState,
-          "feedback-title": {
-            ...preState["feedback-title"],
-            error: titleHasError,
-          },
-        };
-      });
-    }
-
-    if (detailHasError !== "") {
-      setValues((preState: typeof values) => {
-        return {
-          ...preState,
-          "feedback-detail": {
-            ...preState["feedback-detail"],
-            error: detailHasError,
-          },
-        };
-      });
+    if (titleHasError || detailHasError) {
+      setValues((preState: typeof values) => ({
+        ...preState,
+        "feedback-title": {
+          ...preState["feedback-title"],
+          error: titleHasError,
+        },
+        "feedback-detail": {
+          ...preState["feedback-detail"],
+          error: detailHasError,
+        },
+      }));
+      return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5555/feedbacks", {
+      const response = await axios.post(`${API_BASE_URL}/feedbacks`, {
         "feedback-title": values["feedback-title"].value,
         "feedback-detail": values["feedback-detail"].value,
         "feedback-category": values["feedback-category"].value,
@@ -207,7 +200,7 @@ const Form: React.FC = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5555/feedbacks/${id}`,
+        `${API_BASE_URL}/feedbacks/${id}`,
         {
           "feedback-title": values["feedback-title"].value,
           "feedback-detail": values["feedback-detail"].value,
@@ -232,7 +225,7 @@ const Form: React.FC = () => {
   const handleDelete = async (id: string) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5555/feedbacks/${id}`
+        `${API_BASE_URL}/feedbacks/${id}`
       );
       if (response.status === 200) {
         fbCtx.feedbackDispatch({
@@ -289,7 +282,7 @@ const Form: React.FC = () => {
           description={"Choose a category for your feedback"}
           name={"feedback-category"}
           data={categoryData ?? []}
-          value={categoryVlaue}
+          value={categoryValue}
           onClick={handleCategory}
         />
         {editfeedbackPage && (

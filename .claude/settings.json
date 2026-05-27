@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(tee /tmp/build-errors.log)",
+      "Bash(tee /tmp/lint-errors.log)",
+      "Bash(npm outdated *)",
+      "Bash(npm audit *)",
+      "Bash(npm uninstall *)"
+    ]
+  }
+}

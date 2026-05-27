@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import TextField from "@/components/TextField";
 import Comment from "@/components/Comment";
 import { useFeedback } from "@/query/useFeedback";
+import { API_BASE_URL } from "@/lib/api";
 
 type FormValues = {
   [key: string]: {
@@ -81,7 +82,7 @@ const CommentContainer = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5555/comments",
+        `${API_BASE_URL}/comments`,
         newComment,
         {
           headers: {

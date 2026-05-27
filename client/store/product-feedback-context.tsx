@@ -43,20 +43,20 @@ const feedbackReducer = (state: FeedbackState, action: any) => {
         ...state,
         feedbacks: [...state.feedbacks, action.payload],
       };
-    case "UPDATE_FEEDBACK":
-      const updatedFeedbacks = [...state.feedbacks];
-      updatedFeedbacks[action.index] = action.payload;
+    case "UPDATE_FEEDBACK": {
+      const updated: FeedbackItem = action.payload;
       return {
         ...state,
-        feedbacks: updatedFeedbacks,
+        feedbacks: state.feedbacks.map((f) =>
+          f.id === updated.id ? updated : f
+        ),
       };
+    }
     case "DELETE_FEEDBACK": {
-      const filteredFeedbacks = state.feedbacks.filter(
-        (feedback) => feedback.id !== action.payload.id
-      );
+      const deletedId = Number(action.payload);
       return {
         ...state,
-        feedbacks: filteredFeedbacks,
+        feedbacks: state.feedbacks.filter((f) => f.id !== deletedId),
       };
     }
     case "SET_FEEDBACKS":
